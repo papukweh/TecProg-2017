@@ -1,5 +1,1 @@
-motor: maq.o pilha.o motor.o
-
-clean:
-	rm -f motor *.o
-
+programa: maq.o pilha.o fibo.o

@@ -14,7 +14,9 @@ ip = 0
 
 tabsim = {}
 
-print("INSTR prog[] = {")
+print("#include <stdio.h>")
+print('#include "maq.h"\n')
+print("INSTR programa[] = {")
 while l:
     label = op = ""
     arg   = 0
@@ -37,9 +39,17 @@ while l:
         print("  {%s, %s},"%(op,arg))
     else:
         print()
+        ip-=1
     l = stdin.readline()
     ip += 1
-print("};")
+print("};\n")
+
+print("int main(int argc, char *argv) {")
+print("\tMaquina *maq = cria_maquina(programa);")
+print("\texec_maquina(maq, 100);")
+print("\tdestroi_maquina(maq);")
+print("\treturn 0;")
+print("}")
     
 
 
@@ -48,3 +58,4 @@ print("};")
 # Local variables:
 # mode: python
 # End:
+
