@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "maq.h"
 
-/*#define DEBUG*/
+#define DEBUG
 
 #ifdef DEBUG
 #  define D(X) X
@@ -29,6 +29,8 @@ char *CODES[] = {
   "NE",
   "STO",
   "RCL",
+  "STL",
+  "RCE",
   "END",
   "PRN"
 };
@@ -49,6 +51,8 @@ Maquina *cria_maquina(INSTR *p) {
   Maquina *m = (Maquina*)malloc(sizeof(Maquina));
   if (!m) Fatal("Memória insuficiente",4);
   m->ip = 0;
+  m->rbp = 0;
+  m->rbp0 = 0;
   m->prog = p;
   return m;
 }
@@ -62,6 +66,10 @@ void destroi_maquina(Maquina *m) {
 #define pil (&m->pil)
 #define exec (&m->exec)
 #define prg (m->prog)
+#define rbp (m->rbp)
+#define rbp0 (m->rbp0)
+#define SAVE (rbp0 = rbp)
+#define REST (rbp= rbp0)
 
 void exec_maquina(Maquina *m, int n) {
   int i;
@@ -117,8 +125,12 @@ void exec_maquina(Maquina *m, int n) {
 	case CALL:
 	  empilha(exec, ip);
 	  ip = arg;
+	  SAVE;
+	  rbp = exec->topo;
 	  continue;
 	case RET:
+	  exec->topo = rbp;
+	  REST;
 	  ip = desempilha(exec);
 	  break;
 	case EQ:
@@ -162,6 +174,12 @@ void exec_maquina(Maquina *m, int n) {
 	  break;
 	case RCL:
 	  empilha(pil,m->Mem[arg]);
+	  break;
+	case STL:
+	  empilha(exec, desempilha(pil));
+	  break;
+	case RCE:
+	  empilha(pil, desempilha(exec));
 	  break;
 	case END:
 	  return;

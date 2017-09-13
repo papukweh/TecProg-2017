@@ -22,6 +22,8 @@ typedef enum {
   NE,
   STO,
   RCL,
+  STL,
+  RCE,
   END,
   PRN,
 } OpCode;
