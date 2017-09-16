@@ -21,25 +21,25 @@ while l:
     label = op = ""
     arg   = 0
     try:
-        l = l[:l.index('#')]
+        l = l[:l.index('#')]                     #jogando fora os comentários
     except:
         pass
     keys = l.split()
-    if len(keys) > 0 and keys[0].endswith(":"):
-        label = keys[0][:-1]              #jogando fora o ':'
-        tabsim[label]=ip
+    if len(keys) > 0 and keys[0].endswith(":"):  #caso em que tem labels
+        label = keys[0][:-1]                     #jogando fora o ':'
+        tabsim[label]=ip                         #guardando o endereço da label
         keys.pop(0)
-    if len(keys) > 0:
+    if len(keys) > 0:               #definindo o opcode da instrução
         op = keys.pop(0)
-    if len(keys) > 0:
+    if len(keys) > 0:               #definindo o argumento da instrução
         arg = keys.pop(0)
-        if arg in tabsim:
-            arg = tabsim[arg]
+        if arg in tabsim:           #se houver label no argumento
+            arg = tabsim[arg]       #argumento recebe o endereço da label
     if op != "":
-        print("  {%s, %s},"%(op,arg))
+        print("  {%s, %s},"%(op,arg))   #deixa em formato de vetor
     else:
-        print()
-        ip-=1
+        print()                     #se houver uma linha em branco,
+        ip-=1                       #decrementar o ip
     l = stdin.readline()
     ip += 1
 print("};\n")

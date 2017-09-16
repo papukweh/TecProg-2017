@@ -31,6 +31,10 @@ char *CODES[] = {
   "RCL",
   "STL",
   "RCE",
+  "ALC",
+  "FRE",
+  "SAVE",
+  "REST",
   "END",
   "PRN"
 };
@@ -52,7 +56,6 @@ Maquina *cria_maquina(INSTR *p) {
   if (!m) Fatal("Memória insuficiente",4);
   m->ip = 0;
   m->rbp = 0;
-  m->rbp0 = 0;
   m->prog = p;
   return m;
 }
@@ -67,9 +70,6 @@ void destroi_maquina(Maquina *m) {
 #define exec (&m->exec)
 #define prg (m->prog)
 #define rbp (m->rbp)
-#define rbp0 (m->rbp0)
-#define SAVE (rbp0 = rbp)
-#define REST (rbp= rbp0)
 
 void exec_maquina(Maquina *m, int n) {
   int i;
@@ -122,15 +122,17 @@ void exec_maquina(Maquina *m, int n) {
 		continue;
 	  }
 	  break;
+	//Empilha o endereço de retorno na pilha de execução,
+	// atualiza o valor de rbp para o topo
 	case CALL:
 	  empilha(exec, ip);
 	  ip = arg;
-	  SAVE;
 	  rbp = exec->topo;
 	  continue;
+	//Atualiza o valor do topo para o valor de rbp e muda
+	// o ip para o endereço de retorno
 	case RET:
 	  exec->topo = rbp;
-	  REST;
 	  ip = desempilha(exec);
 	  break;
 	case EQ:
@@ -175,11 +177,33 @@ void exec_maquina(Maquina *m, int n) {
 	case RCL:
 	  empilha(pil,m->Mem[arg]);
 	  break;
+	//Remove o primeiro elemento da pilha de dados e armazena
+	// no vetor de variáveis locais (posição rbp+argumento)
 	case STL:
-	  empilha(exec, desempilha(pil));
+	  exec->val[rbp + arg] = desempilha(pil);
 	  break;
+	//Empilha o elemento do vetor de variáveis locais na posição
+	// rbp+argumento na pilha de dados
 	case RCE:
-	  empilha(pil, desempilha(exec));
+	  empilha(pil, exec->val[rbp + arg]);
+	  break;
+	//Aloca um espaço na pilha de execução para o vetor de variáveis
+	// locais, com tamanho argumento (mudando o topo da pilha de execução)
+	case ALC:
+	  exec->topo = exec->topo + arg;
+	  break;
+	//Libera o espaço alocado (o argumento deve ser o mesmo do usado em ALC),
+	// retornando o valor do topo da pilha para o que era antes da alocação
+	case FRE:
+	  exec->topo = exec->topo - arg;
+	  break;
+	//Salva o valor de rbp, empilhando-o na pilha de execução
+	case SAVE:
+	  empilha(exec, rbp);
+	  break;
+	//Restaura o valor de rbp, desempilhando-o da pilha de execução
+	case REST:
+	  rbp = desempilha(exec);
 	  break;
 	case END:
 	  return;
@@ -187,9 +211,15 @@ void exec_maquina(Maquina *m, int n) {
 	  printf("%d\n", desempilha(pil));
 	  break;
 	}
+	D(puts("Pilha de dados:\n"));
 	D(imprime(pil,5));
+	D(puts("\n Pilha de execução: \n"));
+	D(imprime(exec,10));
 	D(puts("\n"));
-
+	D(printf("topo dados = %d \n", pil->topo));
+	D(printf("topo exec = %d \n", exec->topo));
+	D(printf("rbp = %d \n", rbp));
+	D(puts("++++++++++++++++++++++++++++++++++\n"));
 	ip++;
   }
 }
