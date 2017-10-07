@@ -1,0 +1,1683 @@
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:3:3: error: redeclaration of enumerator ‘PUSH’
+   PUSH,       //Empilha argumento na pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:3:3: note: previous definition of ‘PUSH’ was here
+   PUSH,       //Empilha argumento na pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:4:3: error: redeclaration of enumerator ‘POP’
+   POP,        //Desempilha elemento da pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:4:3: note: previous definition of ‘POP’ was here
+   POP,        //Desempilha elemento da pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:5:3: error: redeclaration of enumerator ‘DUP’
+   DUP,        //Duplica o topo da pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:5:3: note: previous definition of ‘DUP’ was here
+   DUP,        //Duplica o topo da pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:6:3: error: redeclaration of enumerator ‘ADD’
+   ADD,        //Soma os dois elementos no topo da pilha
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:6:3: note: previous definition of ‘ADD’ was here
+   ADD,        //Soma os dois elementos no topo da pilha
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:7:3: error: redeclaration of enumerator ‘SUB’
+   SUB,        //Subtrai os dois elementos no topo da pilha
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:7:3: note: previous definition of ‘SUB’ was here
+   SUB,        //Subtrai os dois elementos no topo da pilha
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:8:3: error: redeclaration of enumerator ‘MUL’
+   MUL,        //Multiplica os dois elementos no topo da pilha
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:8:3: note: previous definition of ‘MUL’ was here
+   MUL,        //Multiplica os dois elementos no topo da pilha
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:9:3: error: redeclaration of enumerator ‘DIV’
+   DIV,        //Divide os dois elementos no topo da pilha
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:9:3: note: previous definition of ‘DIV’ was here
+   DIV,        //Divide os dois elementos no topo da pilha
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:10:3: error: redeclaration of enumerator ‘JMP’
+   JMP,        //Pulo incondicional para argumento
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:10:3: note: previous definition of ‘JMP’ was here
+   JMP,        //Pulo incondicional para argumento
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:11:3: error: redeclaration of enumerator ‘JIT’
+   JIT,        //Pulo se verdadeiro
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:11:3: note: previous definition of ‘JIT’ was here
+   JIT,        //Pulo se verdadeiro
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:12:3: error: redeclaration of enumerator ‘JIF’
+   JIF,        //Pulo se falso
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:12:3: note: previous definition of ‘JIF’ was here
+   JIF,        //Pulo se falso
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:13:3: error: redeclaration of enumerator ‘CALL’
+   CALL,       //Chama a função no endereço argumento
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:13:3: note: previous definition of ‘CALL’ was here
+   CALL,       //Chama a função no endereço argumento
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:14:3: error: redeclaration of enumerator ‘RET’
+   RET,        //Retorna  
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:14:3: note: previous definition of ‘RET’ was here
+   RET,        //Retorna  
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:15:3: error: redeclaration of enumerator ‘EQ’
+   EQ,         //Compara os dois elementos do topo da pilha de dados (=)
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:15:3: note: previous definition of ‘EQ’ was here
+   EQ,         //Compara os dois elementos do topo da pilha de dados (=)
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:16:3: error: redeclaration of enumerator ‘GT’
+   GT,         //Compara os dois elementos do topo da pilha de dados (>)
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:16:3: note: previous definition of ‘GT’ was here
+   GT,         //Compara os dois elementos do topo da pilha de dados (>)
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:17:3: error: redeclaration of enumerator ‘GE’
+   GE,         //Compara os dois elementos do topo da pilha de dados (>=)
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:17:3: note: previous definition of ‘GE’ was here
+   GE,         //Compara os dois elementos do topo da pilha de dados (>=)
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:18:3: error: redeclaration of enumerator ‘LT’
+   LT,         //Compara os dois elementos do topo da pilha de dados (<)
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:18:3: note: previous definition of ‘LT’ was here
+   LT,         //Compara os dois elementos do topo da pilha de dados (<)
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:19:3: error: redeclaration of enumerator ‘LE’
+   LE,         //Compara os dois elementos do topo da pilha de dados (<=)
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:19:3: note: previous definition of ‘LE’ was here
+   LE,         //Compara os dois elementos do topo da pilha de dados (<=)
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:20:3: error: redeclaration of enumerator ‘NE’
+   NE,         //Compara os dois elementos do topo da pilha de dados (!=)
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:20:3: note: previous definition of ‘NE’ was here
+   NE,         //Compara os dois elementos do topo da pilha de dados (!=)
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:21:3: error: redeclaration of enumerator ‘STO’
+   STO,        //Desempilha elemento da pilha de dados e armazena em mem[arg]
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:21:3: note: previous definition of ‘STO’ was here
+   STO,        //Desempilha elemento da pilha de dados e armazena em mem[arg]
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:22:3: error: redeclaration of enumerator ‘RCL’
+   RCL,        //Empilha elemento de mem[arg] na pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:22:3: note: previous definition of ‘RCL’ was here
+   RCL,        //Empilha elemento de mem[arg] na pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:23:3: error: redeclaration of enumerator ‘STL’
+   STL,        //Desempilha elemento da pilha de dados e armazena em exec[rbp+arg]
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:23:3: note: previous definition of ‘STL’ was here
+   STL,        //Desempilha elemento da pilha de dados e armazena em exec[rbp+arg]
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:24:3: error: redeclaration of enumerator ‘RCE’
+   RCE,        //Empilha elemento de exec[rbp+arg] na pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:24:3: note: previous definition of ‘RCE’ was here
+   RCE,        //Empilha elemento de exec[rbp+arg] na pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:25:3: error: redeclaration of enumerator ‘ALC’
+   ALC,        //Aloca arg espaços na pilha de execução
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:25:3: note: previous definition of ‘ALC’ was here
+   ALC,        //Aloca arg espaços na pilha de execução
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:26:3: error: redeclaration of enumerator ‘FRE’
+   FRE,        //Libera arg espaçoes na pilha de execução
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:26:3: note: previous definition of ‘FRE’ was here
+   FRE,        //Libera arg espaçoes na pilha de execução
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:27:3: error: redeclaration of enumerator ‘SAVE’
+   SAVE,       //Salva o valor de rbp
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:27:3: note: previous definition of ‘SAVE’ was here
+   SAVE,       //Salva o valor de rbp
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:28:3: error: redeclaration of enumerator ‘REST’
+   REST,       //Restaura o valor de rbp
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:28:3: note: previous definition of ‘REST’ was here
+   REST,       //Restaura o valor de rbp
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:29:3: error: redeclaration of enumerator ‘END’
+   END,        //Finaliza a execução do programa
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:29:3: note: previous definition of ‘END’ was here
+   END,        //Finaliza a execução do programa
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:30:3: error: redeclaration of enumerator ‘PRN’
+   PRN,        //Desempilha e imprime o elemento da pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:30:3: note: previous definition of ‘PRN’ was here
+   PRN,        //Desempilha e imprime o elemento da pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:31:3: error: redeclaration of enumerator ‘SISTEMA’
+   SISTEMA,
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:31:3: note: previous definition of ‘SISTEMA’ was here
+   SISTEMA,
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:32:3: error: conflicting types for ‘OpCode’
+ } OpCode;
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:32:3: note: previous declaration of ‘OpCode’ was here
+ } OpCode;
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:37:3: error: redeclaration of enumerator ‘NUM’
+   NUM,
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:37:3: note: previous definition of ‘NUM’ was here
+   NUM,
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:38:3: error: redeclaration of enumerator ‘ACAO’
+   ACAO,
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:38:3: note: previous definition of ‘ACAO’ was here
+   ACAO,
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:39:3: error: redeclaration of enumerator ‘VAR’
+   VAR
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:39:3: note: previous definition of ‘VAR’ was here
+   VAR
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:40:3: error: conflicting types for ‘Tipo’
+ } Tipo;
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:40:3: note: previous declaration of ‘Tipo’ was here
+ } Tipo;
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:57:3: error: conflicting types for ‘INSTR’
+ } INSTR;
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from maq.c:3:
+instr.h:57:3: note: previous declaration of ‘INSTR’ was here
+ } INSTR;
+   ^
+In file included from maq.h:1:0,
+                 from arena.h:3,
+                 from maq.c:4:
+pilha.h:8:3: error: conflicting types for ‘Pilha’
+ } Pilha;
+   ^
+In file included from maq.h:1:0,
+                 from maq.c:3:
+pilha.h:8:3: note: previous declaration of ‘Pilha’ was here
+ } Pilha;
+   ^
+In file included from maq.h:1:0,
+                 from arena.h:3,
+                 from maq.c:4:
+pilha.h:10:8: error: conflicting types for ‘cria_pilha’
+ Pilha *cria_pilha();
+        ^
+In file included from maq.h:1:0,
+                 from maq.c:3:
+pilha.h:10:8: note: previous declaration of ‘cria_pilha’ was here
+ Pilha *cria_pilha();
+        ^
+In file included from maq.h:1:0,
+                 from arena.h:3,
+                 from maq.c:4:
+pilha.h:11:6: error: conflicting types for ‘destroi_pilha’
+ void destroi_pilha(Pilha *p);
+      ^
+In file included from maq.h:1:0,
+                 from maq.c:3:
+pilha.h:11:6: note: previous declaration of ‘destroi_pilha’ was here
+ void destroi_pilha(Pilha *p);
+      ^
+In file included from maq.h:1:0,
+                 from arena.h:3,
+                 from maq.c:4:
+pilha.h:12:6: error: conflicting types for ‘empilha’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+In file included from maq.h:1:0,
+                 from maq.c:3:
+pilha.h:12:6: note: previous declaration of ‘empilha’ was here
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+In file included from maq.h:1:0,
+                 from arena.h:3,
+                 from maq.c:4:
+pilha.h:13:10: error: conflicting types for ‘desempilha’
+ OPERANDO desempilha(Pilha *p);
+          ^
+In file included from maq.h:1:0,
+                 from maq.c:3:
+pilha.h:13:10: note: previous declaration of ‘desempilha’ was here
+ OPERANDO desempilha(Pilha *p);
+          ^
+In file included from maq.h:1:0,
+                 from arena.h:3,
+                 from maq.c:4:
+pilha.h:14:6: error: conflicting types for ‘imprime’
+ void imprime(Pilha *p, int n);
+      ^
+In file included from maq.h:1:0,
+                 from maq.c:3:
+pilha.h:14:6: note: previous declaration of ‘imprime’ was here
+ void imprime(Pilha *p, int n);
+      ^
+In file included from arena.h:3:0,
+                 from maq.c:4:
+maq.h:15:3: error: conflicting types for ‘Maquina’
+ } Maquina;
+   ^
+In file included from maq.c:3:0:
+maq.h:15:3: note: previous declaration of ‘Maquina’ was here
+ } Maquina;
+   ^
+In file included from arena.h:3:0,
+                 from maq.c:4:
+maq.h:17:10: error: conflicting types for ‘cria_maquina’
+ Maquina *cria_maquina(INSTR *p, int id, int posx, int posy);
+          ^
+In file included from maq.c:3:0:
+maq.h:17:10: note: previous declaration of ‘cria_maquina’ was here
+ Maquina *cria_maquina(INSTR *p, int id, int posx, int posy);
+          ^
+In file included from arena.h:3:0,
+                 from maq.c:4:
+maq.h:19:6: error: conflicting types for ‘destroi_maquina’
+ void destroi_maquina(Maquina *m);
+      ^
+In file included from maq.c:3:0:
+maq.h:19:6: note: previous declaration of ‘destroi_maquina’ was here
+ void destroi_maquina(Maquina *m);
+      ^
+In file included from arena.h:3:0,
+                 from maq.c:4:
+maq.h:21:6: error: conflicting types for ‘exec_maquina’
+ void exec_maquina(Maquina *m, int n);
+      ^
+In file included from maq.c:3:0:
+maq.h:21:6: note: previous declaration of ‘exec_maquina’ was here
+ void exec_maquina(Maquina *m, int n);
+      ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:3:3: error: redeclaration of enumerator ‘PUSH’
+   PUSH,       //Empilha argumento na pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:3:3: note: previous definition of ‘PUSH’ was here
+   PUSH,       //Empilha argumento na pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:4:3: error: redeclaration of enumerator ‘POP’
+   POP,        //Desempilha elemento da pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:4:3: note: previous definition of ‘POP’ was here
+   POP,        //Desempilha elemento da pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:5:3: error: redeclaration of enumerator ‘DUP’
+   DUP,        //Duplica o topo da pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:5:3: note: previous definition of ‘DUP’ was here
+   DUP,        //Duplica o topo da pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:6:3: error: redeclaration of enumerator ‘ADD’
+   ADD,        //Soma os dois elementos no topo da pilha
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:6:3: note: previous definition of ‘ADD’ was here
+   ADD,        //Soma os dois elementos no topo da pilha
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:7:3: error: redeclaration of enumerator ‘SUB’
+   SUB,        //Subtrai os dois elementos no topo da pilha
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:7:3: note: previous definition of ‘SUB’ was here
+   SUB,        //Subtrai os dois elementos no topo da pilha
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:8:3: error: redeclaration of enumerator ‘MUL’
+   MUL,        //Multiplica os dois elementos no topo da pilha
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:8:3: note: previous definition of ‘MUL’ was here
+   MUL,        //Multiplica os dois elementos no topo da pilha
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:9:3: error: redeclaration of enumerator ‘DIV’
+   DIV,        //Divide os dois elementos no topo da pilha
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:9:3: note: previous definition of ‘DIV’ was here
+   DIV,        //Divide os dois elementos no topo da pilha
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:10:3: error: redeclaration of enumerator ‘JMP’
+   JMP,        //Pulo incondicional para argumento
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:10:3: note: previous definition of ‘JMP’ was here
+   JMP,        //Pulo incondicional para argumento
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:11:3: error: redeclaration of enumerator ‘JIT’
+   JIT,        //Pulo se verdadeiro
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:11:3: note: previous definition of ‘JIT’ was here
+   JIT,        //Pulo se verdadeiro
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:12:3: error: redeclaration of enumerator ‘JIF’
+   JIF,        //Pulo se falso
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:12:3: note: previous definition of ‘JIF’ was here
+   JIF,        //Pulo se falso
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:13:3: error: redeclaration of enumerator ‘CALL’
+   CALL,       //Chama a função no endereço argumento
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:13:3: note: previous definition of ‘CALL’ was here
+   CALL,       //Chama a função no endereço argumento
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:14:3: error: redeclaration of enumerator ‘RET’
+   RET,        //Retorna  
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:14:3: note: previous definition of ‘RET’ was here
+   RET,        //Retorna  
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:15:3: error: redeclaration of enumerator ‘EQ’
+   EQ,         //Compara os dois elementos do topo da pilha de dados (=)
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:15:3: note: previous definition of ‘EQ’ was here
+   EQ,         //Compara os dois elementos do topo da pilha de dados (=)
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:16:3: error: redeclaration of enumerator ‘GT’
+   GT,         //Compara os dois elementos do topo da pilha de dados (>)
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:16:3: note: previous definition of ‘GT’ was here
+   GT,         //Compara os dois elementos do topo da pilha de dados (>)
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:17:3: error: redeclaration of enumerator ‘GE’
+   GE,         //Compara os dois elementos do topo da pilha de dados (>=)
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:17:3: note: previous definition of ‘GE’ was here
+   GE,         //Compara os dois elementos do topo da pilha de dados (>=)
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:18:3: error: redeclaration of enumerator ‘LT’
+   LT,         //Compara os dois elementos do topo da pilha de dados (<)
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:18:3: note: previous definition of ‘LT’ was here
+   LT,         //Compara os dois elementos do topo da pilha de dados (<)
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:19:3: error: redeclaration of enumerator ‘LE’
+   LE,         //Compara os dois elementos do topo da pilha de dados (<=)
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:19:3: note: previous definition of ‘LE’ was here
+   LE,         //Compara os dois elementos do topo da pilha de dados (<=)
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:20:3: error: redeclaration of enumerator ‘NE’
+   NE,         //Compara os dois elementos do topo da pilha de dados (!=)
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:20:3: note: previous definition of ‘NE’ was here
+   NE,         //Compara os dois elementos do topo da pilha de dados (!=)
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:21:3: error: redeclaration of enumerator ‘STO’
+   STO,        //Desempilha elemento da pilha de dados e armazena em mem[arg]
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:21:3: note: previous definition of ‘STO’ was here
+   STO,        //Desempilha elemento da pilha de dados e armazena em mem[arg]
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:22:3: error: redeclaration of enumerator ‘RCL’
+   RCL,        //Empilha elemento de mem[arg] na pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:22:3: note: previous definition of ‘RCL’ was here
+   RCL,        //Empilha elemento de mem[arg] na pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:23:3: error: redeclaration of enumerator ‘STL’
+   STL,        //Desempilha elemento da pilha de dados e armazena em exec[rbp+arg]
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:23:3: note: previous definition of ‘STL’ was here
+   STL,        //Desempilha elemento da pilha de dados e armazena em exec[rbp+arg]
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:24:3: error: redeclaration of enumerator ‘RCE’
+   RCE,        //Empilha elemento de exec[rbp+arg] na pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:24:3: note: previous definition of ‘RCE’ was here
+   RCE,        //Empilha elemento de exec[rbp+arg] na pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:25:3: error: redeclaration of enumerator ‘ALC’
+   ALC,        //Aloca arg espaços na pilha de execução
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:25:3: note: previous definition of ‘ALC’ was here
+   ALC,        //Aloca arg espaços na pilha de execução
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:26:3: error: redeclaration of enumerator ‘FRE’
+   FRE,        //Libera arg espaçoes na pilha de execução
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:26:3: note: previous definition of ‘FRE’ was here
+   FRE,        //Libera arg espaçoes na pilha de execução
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:27:3: error: redeclaration of enumerator ‘SAVE’
+   SAVE,       //Salva o valor de rbp
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:27:3: note: previous definition of ‘SAVE’ was here
+   SAVE,       //Salva o valor de rbp
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:28:3: error: redeclaration of enumerator ‘REST’
+   REST,       //Restaura o valor de rbp
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:28:3: note: previous definition of ‘REST’ was here
+   REST,       //Restaura o valor de rbp
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:29:3: error: redeclaration of enumerator ‘END’
+   END,        //Finaliza a execução do programa
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:29:3: note: previous definition of ‘END’ was here
+   END,        //Finaliza a execução do programa
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:30:3: error: redeclaration of enumerator ‘PRN’
+   PRN,        //Desempilha e imprime o elemento da pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:30:3: note: previous definition of ‘PRN’ was here
+   PRN,        //Desempilha e imprime o elemento da pilha de dados
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:31:3: error: redeclaration of enumerator ‘SISTEMA’
+   SISTEMA,
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:31:3: note: previous definition of ‘SISTEMA’ was here
+   SISTEMA,
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:32:3: error: conflicting types for ‘OpCode’
+ } OpCode;
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:32:3: note: previous declaration of ‘OpCode’ was here
+ } OpCode;
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:37:3: error: redeclaration of enumerator ‘NUM’
+   NUM,
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:37:3: note: previous definition of ‘NUM’ was here
+   NUM,
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:38:3: error: redeclaration of enumerator ‘ACAO’
+   ACAO,
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:38:3: note: previous definition of ‘ACAO’ was here
+   ACAO,
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:39:3: error: redeclaration of enumerator ‘VAR’
+   VAR
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:39:3: note: previous definition of ‘VAR’ was here
+   VAR
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:40:3: error: conflicting types for ‘Tipo’
+ } Tipo;
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:40:3: note: previous declaration of ‘Tipo’ was here
+ } Tipo;
+   ^
+In file included from pilha.h:1:0,
+                 from arena.h:4,
+                 from maq.c:4:
+instr.h:57:3: error: conflicting types for ‘INSTR’
+ } INSTR;
+   ^
+In file included from pilha.h:1:0,
+                 from maq.h:1,
+                 from arena.h:3,
+                 from maq.c:4:
+instr.h:57:3: note: previous declaration of ‘INSTR’ was here
+ } INSTR;
+   ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:8:3: error: conflicting types for ‘Pilha’
+ } Pilha;
+   ^
+In file included from maq.h:1:0,
+                 from arena.h:3,
+                 from maq.c:4:
+pilha.h:8:3: note: previous declaration of ‘Pilha’ was here
+ } Pilha;
+   ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:10:8: error: conflicting types for ‘cria_pilha’
+ Pilha *cria_pilha();
+        ^
+In file included from maq.h:1:0,
+                 from maq.c:3:
+pilha.h:10:8: note: previous declaration of ‘cria_pilha’ was here
+ Pilha *cria_pilha();
+        ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:11:6: error: conflicting types for ‘destroi_pilha’
+ void destroi_pilha(Pilha *p);
+      ^
+In file included from maq.h:1:0,
+                 from maq.c:3:
+pilha.h:11:6: note: previous declaration of ‘destroi_pilha’ was here
+ void destroi_pilha(Pilha *p);
+      ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: error: conflicting types for ‘empilha’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+In file included from maq.h:1:0,
+                 from maq.c:3:
+pilha.h:12:6: note: previous declaration of ‘empilha’ was here
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: error: conflicting types for ‘desempilha’
+ OPERANDO desempilha(Pilha *p);
+          ^
+In file included from maq.h:1:0,
+                 from maq.c:3:
+pilha.h:13:10: note: previous declaration of ‘desempilha’ was here
+ OPERANDO desempilha(Pilha *p);
+          ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:14:6: error: conflicting types for ‘imprime’
+ void imprime(Pilha *p, int n);
+      ^
+In file included from maq.h:1:0,
+                 from maq.c:3:
+pilha.h:14:6: note: previous declaration of ‘imprime’ was here
+ void imprime(Pilha *p, int n);
+      ^
+maq.c:54:10: error: conflicting types for ‘cria_maquina’
+ Maquina *cria_maquina(INSTR *p, int id, int posx, int posy) {
+          ^
+In file included from maq.c:3:0:
+maq.h:17:10: note: previous declaration of ‘cria_maquina’ was here
+ Maquina *cria_maquina(INSTR *p, int id, int posx, int posy);
+          ^
+maq.c: In function ‘cria_maquina’:
+maq.c:62:11: warning: assignment from incompatible pointer type [-Wincompatible-pointer-types]
+   m->prog = p;
+           ^
+maq.c: At top level:
+maq.c:67:6: error: conflicting types for ‘destroi_maquina’
+ void destroi_maquina(Maquina *m) {
+      ^
+In file included from maq.c:3:0:
+maq.h:19:6: note: previous declaration of ‘destroi_maquina’ was here
+ void destroi_maquina(Maquina *m);
+      ^
+maq.c:79:6: error: conflicting types for ‘exec_maquina’
+ void exec_maquina(Maquina *m, int n) {
+      ^
+In file included from maq.c:3:0:
+maq.h:21:6: note: previous declaration of ‘exec_maquina’ was here
+ void exec_maquina(Maquina *m, int n);
+      ^
+maq.c: In function ‘exec_maquina’:
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:91:12: note: in expansion of macro ‘pil’
+    empilha(pil, arg);
+            ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:94:15: note: in expansion of macro ‘pil’
+    desempilha(pil);
+               ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:97:21: note: in expansion of macro ‘pil’
+    tmp = desempilha(pil);
+                     ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:98:12: note: in expansion of macro ‘pil’
+    empilha(pil, tmp);
+            ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:99:12: note: in expansion of macro ‘pil’
+    empilha(pil, tmp);
+            ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:102:28: note: in expansion of macro ‘pil’
+    empilha(pil, desempilha(pil)+desempilha(pil));
+                            ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:102:44: note: in expansion of macro ‘pil’
+    empilha(pil, desempilha(pil)+desempilha(pil));
+                                            ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:102:12: note: in expansion of macro ‘pil’
+    empilha(pil, desempilha(pil)+desempilha(pil));
+            ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:105:21: note: in expansion of macro ‘pil’
+    tmp = desempilha(pil);
+                     ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:106:28: note: in expansion of macro ‘pil’
+    empilha(pil, desempilha(pil)-tmp);
+                            ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:106:12: note: in expansion of macro ‘pil’
+    empilha(pil, desempilha(pil)-tmp);
+            ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:109:28: note: in expansion of macro ‘pil’
+    empilha(pil, desempilha(pil)*desempilha(pil));
+                            ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:109:44: note: in expansion of macro ‘pil’
+    empilha(pil, desempilha(pil)*desempilha(pil));
+                                            ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:109:12: note: in expansion of macro ‘pil’
+    empilha(pil, desempilha(pil)*desempilha(pil));
+            ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:112:21: note: in expansion of macro ‘pil’
+    tmp = desempilha(pil);
+                     ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:113:28: note: in expansion of macro ‘pil’
+    empilha(pil, desempilha(pil)/tmp);
+                            ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:113:12: note: in expansion of macro ‘pil’
+    empilha(pil, desempilha(pil)/tmp);
+            ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:119:19: note: in expansion of macro ‘pil’
+    if (desempilha(pil) != 0) {
+                   ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:125:19: note: in expansion of macro ‘pil’
+    if (desempilha(pil) == 0) {
+                   ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:74:14: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define exec (&m->exec)
+              ^
+maq.c:133:12: note: in expansion of macro ‘exec’
+    empilha(exec, ip);
+            ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:74:14: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define exec (&m->exec)
+              ^
+maq.c:141:20: note: in expansion of macro ‘exec’
+    ip = desempilha(exec);
+                    ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:144:19: note: in expansion of macro ‘pil’
+    if (desempilha(pil) == desempilha(pil))
+                   ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:144:38: note: in expansion of macro ‘pil’
+    if (desempilha(pil) == desempilha(pil))
+                                      ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:145:11: note: in expansion of macro ‘pil’
+   empilha(pil, 1);
+           ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:147:11: note: in expansion of macro ‘pil’
+   empilha(pil, 0);
+           ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:150:19: note: in expansion of macro ‘pil’
+    if (desempilha(pil) < desempilha(pil))
+                   ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:150:37: note: in expansion of macro ‘pil’
+    if (desempilha(pil) < desempilha(pil))
+                                     ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:151:11: note: in expansion of macro ‘pil’
+   empilha(pil, 1);
+           ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:153:11: note: in expansion of macro ‘pil’
+   empilha(pil, 0);
+           ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:156:19: note: in expansion of macro ‘pil’
+    if (desempilha(pil) <= desempilha(pil))
+                   ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:156:38: note: in expansion of macro ‘pil’
+    if (desempilha(pil) <= desempilha(pil))
+                                      ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:157:11: note: in expansion of macro ‘pil’
+   empilha(pil, 1);
+           ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:159:11: note: in expansion of macro ‘pil’
+   empilha(pil, 0);
+           ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:162:19: note: in expansion of macro ‘pil’
+    if (desempilha(pil) > desempilha(pil))
+                   ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:162:37: note: in expansion of macro ‘pil’
+    if (desempilha(pil) > desempilha(pil))
+                                     ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:163:11: note: in expansion of macro ‘pil’
+   empilha(pil, 1);
+           ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:165:11: note: in expansion of macro ‘pil’
+   empilha(pil, 0);
+           ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:168:19: note: in expansion of macro ‘pil’
+    if (desempilha(pil) >= desempilha(pil))
+                   ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:168:38: note: in expansion of macro ‘pil’
+    if (desempilha(pil) >= desempilha(pil))
+                                      ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:169:11: note: in expansion of macro ‘pil’
+   empilha(pil, 1);
+           ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:171:11: note: in expansion of macro ‘pil’
+   empilha(pil, 0);
+           ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:174:19: note: in expansion of macro ‘pil’
+    if (desempilha(pil) != desempilha(pil))
+                   ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:174:38: note: in expansion of macro ‘pil’
+    if (desempilha(pil) != desempilha(pil))
+                                      ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:175:11: note: in expansion of macro ‘pil’
+   empilha(pil, 1);
+           ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:177:11: note: in expansion of macro ‘pil’
+   empilha(pil, 0);
+           ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:180:29: note: in expansion of macro ‘pil’
+    m->Mem[arg] = desempilha(pil);
+                             ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:183:12: note: in expansion of macro ‘pil’
+    empilha(pil,m->Mem[arg]);
+            ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:188:38: note: in expansion of macro ‘pil’
+    exec->val[rbp + arg] = desempilha(pil);
+                                      ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:193:12: note: in expansion of macro ‘pil’
+    empilha(pil, exec->val[rbp + arg]);
+            ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:74:14: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define exec (&m->exec)
+              ^
+maq.c:207:12: note: in expansion of macro ‘exec’
+    empilha(exec, rbp);
+            ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^
+maq.c:74:14: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define exec (&m->exec)
+              ^
+maq.c:211:21: note: in expansion of macro ‘exec’
+    rbp = desempilha(exec);
+                     ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘desempilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:216:30: note: in expansion of macro ‘pil’
+    printf("%d\n", desempilha(pil));
+                              ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:13:10: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ OPERANDO desempilha(Pilha *p);
+          ^
+maq.c:73:13: warning: passing argument 1 of ‘empilha’ from incompatible pointer type [-Wincompatible-pointer-types]
+ #define pil (&m->pil)
+             ^
+maq.c:219:12: note: in expansion of macro ‘pil’
+    empilha(pil, Sistema(id));
+            ^
+In file included from arena.h:4:0,
+                 from maq.c:4:
+pilha.h:12:6: note: expected ‘Pilha * {aka struct <anonymous> *}’ but argument is of type ‘Pilha * {aka struct <anonymous> *}’
+ void empilha(Pilha *p, OPERANDO op);
+      ^

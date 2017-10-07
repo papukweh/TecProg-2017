@@ -28,6 +28,7 @@ typedef enum {
   REST,       //Restaura o valor de rbp
   END,        //Finaliza a execução do programa
   PRN,        //Desempilha e imprime o elemento da pilha de dados
+  SISTEMA,
 } OpCode;
 
 /* Tipos dos operandos */

@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "maq.h"
+#include "arena.h"
+#include "hlinstr.h"
 
 #define DEBUG
 
 #ifdef DEBUG
-#  define D(X) X
+	#define D(X) X
 char *CODES[] = {
   "PUSH",
   "POP",
@@ -19,8 +21,6 @@ char *CODES[] = {
   "JIF",
   "CALL",
   "RET",
-  "STS",
-  "RCS",
   "EQ",
   "GT",
   "GE",
@@ -36,10 +36,11 @@ char *CODES[] = {
   "SAVE",
   "REST",
   "END",
-  "PRN"
+  "PRN",
+  "SISTEMA"
 };
 #else
-#  define D(X)
+#define D(X)
 #endif
 
 static void Erro(char *msg) {
@@ -51,12 +52,18 @@ static void Fatal(char *msg, int cod) {
   exit(cod);
 }
 
-Maquina *cria_maquina(INSTR *p) {
+Maquina *cria_maquina(INSTR *p, int id, int posx, int posy) {
   Maquina *m = (Maquina*)malloc(sizeof(Maquina));
   if (!m) Fatal("Memória insuficiente",4);
+  m->pil = *cria_pilha();
+  m->exec = *cria_pilha();
+  m->id = id;
+  m->position[0]=posx;
+  m->position[1]=posy;
   m->ip = 0;
   m->rbp = 0;
   m->prog = p;
+  m->cristais = 0;
   return m;
 }
 
@@ -70,6 +77,8 @@ void destroi_maquina(Maquina *m) {
 #define exec (&m->exec)
 #define prg (m->prog)
 #define rbp (m->rbp)
+#define id (m->id)
+
 
 void exec_maquina(Maquina *m, int n) {
   int i;
@@ -210,7 +219,13 @@ void exec_maquina(Maquina *m, int n) {
 	case PRN:
 	  printf("%d\n", desempilha(pil));
 	  break;
+	case SISTEMA:
+	  empilha(pil, 3);
+	  Sistema(id);
+	  return;
 	}
+
+	//Imprimindo as pilhas por motivos de debug
 	D(puts("Pilha de dados:\n"));
 	D(imprime(pil,5));
 	D(puts("\n Pilha de execução: \n"));
