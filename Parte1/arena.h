@@ -21,12 +21,10 @@ typedef struct{
 	Mapa mapa;
 } Arena;
 
-//extern volatile Arena arena;
-
-void Atualiza();
 void criaArena();
 Tile Inicializa();
-Maquina *criaRobo();
-void RemoveRobo();
+//Maquina *criaRobo();
+//void RemoveRobo();
 void insereExercito();
+void Atualiza();
 int Sistema();

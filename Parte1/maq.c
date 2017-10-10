@@ -87,6 +87,7 @@ void exec_maquina(Maquina *m, int n) {
 	OpCode   opc = prg[ip].instr;
 	OPERANDO arg = prg[ip].op;
 
+	D(printf("Turno da máquina %d\n", id));
 	D(printf("%3d: %-4.4s %d\n     ", ip, CODES[opc], arg));
 
 	switch (opc) {
@@ -219,10 +220,13 @@ void exec_maquina(Maquina *m, int n) {
 	case PRN:
 	  printf("%d\n", desempilha(pil));
 	  break;
-	case SISTEMA:
-	  empilha(pil, 3);
-	  Sistema(id);
-	  return;
+	case SISTEMA: ;
+	  int resposta = Sistema(id);
+	  D(printf("Resposta: %d\n", resposta));
+	  empilha(pil, resposta);
+	  i=n;
+	  ip++;
+	  break;
 	}
 
 	//Imprimindo as pilhas por motivos de debug
@@ -231,9 +235,9 @@ void exec_maquina(Maquina *m, int n) {
 	D(puts("\n Pilha de execução: \n"));
 	D(imprime(exec,10));
 	D(puts("\n"));
-	D(printf("topo dados = %d \n", pil->topo));
-	D(printf("topo exec = %d \n", exec->topo));
-	D(printf("rbp = %d \n", rbp));
+	// D(printf("topo dados = %d \n", pil->topo));
+	// D(printf("topo exec = %d \n", exec->topo));
+	// D(printf("rbp = %d \n", rbp));
 	D(puts("++++++++++++++++++++++++++++++++++\n"));
 	ip++;
   }

@@ -9,7 +9,7 @@ static Arena arena;
 int main(){
 	criaArena();
 	insereExercito();
-	//Sistema(0);
+	Atualiza();
 	return 0;
 }
 
@@ -32,28 +32,34 @@ void criaArena(){
 			i++;
 		}
 	}
-
-	//printf("%d\n", arena.mapa->tiles[0][1]->base);
 }
 
-Maquina *criaRobo(int id){
-	//INSTR p[] = {
-    //	{28, 5},  // 0
-	 //   {SISTEMA, 0},	// 1
-	//};
-	INSTR p[] = {{PRN,0},{PUSH,7}};
-	Maquina *m = cria_maquina(p, id,  1, 1);
-	return m;
+// Maquina *criaRobo(int id){
+// 	//INSTR p[] = {
+//     //	{28, 5},  // 0
+// 	 //   {SISTEMA, 0},	// 1
+// 	//};
+// 	INSTR p[] = {{PRN,0},{PUSH,7}};
+// 	Maquina *m = cria_maquina(p, id,  1, 1);
+// 	return m;
+// }
+
+void Atualiza(){
+	for(int j=0; j<2; j++){
+		for(int i=0; i<3; i++){
+			exec_maquina(arena.robots->robots[i], 3);
+		}
+	}
 }
 
 void insereExercito(){
+	INSTR p[] = {{PUSH,5}, {SISTEMA,0}, {PUSH,10}, {PRN,0}, {PUSH, 1}, {POP, 2} };
 	arena.robots = (Robos*)malloc(sizeof(Robos));
-	for(int i=0; i<1; i++){
-		//arena.robots->robots[i] = (Maquina*)malloc(sizeof(Maquina));
-		arena.robots->robots[i] = criaRobo(i);
+	for(int i=0; i<3; i++){
+		arena.robots->robots[i] = cria_maquina(p, i, 5*i, 5*i);
+		//exec_maquina(arena.robots->robots[i], 4);
 	}
-	exec_maquina(arena.robots->robots[0], 2);
-	//printf("%d\n", arena.robots->robots[0]->position[0]);
+	//exec_maquina(arena.robots->robots[0], 4);
 }
 
 Tile Inicializa(int terr, int cris, int ocup, int base){
@@ -68,8 +74,8 @@ Tile Inicializa(int terr, int cris, int ocup, int base){
 
 int Sistema(int id){
 	int arg = desempilha(&arena.robots->robots[id]->pil);
-	printf("%d", arg);
-	printf("haha");
-	return 0;
+	printf("%d\n", arg);
+	if(arg==5) return 0;
+	else return 1;
 }
 
