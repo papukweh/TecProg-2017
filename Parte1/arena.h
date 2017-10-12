@@ -1,12 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct {
-  int terreno;
-  int cristais;
-  int ocupado;
-  int base;
-} Tile;
+#include "maq.h"
 
 typedef struct{
 	Tile tiles[5][5];
@@ -23,8 +17,6 @@ typedef struct{
 
 void criaArena();
 Tile Inicializa();
-//Maquina *criaRobo();
-//void RemoveRobo();
 void insereExercito();
 void Atualiza();
 int Sistema();

@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include "maq.h"
 
-INSTR fat[] = {
-    OPERANDO tmp = cria_operando(NUM, 8)
-    {PUSH, tmp},  // 0
-    {SAVE, 0},	// 1
+int main(int argc, char *argv) {
+    INSTR fat[] = {
+    {PUSH, cria_operando(NUM, 8)},  // 0
+    {SAVE, 0},  // 1
     {CALL, cria_operando(NUM, 6)},  // 2
-    {REST, 0},	// 3
+    {REST, 0},  // 3
     {PRN,  0},  // 4
     {END,  0},  // 5
     {ALC,  cria_operando(NUM, 1)},  // 6
@@ -21,17 +21,15 @@ INSTR fat[] = {
     {RCE,  0},  // 15 n
     {PUSH, cria_operando(NUM, 1)},  // 16
     {SUB,  0},  // 17 n-1
-    {SAVE, 0}, 	// 18
+    {SAVE, 0},  // 18
     {CALL, cria_operando(NUM, 6)},  // 19 fat(n-1)
-    {REST, 0}, 	// 20
+    {REST, 0},  // 20
     {RCE,  0},  // 21 n
     {MUL,  0},  // 22 n * fat(n-1)
     {FRE,  cria_operando(NUM, 1)},  // 23
     {RET,  0}   // 24
 };
-
-int main(int argc, char *argv) {
-	Maquina *maq = cria_maquina(fat, 0, 0, 0);
+	Maquina *maq = cria_maquina(fat,0,0,0);
 	exec_maquina(maq, 200);
 	destroi_maquina(maq);
 	return 0;

@@ -29,6 +29,7 @@ typedef enum {
   END,        //Finaliza a execução do programa
   PRN,        //Desempilha e imprime o elemento da pilha de dados
   SISTEMA,    //Chamada para o sistema (arena)
+  ATR,
 } OpCode;
 
 /* Tipos dos operandos */
@@ -36,22 +37,32 @@ typedef enum {
 typedef enum {
   NUM,
   ACAO,
-  VAR
+  VAR,
+  TILE,
 } Tipo;
 
+typedef struct {
+  int terreno;
+  int cristais;
+  int ocupado;
+  int base;
+} Tile;
+ 
 /* Operando */
-/* typedef struct { */
-/*   Tipo t; */
-/*   union { */
-/* 	int n; */
-/* 	int ac; */
-/* 	int v; */
-/*   }; */
-/* } OPERANDO; */
-typedef int OPERANDO;
+typedef struct { 
+  Tipo t; 
+  union { 
+ 	  int n; 
+ 	  int ac; 
+    int v; 
+    Tile tile;
+  }; 
+} OPERANDO; 
 
 /* Instrução */
 typedef struct {
   OpCode instr;
   OPERANDO op;
 } INSTR;
+
+
