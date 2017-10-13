@@ -38,6 +38,22 @@ char *CODES[] = {
   "SYS",
   "ATR"
 };
+
+char *Chamadas[] = {
+  "MOV",
+  "REC",
+  "DEP",
+  "VER",
+};
+
+char *Direcao[] = {
+  "N",
+  "NE",
+  "SE",
+  "S",
+  "SW",
+  "NW",
+};
 #else
 #define D(X)
 #endif
@@ -45,7 +61,6 @@ char *CODES[] = {
 static void Erro(char *msg) {
   fprintf(stderr, "%s\n", msg);
 }
-
 static void Fatal(char *msg, int cod) {
   Erro(msg);
   exit(cod);
@@ -88,7 +103,7 @@ void exec_maquina(Maquina *m, int n) {
 	OPERANDO arg = prg[ip].op;
 
 	D(printf("Turno da máquina %d\n", id));
-	D(printf("%3d: %-4.4s %d\n     ", ip, CODES[opc], arg.n));
+	D(printf("%3d: %-4.4s     ", ip, CODES[opc]); imprime_op(arg); puts("");); 
 
 			switch (opc) {
 			case ADD: //ok
@@ -212,7 +227,7 @@ void exec_maquina(Maquina *m, int n) {
 			  empilha(pil,m->Mem[arg.n]);
 			  break;
 			//Remove o primeiro elemento da pilha de dados e armazena
-			// no vetor de variáveis locais (posição rbp+argumento)
+			// \nno vetor de variáveis locais (posição rbp+argumento)
 			case STL:
 			  exec->val[rbp + arg.n] = desempilha(pil);
 			  break;
@@ -237,27 +252,26 @@ void exec_maquina(Maquina *m, int n) {
 			  if(tmpop.t==TILE){
 			  	switch (arg.n){
 			  		case 0:
-			  		empilha(pil, cria_operando(NUM, tmpop.tile.terreno));
-			  		break;
+			  		  empilha(pil, cria_operando(NUM, tmpop.tile.terreno));
+			  		  break;
 			  		case 1:
-			  		empilha(pil, cria_operando(NUM, tmpop.tile.terreno));
-			  		break;
+			  		  empilha(pil, cria_operando(NUM, tmpop.tile.cristais));
+			  		  break;
 			  		case 2:
-			  		empilha(pil, cria_operando(NUM, tmpop.tile.terreno));
-			  		break;
+			  		  empilha(pil, cria_operando(NUM, tmpop.tile.ocupado));
+			  		  break;
 			  		case 3:
-			  		empilha(pil, cria_operando(NUM, tmpop.tile.terreno));
-			  		break;
+			  		  empilha(pil, cria_operando(NUM, tmpop.tile.base));
+			  		  break;
 			  		default:
-			  		Erro("Atributo inexistente");
+			  		  Erro("Atributo inexistente");
 			  	}
 			  }
 			  else{
 			  	Erro("Tipo invalido");
 			  }
 			  break;
-	}
-
+		}
 
 	//Imprimindo as pilhas por motivos de debug
 	D(puts("Pilha de dados:\n"));
@@ -265,12 +279,10 @@ void exec_maquina(Maquina *m, int n) {
 	D(puts("\n Pilha de execução: \n"));
 	D(imprime(exec,10));
 	D(puts("\n"));
-	// D(printf("topo dados = %d \n", pil->topo));
-	// D(printf("topo exec = %d \n", exec->topo));
-	// D(printf("rbp = %d \n", rbp));
 	D(puts("++++++++++++++++++++++++++++++++++\n"));
 	ip++;
-  }
+
+	}
 }
 
 //Funções auxiliares
@@ -279,40 +291,31 @@ OPERANDO cria_operando(Tipo t, int arg){
 	a.t = t;
 	switch(t){
 		case NUM:
-		a.n = arg;
-		//printf("%d\n", a.n);
-		break;
+		  a.n = arg;
+		  break;
 		case ACAO:
-		a.ac = arg;
-		break;
+		  a.ac = arg;
+		  break;
 		case VAR:
-		a.v = arg;
-		break;
+		  a.v = arg;
+		  break;
 	} 
 	return a;
 }
-OPERANDO cria_operando_tile(Tipo t, Tile arg){
-  OPERANDO a;
-  a.t = t;
-  a.n = 0;
-  a.v = 0;
-  a.ac = 0;
-  a.tile = arg;
-}
-OPERANDO cria_operando_acao(Tipo t, High_instr arg){
-  OPERANDO a;
-  a.t = t;
-  a.n = 0;
-  a.v = 0;
- // a.tile = Inicializa(0,0,0,0);
-  a.ac = arg;
-}
-OPERANDO cria_operando_dir(Tipo t, Dir arg){
-  OPERANDO a;
-  a.t = t;
-  a.n = 0;
-  a.ac = 0;
-  //a.tile = Inicializa(0,0,0,0);
-  a.v = arg;
-}
 
+void imprime_op(OPERANDO arg){
+	switch(arg.t){
+		case NUM:
+		  printf("%d", arg.n);
+		  break;
+		case ACAO:
+		  printf("%s", Chamadas[arg.ac]);
+		  break;
+		case VAR:
+		  printf("%s", Direcao[arg.v]);
+		  break;
+		case TILE:
+		  printf("Tile {%d, %d, %d, %d}", arg.tile.terreno, arg.tile.cristais, arg.tile.ocupado, arg.tile.base);
+		  break;
+	}
+}

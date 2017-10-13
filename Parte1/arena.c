@@ -5,10 +5,10 @@
 static Arena arena;
 static int ids=0;
 
-#define MAX_ROBOS 3
-#define MAX_TURNOS 2
-#define MAX_TIME 2
-#define MAX_INSTR 3
+#define MAX_ROBOS 1
+#define MAX_TURNOS 7
+#define MAX_TIME 1
+#define MAX_INSTR 1
 
 int main(){
 	criaArena();
@@ -17,6 +17,8 @@ int main(){
 	return 0;
 }
 
+// Recebe um prototipo de arena pela entrada padrao e cria
+// os respectivos tiles
 void criaArena(){
 	int c;
 	int terr, cris, ocup, base,i,j;
@@ -39,24 +41,27 @@ void criaArena(){
 	}
 }
 
+// Escalonador: manda cada robo executar suas instrucoes sucessivamente
 void Atualiza(){
-	//for(int j=0; j<MAX_TURNOS; j++){
-		//for(int i=0; i<ids; i++){
-			exec_maquina(arena.robots->robots[0], MAX_INSTR);		
-		//}
-	//}
+	for(int j=0; j<MAX_TURNOS; j++){
+		for(int i=0; i<ids; i++){
+			exec_maquina(arena.robots->robots[i], MAX_INSTR);		
+		}
+	}
 }
 
+// Funcao que insere todos os robos na arena
 void insereExercito(){
-	INSTR p[] = {{PUSH, cria_operando_dir(VAR, NW)}, {PUSH, cria_operando_acao(ACAO, REC)}, 
-	{SYS, cria_operando(NUM, 0)}  };
+	INSTR p[] = {{PUSH, {VAR, NW}}, {PUSH, {ACAO, REC}}, 
+	{SYS, {NUM, 0}}, {PUSH, {ACAO, VER}}, {SYS, {NUM, 0}}, {POP, {NUM, 0}}, {ATR, {NUM, 2}}  };
 	arena.robots = (Robos*)malloc(sizeof(Robos));
 	for(int i=0; i<MAX_ROBOS*MAX_TIME; i++){
-		arena.robots->robots[i] = cria_maquina(p, ids, 5, 5);
+		arena.robots->robots[i] = cria_maquina(p, ids, 2, 1);
 		ids++;
 	}
 }
 
+// Funcao que inicializa os valores de um tile da arena
 Tile Inicializa(int terr, int cris, int ocup, int base){
 	Tile t;
 	t.terreno = terr;
@@ -66,20 +71,63 @@ Tile Inicializa(int terr, int cris, int ocup, int base){
 	return t;
 }
 
+// Funcao que responde as chamadas de sistema realizadas pelos robos
+// Recebe um numero de identificacao e responde 0 ou 1
 int Sistema(int id){
 	OPERANDO instr = desempilha(&arena.robots->robots[id]->pil);
 	OPERANDO arg;
+	OPERANDO ver;
 	int posx = arena.robots->robots[id]->position[0];
 	int posy = arena.robots->robots[id]->position[1];
-	switch(instr.t){
-		case REC:
+	if(instr.ac==VER){
+		ver.t = TILE;
+		ver.tile = arena.mapa.tiles[posx][posy];
+		empilha(&arena.robots->robots[id]->pil, ver);
+		return 0;
+	}
+	else{
 		arg = desempilha(&arena.robots->robots[id]->pil);
 		switch(arg.v){
+			case N:
+			  posx--;  
+			  break;
+			case NE:
+			  posx--;
+			  posy++;
+			  break;
+			case SE:
+			  posy++;
+			  break;
+			case S:
+			  posx++;
+			  break;
+			case SW:
+			  posx++;
+			  posy--;
+			  break;
 			case NW:
-			if(arena.mapa.tiles[posx][posy-1].cristais > 0){
-				arena.mapa.tiles[posx][posy-1].cristais = arena.mapa.tiles[posx][posy-1].cristais-1;
-				arena.robots->robots[id]->cristais++;
-				return 0;
+			  posy--;
+			  break;
+
+			if(posx<0 || posy>4) return -1;
+			
+			switch(instr.t){
+				case MOV:
+					if(arena.mapa.tiles[posx][posy].ocupado == 0){
+						arena.robots->robots[id]->position[0] = posx;
+						arena.robots->robots[id]->position[0] = posy;
+						return 0;
+					}
+					else return 1;
+				case REC:
+					if(arena.mapa.tiles[posx][posy].cristais > 0){
+						arena.mapa.tiles[posx][posy].cristais--;
+						arena.robots->robots[id]->cristais++;
+						return 0;
+					}
+				case DEP:
+					arena.mapa.tiles[posx][posy].cristais++;
+					return 0;
 			}
 		}
 	}
