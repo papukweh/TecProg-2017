@@ -23,3 +23,6 @@ void exec_maquina(Maquina *m, int n);
 
 
 OPERANDO cria_operando(Tipo t, int arg);
+OPERANDO cria_operando_tile(Tipo t, Tile arg);
+OPERANDO cria_operando_acao(Tipo t, High_instr arg);
+OPERANDO cria_operando_dir(Tipo t, Dir arg);

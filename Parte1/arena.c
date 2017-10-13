@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "arena.h"
-#include "hlinstr.h"
 
 static Arena arena;
 static int ids=0;
@@ -41,20 +40,19 @@ void criaArena(){
 }
 
 void Atualiza(){
-	for(int j=0; j<MAX_TURNOS; j++){
-		for(int i=0; i<ids; i++){
-			exec_maquina(arena.robots->robots[i], MAX_INSTR);		
-		}
-	}
+	//for(int j=0; j<MAX_TURNOS; j++){
+		//for(int i=0; i<ids; i++){
+			exec_maquina(arena.robots->robots[0], MAX_INSTR);		
+		//}
+	//}
 }
 
 void insereExercito(){
-	INSTR p[] = {{PUSH, cria_operando(NUM, 5)}, {SISTEMA,cria_operando(NUM, 0)}, 
-	{PUSH,cria_operando(NUM, 10)}, {PRN,cria_operando(NUM, 0)}, {PUSH, cria_operando(NUM, 1)}, 
-	{POP, cria_operando(NUM, 2)}, {SISTEMA, cria_operando(NUM, 0)} };
+	INSTR p[] = {{PUSH, cria_operando_dir(VAR, NW)}, {PUSH, cria_operando_acao(ACAO, REC)}, 
+	{SYS, cria_operando(NUM, 0)}  };
 	arena.robots = (Robos*)malloc(sizeof(Robos));
 	for(int i=0; i<MAX_ROBOS*MAX_TIME; i++){
-		arena.robots->robots[i] = cria_maquina(p, ids, 5*i, 5*i);
+		arena.robots->robots[i] = cria_maquina(p, ids, 5, 5);
 		ids++;
 	}
 }
@@ -69,9 +67,22 @@ Tile Inicializa(int terr, int cris, int ocup, int base){
 }
 
 int Sistema(int id){
-	int arg = desempilha(&arena.robots->robots[id]->pil).n;
-	printf("%d\n", arg);
-	if(arg==5) return 0;
-	else return 1;
+	OPERANDO instr = desempilha(&arena.robots->robots[id]->pil);
+	OPERANDO arg;
+	int posx = arena.robots->robots[id]->position[0];
+	int posy = arena.robots->robots[id]->position[1];
+	switch(instr.t){
+		case REC:
+		arg = desempilha(&arena.robots->robots[id]->pil);
+		switch(arg.v){
+			case NW:
+			if(arena.mapa.tiles[posx][posy-1].cristais > 0){
+				arena.mapa.tiles[posx][posy-1].cristais = arena.mapa.tiles[posx][posy-1].cristais-1;
+				arena.robots->robots[id]->cristais++;
+				return 0;
+			}
+		}
+	}
+	return 1;
 }
 

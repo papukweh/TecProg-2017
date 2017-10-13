@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "maq.h"
-#include "hlinstr.h"
 
 #define DEBUG
 
@@ -25,7 +24,7 @@ char *CODES[] = {
   "GE",
   "LT",
   "LE",
-  "NE",
+  "DIFF",
   "STO",
   "RCL",
   "STL",
@@ -36,7 +35,7 @@ char *CODES[] = {
   "REST",
   "END",
   "PRN",
-  "SISTEMA",
+  "SYS",
   "ATR"
 };
 #else
@@ -170,7 +169,7 @@ void exec_maquina(Maquina *m, int n) {
 			  else
 				empilha(pil, cria_operando(NUM, 0));
 			  break;
-			case NE:
+			case DIFF:
 			  if (desempilha(pil).n != desempilha(pil).n)
 				empilha(pil, cria_operando(NUM, 1));
 			  else
@@ -227,7 +226,7 @@ void exec_maquina(Maquina *m, int n) {
 			case PRN:
 			  printf("%d\n", desempilha(pil).n);
 			  break;
-			case SISTEMA: 
+			case SYS: 
 			  resposta = cria_operando(NUM, Sistema(id));
 			  D(printf("Resposta: %d\n", resposta.n));
 			  empilha(pil, resposta);
@@ -292,3 +291,28 @@ OPERANDO cria_operando(Tipo t, int arg){
 	} 
 	return a;
 }
+OPERANDO cria_operando_tile(Tipo t, Tile arg){
+  OPERANDO a;
+  a.t = t;
+  a.n = 0;
+  a.v = 0;
+  a.ac = 0;
+  a.tile = arg;
+}
+OPERANDO cria_operando_acao(Tipo t, High_instr arg){
+  OPERANDO a;
+  a.t = t;
+  a.n = 0;
+  a.v = 0;
+ // a.tile = Inicializa(0,0,0,0);
+  a.ac = arg;
+}
+OPERANDO cria_operando_dir(Tipo t, Dir arg){
+  OPERANDO a;
+  a.t = t;
+  a.n = 0;
+  a.ac = 0;
+  //a.tile = Inicializa(0,0,0,0);
+  a.v = arg;
+}
+

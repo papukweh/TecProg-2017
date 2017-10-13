@@ -1,3 +1,4 @@
+//#include "hlinstr.h"
 /* Códigos das instruções */
 typedef enum {
   PUSH,       //Empilha argumento na pilha de dados
@@ -17,7 +18,7 @@ typedef enum {
   GE,         //Compara os dois elementos do topo da pilha de dados (>=)
   LT,         //Compara os dois elementos do topo da pilha de dados (<)
   LE,         //Compara os dois elementos do topo da pilha de dados (<=)
-  NE,         //Compara os dois elementos do topo da pilha de dados (!=)
+  DIFF,         //Compara os dois elementos do topo da pilha de dados (!=)
   STO,        //Desempilha elemento da pilha de dados e armazena em mem[arg]
   RCL,        //Empilha elemento de mem[arg] na pilha de dados
   STL,        //Desempilha elemento da pilha de dados e armazena em exec[rbp+arg]
@@ -28,7 +29,7 @@ typedef enum {
   REST,       //Restaura o valor de rbp
   END,        //Finaliza a execução do programa
   PRN,        //Desempilha e imprime o elemento da pilha de dados
-  SISTEMA,    //Chamada para o sistema (arena)
+  SYS,        //Chamada para o sistema (arena)
   ATR,
 } OpCode;
 
@@ -47,14 +48,30 @@ typedef struct {
   int ocupado;
   int base;
 } Tile;
+
+typedef enum{
+  MOV,  // Mover robô
+  REC,  // Recolher cristal
+  DEP,  // Depositar cristal
+  VER,  // Checar as vizinhanças
+} High_instr;
+
+typedef enum{
+  N,  //(i-1,j)
+  NE, //(i-1,j+1)
+  SE, //(i,j+1)
+  S,  //(i+1,j)
+  SW, //(i+1,j-1)
+  NW, //(i,j-1)
+} Dir;
  
 /* Operando */
 typedef struct { 
   Tipo t; 
   union { 
  	  int n; 
- 	  int ac; 
-    int v; 
+ 	  High_instr ac; 
+    Dir v; 
     Tile tile;
   }; 
 } OPERANDO; 
