@@ -8,6 +8,7 @@ typedef struct {
   OPERANDO Mem[MAXMEM];
   INSTR *prog;
   int ip;
+  int instrSize;
   int rbp;
   int id;
   int time;
@@ -15,7 +16,7 @@ typedef struct {
   int cristais;
 } Maquina;
 
-Maquina *cria_maquina(INSTR *p, int id, int posx, int posy);
+Maquina *cria_maquina(INSTR *p, int iSize, int id, int posx, int posy);
 
 void destroi_maquina(Maquina *m);
 

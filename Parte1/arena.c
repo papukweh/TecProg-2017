@@ -6,7 +6,7 @@ static Arena arena;
 static int ids=0;
 
 #define MAX_ROBOS 1
-#define MAX_TURNOS 7
+#define MAX_TURNOS 15
 #define MAX_TIME 1
 #define MAX_INSTR 1
 
@@ -52,11 +52,18 @@ void Atualiza(){
 
 // Funcao que insere todos os robos na arena
 void insereExercito(){
-	INSTR p[] = {{PUSH, {VAR, NW}}, {PUSH, {ACAO, REC}}, 
-	{SYS, {NUM, 0}}, {PUSH, {ACAO, VER}}, {SYS, {NUM, 0}}, {POP, {NUM, 0}}, {ATR, {NUM, 2}}  };
-	arena.robots = (Robos*)malloc(sizeof(Robos));
+    arena.robots = (Robos*)malloc(sizeof(Robos));
+    
+    INSTR aux = cria_instr(END, cria_operando(NUM, 0));
+    INSTR p[] = {{ADD, {NUM, 0}}, {PUSH, {NUM, 2}},  {PUSH, {NUM, 1}}, {CALL, {NUM, 4}}, {SAVE, {NUM, 0}},
+    /*{SYS, {NUM, 0}},*/ {PUSH, {ACAO, VER}}, // {ADD, {NUM,1}}, {DUP, {NUM,0}}, {MUL, {NUM, 2}}, {SUB, {NUM, 8}}, 
+    {SYS, {NUM, 0}}, {POP, {NUM, 0}}, /*{ATR, {NUM, 2}}*/ {PUSH, {NUM, 2}},  aux };
+    int instrSize = sizeof(p)/sizeof(p[0]);
+    //p[instrSize] = cria_instr(END, cria_operando(NUM, 0));
+    //p.insert(nweOperando)
+	
 	for(int i=0; i<MAX_ROBOS*MAX_TIME; i++){
-		arena.robots->robots[i] = cria_maquina(p, ids, 2, 1);
+		arena.robots->robots[i] = cria_maquina(p, instrSize, ids, 2, 1);
 		ids++;
 	}
 }
@@ -109,7 +116,7 @@ int Sistema(int id){
 			  posy--;
 			  break;
 
-			if(posx<0 || posy>4) return -1;
+			if(posx<0 || posy>4 || posx>4 || posy<0) return -1;
 			
 			switch(instr.t){
 				case MOV:
@@ -132,5 +139,10 @@ int Sistema(int id){
 		}
 	}
 	return 1;
+}
+
+INSTR cria_instr(OpCode oC, OPERANDO o){
+	INSTR a = {oC, o};
+	return a;
 }
 

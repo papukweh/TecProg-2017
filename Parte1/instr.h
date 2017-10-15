@@ -18,7 +18,7 @@ typedef enum {
   GE,         //Compara os dois elementos do topo da pilha de dados (>=)
   LT,         //Compara os dois elementos do topo da pilha de dados (<)
   LE,         //Compara os dois elementos do topo da pilha de dados (<=)
-  DIFF,         //Compara os dois elementos do topo da pilha de dados (!=)
+  DIFF,       //Compara os dois elementos do topo da pilha de dados (!=)
   STO,        //Desempilha elemento da pilha de dados e armazena em mem[arg]
   RCL,        //Empilha elemento de mem[arg] na pilha de dados
   STL,        //Desempilha elemento da pilha de dados e armazena em exec[rbp+arg]
@@ -30,7 +30,7 @@ typedef enum {
   END,        //Finaliza a execução do programa
   PRN,        //Desempilha e imprime o elemento da pilha de dados
   SYS,        //Chamada para o sistema (arena)
-  ATR,
+  ATR,        //empilha um atributo de um tile especifico na memoria
 } OpCode;
 
 /* Tipos dos operandos */
@@ -67,13 +67,13 @@ typedef enum{
  
 /* Operando */
 typedef struct { 
-  Tipo t; 
-  union { 
- 	  int n; 
- 	  High_instr ac; 
-    Dir v; 
-    Tile tile;
-  }; 
+    Tipo t; 
+    union { 
+        int n; 
+        High_instr ac; 
+        Dir v; 
+        Tile tile;
+    }; 
 } OPERANDO; 
 
 /* Instrução */
@@ -82,4 +82,4 @@ typedef struct {
   OPERANDO op;
 } INSTR;
 
-
+INSTR cria_instr(OpCode oC, OPERANDO o);
