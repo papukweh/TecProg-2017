@@ -1,0 +1,318 @@
+  0: PUSH 5
+     Pilha de dados:
+
+[   5, ]
+ Pilha de execução: 
+
+[]
+
+topo dados = 1 
+topo exec = 0 
+rbp = 0 
+++++++++++++++++++++++++++++++++++
+
+  1: PUSH 4
+     Pilha de dados:
+
+[   4,    5, ]
+ Pilha de execução: 
+
+[]
+
+topo dados = 2 
+topo exec = 0 
+rbp = 0 
+++++++++++++++++++++++++++++++++++
+
+  2: PUSH 3
+     Pilha de dados:
+
+[   3,    4,    5, ]
+ Pilha de execução: 
+
+[]
+
+topo dados = 3 
+topo exec = 0 
+rbp = 0 
+++++++++++++++++++++++++++++++++++
+
+  3: SAVE 0
+     Pilha de dados:
+
+[   3,    4,    5, ]
+ Pilha de execução: 
+
+[   0, ]
+
+topo dados = 3 
+topo exec = 1 
+rbp = 0 
+++++++++++++++++++++++++++++++++++
+
+  4: CALL 10
+      10: ALC  2
+     Pilha de dados:
+
+[   3,    4,    5, ]
+ Pilha de execução: 
+
+[   0,    0,    4,    0, ]
+
+topo dados = 3 
+topo exec = 4 
+rbp = 2 
+++++++++++++++++++++++++++++++++++
+
+ 11: ADD  0
+     Pilha de dados:
+
+[   7,    5, ]
+ Pilha de execução: 
+
+[   0,    0,    4,    0, ]
+
+topo dados = 2 
+topo exec = 4 
+rbp = 2 
+++++++++++++++++++++++++++++++++++
+
+ 12: STL  0
+     Pilha de dados:
+
+[   5, ]
+ Pilha de execução: 
+
+[   0,    7,    4,    0, ]
+
+topo dados = 1 
+topo exec = 4 
+rbp = 2 
+++++++++++++++++++++++++++++++++++
+
+ 13: STL  1
+     Pilha de dados:
+
+[]
+ Pilha de execução: 
+
+[   5,    7,    4,    0, ]
+
+topo dados = 0 
+topo exec = 4 
+rbp = 2 
+++++++++++++++++++++++++++++++++++
+
+ 14: RCE  1
+     Pilha de dados:
+
+[   5, ]
+ Pilha de execução: 
+
+[   5,    7,    4,    0, ]
+
+topo dados = 1 
+topo exec = 4 
+rbp = 2 
+++++++++++++++++++++++++++++++++++
+
+ 15: RCE  0
+     Pilha de dados:
+
+[   7,    5, ]
+ Pilha de execução: 
+
+[   5,    7,    4,    0, ]
+
+topo dados = 2 
+topo exec = 4 
+rbp = 2 
+++++++++++++++++++++++++++++++++++
+
+ 16: SAVE 0
+     Pilha de dados:
+
+[   7,    5, ]
+ Pilha de execução: 
+
+[   2,    5,    7,    4,    0, ]
+
+topo dados = 2 
+topo exec = 5 
+rbp = 2 
+++++++++++++++++++++++++++++++++++
+
+ 17: CALL 22
+      22: ALC  5
+     Pilha de dados:
+
+[   7,    5, ]
+ Pilha de execução: 
+
+[   0,    0,    0,    0,    0,   17,    2,    5,    7, ]
+
+topo dados = 2 
+topo exec = 11 
+rbp = 6 
+++++++++++++++++++++++++++++++++++
+
+ 23: STL  0
+     Pilha de dados:
+
+[   5, ]
+ Pilha de execução: 
+
+[   0,    0,    0,    0,    7,   17,    2,    5,    7, ]
+
+topo dados = 1 
+topo exec = 11 
+rbp = 6 
+++++++++++++++++++++++++++++++++++
+
+ 24: STL  1
+     Pilha de dados:
+
+[]
+ Pilha de execução: 
+
+[   0,    0,    0,    5,    7,   17,    2,    5,    7, ]
+
+topo dados = 0 
+topo exec = 11 
+rbp = 6 
+++++++++++++++++++++++++++++++++++
+
+ 25: RCE  0
+     Pilha de dados:
+
+[   7, ]
+ Pilha de execução: 
+
+[   0,    0,    0,    5,    7,   17,    2,    5,    7, ]
+
+topo dados = 1 
+topo exec = 11 
+rbp = 6 
+++++++++++++++++++++++++++++++++++
+
+ 26: RCE  1
+     Pilha de dados:
+
+[   5,    7, ]
+ Pilha de execução: 
+
+[   0,    0,    0,    5,    7,   17,    2,    5,    7, ]
+
+topo dados = 2 
+topo exec = 11 
+rbp = 6 
+++++++++++++++++++++++++++++++++++
+
+ 27: ADD  0
+     Pilha de dados:
+
+[  12, ]
+ Pilha de execução: 
+
+[   0,    0,    0,    5,    7,   17,    2,    5,    7, ]
+
+topo dados = 1 
+topo exec = 11 
+rbp = 6 
+++++++++++++++++++++++++++++++++++
+
+ 28: PRN  0
+     12
+Pilha de dados:
+
+[]
+ Pilha de execução: 
+
+[   0,    0,    0,    5,    7,   17,    2,    5,    7, ]
+
+topo dados = 0 
+topo exec = 11 
+rbp = 6 
+++++++++++++++++++++++++++++++++++
+
+ 29: RET  0
+     Pilha de dados:
+
+[]
+ Pilha de execução: 
+
+[   2,    5,    7,    4,    0, ]
+
+topo dados = 0 
+topo exec = 5 
+rbp = 6 
+++++++++++++++++++++++++++++++++++
+
+ 18: REST 0
+     Pilha de dados:
+
+[]
+ Pilha de execução: 
+
+[   5,    7,    4,    0, ]
+
+topo dados = 0 
+topo exec = 4 
+rbp = 2 
+++++++++++++++++++++++++++++++++++
+
+ 19: RET  0
+     Pilha de dados:
+
+[]
+ Pilha de execução: 
+
+[   0, ]
+
+topo dados = 0 
+topo exec = 1 
+rbp = 2 
+++++++++++++++++++++++++++++++++++
+
+  5: REST 0
+     Pilha de dados:
+
+[]
+ Pilha de execução: 
+
+[]
+
+topo dados = 0 
+topo exec = 0 
+rbp = 0 
+++++++++++++++++++++++++++++++++++
+
+  6: PUSH 10
+     Pilha de dados:
+
+[  10, ]
+ Pilha de execução: 
+
+[]
+
+topo dados = 1 
+topo exec = 0 
+rbp = 0 
+++++++++++++++++++++++++++++++++++
+
+  7: PRN  0
+     10
+Pilha de dados:
+
+[]
+ Pilha de execução: 
+
+[]
+
+topo dados = 0 
+topo exec = 0 
+rbp = 0 
+++++++++++++++++++++++++++++++++++
+
+  8: END  0
+     
