@@ -1,4 +1,4 @@
-CFLAGS = -Wall --std=c99 -g
+CFLAGS = -Wall --std=c11 -Wno-missing-braces -g
 CC=gcc
 
 .PHONY: clean

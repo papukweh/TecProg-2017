@@ -1,30 +1,30 @@
-	PUSH 5
-	PUSH 4
-	PUSH 3
-	SAVE
-	CALL 10
-	REST
-	PUSH 10
-	PRN
-	END
-	POP
-	ALC 2
-	ADD
-	STL 0
-	STL 1
-	RCE 1
-	RCE 0
-	SAVE
-	CALL 22
-	REST
-	RET
-	POP
-	POP
-	ALC 5
-	STL 0
-	STL 1
-	RCE 0
-	RCE 1
-	ADD
-	PRN
-	RET
+    PUSH 5
+    PUSH 4
+    PUSH 3
+    SAVE
+    CALL 10
+    REST
+    PUSH 10
+    PRN
+    END
+    POP
+    ALC 2
+    ADD
+    STL 0
+    STL 1
+    RCE 1
+    RCE 0
+    SAVE
+    CALL 22
+    REST
+    RET
+    POP
+    POP
+    ALC 5
+    STL 0
+    STL 1
+    RCE 0
+    RCE 1
+    ADD
+    PRN
+    RET

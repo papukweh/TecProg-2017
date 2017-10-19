@@ -1,5 +1,5 @@
 Turno da máquina 0
-  0: SYS      0
+    0: SYS        0
 Resposta: 1
 Pilha de dados:
 
@@ -11,7 +11,7 @@ Pilha de dados:
 ++++++++++++++++++++++++++++++++++
 
 Turno da máquina 0
-  1: ADD      1
+    1: ADD        1
 Pilha de dados:
 
 [ 1, ]
@@ -22,10 +22,10 @@ Pilha de dados:
 ++++++++++++++++++++++++++++++++++
 
 Turno da máquina 0
-  2: DUP      0
+    2: DUP        0
 Pilha de dados:
 
-[ 1,  1, ]
+[ 1,    1, ]
  Pilha de execução: 
 
 []
@@ -33,18 +33,7 @@ Pilha de dados:
 ++++++++++++++++++++++++++++++++++
 
 Turno da máquina 0
-  3: MUL      2
-Pilha de dados:
-
-[ 1, ]
- Pilha de execução: 
-
-[]
-
-++++++++++++++++++++++++++++++++++
-
-Turno da máquina 0
-  4: SUB      8
+    3: MUL        2
 Pilha de dados:
 
 [ 1, ]
@@ -55,7 +44,18 @@ Pilha de dados:
 ++++++++++++++++++++++++++++++++++
 
 Turno da máquina 0
-  5: SYS      0
+    4: SUB        8
+Pilha de dados:
+
+[ 1, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 0
+    5: SYS        0
 Resposta: 1
 Pilha de dados:
 

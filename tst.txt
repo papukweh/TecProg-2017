@@ -1,0 +1,1099 @@
+7
+Posx = 0
+Posy = 1
+Posx = 1
+Posy = 0
+Posx = 2
+Posy = 0
+Posx = 2
+Posy = 4
+Posx = 3
+Posy = 3
+Posx = 3
+Posy = 4
+Turno da máquina 0
+  0: PUSH     VER
+Pilha de dados:
+
+[ VER, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 0
+  1: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Tile {0, 4, 1, 0},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 1
+  0: PUSH     VER
+Pilha de dados:
+
+[ VER, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 1
+  1: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Tile {0, 0, 0, 1},  Tile {1, 20, 1, 0},  Tile {1, 10, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 3, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 2
+  0: PUSH     VER
+Pilha de dados:
+
+[ VER, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 2
+  1: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Tile {1, 0, 0, 0},  Tile {1, 10, 0, 0},  Tile {0, 4, 1, 0},  Tile {0, 0, 0, 1}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 3
+  0: PUSH     VER
+Pilha de dados:
+
+[ VER, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 3
+  1: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Tile {3, 20, 0, 0},  Tile {1, 0, 1, 0},  Tile {3, 0, 0, 1},  Tile {1, 0, 1, 0},  Tile {5, 0, 0, 0},  Tile {0, 10, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 4
+  0: PUSH     VER
+Pilha de dados:
+
+[ VER, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 4
+  1: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Tile {1, 10, 0, 0},  Tile {2, 0, 0, 0},  Tile {3, 0, 0, 1},  Tile {4, 0, 1, 0},  Tile {3, 20, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 5
+  0: PUSH     VER
+Pilha de dados:
+
+[ VER, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 5
+  1: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Tile {4, 0, 1, 0},  Tile {3, 0, 0, 1},  Tile {5, 0, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 0
+  2: POP      0
+Pilha de dados:
+
+[ Tile {0, 4, 1, 0},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 0
+  3: ATR      0
+Pilha de dados:
+
+[ Terreno {GRAMA},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 0
+  4: PUSH     NW
+Pilha de dados:
+
+[ NW,  Terreno {GRAMA},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 0
+  5: PUSH     MOV
+Pilha de dados:
+
+[ MOV,  NW,  Terreno {GRAMA},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 0
+  6: SYS      0
+Resposta: -1
+Pilha de dados:
+
+[ -1,  Terreno {GRAMA},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 1
+  2: POP      0
+Pilha de dados:
+
+[ Tile {0, 0, 0, 1},  Tile {1, 20, 1, 0},  Tile {1, 10, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 3, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 1
+  3: ATR      0
+Pilha de dados:
+
+[ Terreno {GRAMA},  Tile {1, 20, 1, 0},  Tile {1, 10, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 3, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 1
+  4: PUSH     NW
+Pilha de dados:
+
+[ NW,  Terreno {GRAMA},  Tile {1, 20, 1, 0},  Tile {1, 10, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 3, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 1
+  5: PUSH     MOV
+Pilha de dados:
+
+[ MOV,  NW,  Terreno {GRAMA},  Tile {1, 20, 1, 0},  Tile {1, 10, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 3, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 1
+  6: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Terreno {GRAMA},  Tile {1, 20, 1, 0},  Tile {1, 10, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 3, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 2
+  2: POP      0
+Pilha de dados:
+
+[ Tile {1, 0, 0, 0},  Tile {1, 10, 0, 0},  Tile {0, 4, 1, 0},  Tile {0, 0, 0, 1}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 2
+  3: ATR      0
+Pilha de dados:
+
+[ Terreno {ESTRADA},  Tile {1, 10, 0, 0},  Tile {0, 4, 1, 0},  Tile {0, 0, 0, 1}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 2
+  4: PUSH     NW
+Pilha de dados:
+
+[ NW,  Terreno {ESTRADA},  Tile {1, 10, 0, 0},  Tile {0, 4, 1, 0},  Tile {0, 0, 0, 1}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 2
+  5: PUSH     MOV
+Pilha de dados:
+
+[ MOV,  NW,  Terreno {ESTRADA},  Tile {1, 10, 0, 0},  Tile {0, 4, 1, 0},  Tile {0, 0, 0, 1}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 2
+  6: SYS      0
+Resposta: -1
+Pilha de dados:
+
+[ -1,  Terreno {ESTRADA},  Tile {1, 10, 0, 0},  Tile {0, 4, 1, 0},  Tile {0, 0, 0, 1}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 3
+  2: POP      0
+Pilha de dados:
+
+[ Tile {3, 20, 0, 0},  Tile {1, 0, 1, 0},  Tile {3, 0, 0, 1},  Tile {1, 0, 1, 0},  Tile {5, 0, 0, 0},  Tile {0, 10, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 3
+  3: ATR      0
+Pilha de dados:
+
+[ Terreno {AGUA},  Tile {1, 0, 1, 0},  Tile {3, 0, 0, 1},  Tile {1, 0, 1, 0},  Tile {5, 0, 0, 0},  Tile {0, 10, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 3
+  4: PUSH     NW
+Pilha de dados:
+
+[ NW,  Terreno {AGUA},  Tile {1, 0, 1, 0},  Tile {3, 0, 0, 1},  Tile {1, 0, 1, 0},  Tile {5, 0, 0, 0},  Tile {0, 10, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 3
+  5: PUSH     MOV
+Pilha de dados:
+
+[ MOV,  NW,  Terreno {AGUA},  Tile {1, 0, 1, 0},  Tile {3, 0, 0, 1},  Tile {1, 0, 1, 0},  Tile {5, 0, 0, 0},  Tile {0, 10, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 3
+  6: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Terreno {AGUA},  Tile {1, 0, 1, 0},  Tile {3, 0, 0, 1},  Tile {1, 0, 1, 0},  Tile {5, 0, 0, 0},  Tile {0, 10, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 4
+  2: POP      0
+Pilha de dados:
+
+[ Tile {1, 10, 0, 0},  Tile {2, 0, 0, 0},  Tile {3, 0, 0, 1},  Tile {4, 0, 1, 0},  Tile {3, 20, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 4
+  3: ATR      0
+Pilha de dados:
+
+[ Terreno {ESTRADA},  Tile {2, 0, 0, 0},  Tile {3, 0, 0, 1},  Tile {4, 0, 1, 0},  Tile {3, 20, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 4
+  4: PUSH     NW
+Pilha de dados:
+
+[ NW,  Terreno {ESTRADA},  Tile {2, 0, 0, 0},  Tile {3, 0, 0, 1},  Tile {4, 0, 1, 0},  Tile {3, 20, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 4
+  5: PUSH     MOV
+Pilha de dados:
+
+[ MOV,  NW,  Terreno {ESTRADA},  Tile {2, 0, 0, 0},  Tile {3, 0, 0, 1},  Tile {4, 0, 1, 0},  Tile {3, 20, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 4
+  6: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Terreno {ESTRADA},  Tile {2, 0, 0, 0},  Tile {3, 0, 0, 1},  Tile {4, 0, 1, 0},  Tile {3, 20, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 5
+  2: POP      0
+Pilha de dados:
+
+[ Tile {4, 0, 1, 0},  Tile {3, 0, 0, 1},  Tile {5, 0, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 5
+  3: ATR      0
+Pilha de dados:
+
+[ Terreno {AREIA},  Tile {3, 0, 0, 1},  Tile {5, 0, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 5
+  4: PUSH     NW
+Pilha de dados:
+
+[ NW,  Terreno {AREIA},  Tile {3, 0, 0, 1},  Tile {5, 0, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 5
+  5: PUSH     MOV
+Pilha de dados:
+
+[ MOV,  NW,  Terreno {AREIA},  Tile {3, 0, 0, 1},  Tile {5, 0, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 5
+  6: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Terreno {AREIA},  Tile {3, 0, 0, 1},  Tile {5, 0, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 0
+  0: PUSH     VER
+Pilha de dados:
+
+[ VER,  -1,  Terreno {GRAMA},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 0
+  1: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Tile {0, 4, 0, 0},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0},  -1,  Terreno {GRAMA},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 1
+  0: PUSH     VER
+Pilha de dados:
+
+[ VER,  0,  Terreno {GRAMA},  Tile {1, 20, 1, 0},  Tile {1, 10, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 3, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 1
+  1: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Tile {1, 20, 1, 0},  Tile {0, 4, 0, 0},  0,  Terreno {GRAMA},  Tile {1, 20, 1, 0},  Tile {1, 10, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 3, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 2
+  0: PUSH     VER
+Pilha de dados:
+
+[ VER,  -1,  Terreno {ESTRADA},  Tile {1, 10, 0, 0},  Tile {0, 4, 1, 0},  Tile {0, 0, 0, 1}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 2
+  1: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Tile {1, 0, 0, 0},  Tile {1, 10, 0, 0},  Tile {0, 4, 0, 0},  Tile {0, 0, 1, 1},  -1,  Terreno {ESTRADA},  Tile {1, 10, 0, 0},  Tile {0, 4, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 3
+  0: PUSH     VER
+Pilha de dados:
+
+[ VER,  0,  Terreno {AGUA},  Tile {1, 0, 1, 0},  Tile {3, 0, 0, 1},  Tile {1, 0, 1, 0},  Tile {5, 0, 0, 0},  Tile {0, 10, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 3
+  1: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Tile {3, 0, 0, 0},  Tile {1, 10, 1, 0},  Tile {1, 0, 0, 0},  Tile {4, 0, 1, 0},  Tile {0, 10, 0, 0},  0,  Terreno {AGUA},  Tile {1, 0, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 4
+  0: PUSH     VER
+Pilha de dados:
+
+[ VER,  0,  Terreno {ESTRADA},  Tile {2, 0, 0, 0},  Tile {3, 0, 0, 1},  Tile {4, 0, 1, 0},  Tile {3, 20, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 4
+  1: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Tile {0, 9, 0, 0},  Tile {3, 30, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 0, 0, 0},  Tile {3, 20, 1, 0},  Tile {3, 0, 0, 0},  0,  Terreno {ESTRADA}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 5
+  0: PUSH     VER
+Pilha de dados:
+
+[ VER,  0,  Terreno {AREIA},  Tile {3, 0, 0, 1},  Tile {5, 0, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 5
+  1: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Tile {3, 20, 1, 0},  Tile {1, 0, 0, 0},  Tile {3, 0, 0, 1},  Tile {1, 0, 0, 0},  Tile {5, 0, 0, 0},  Tile {0, 10, 0, 0},  0,  Terreno {AREIA}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 0
+  2: POP      0
+Pilha de dados:
+
+[ Tile {0, 4, 0, 0},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0},  -1,  Terreno {GRAMA},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 0
+  3: ATR      0
+Pilha de dados:
+
+[ Terreno {GRAMA},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0},  -1,  Terreno {GRAMA},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 0
+  4: PUSH     NW
+Pilha de dados:
+
+[ NW,  Terreno {GRAMA},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0},  -1,  Terreno {GRAMA},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 0
+  5: PUSH     MOV
+Pilha de dados:
+
+[ MOV,  NW,  Terreno {GRAMA},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0},  -1,  Terreno {GRAMA},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 0
+  6: SYS      0
+Resposta: -1
+Pilha de dados:
+
+[ -1,  Terreno {GRAMA},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0},  -1,  Terreno {GRAMA},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 1
+  2: POP      0
+Pilha de dados:
+
+[ Tile {1, 20, 1, 0},  Tile {0, 4, 0, 0},  0,  Terreno {GRAMA},  Tile {1, 20, 1, 0},  Tile {1, 10, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 3, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 1
+  3: ATR      0
+Pilha de dados:
+
+[ Terreno {ESTRADA},  Tile {0, 4, 0, 0},  0,  Terreno {GRAMA},  Tile {1, 20, 1, 0},  Tile {1, 10, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 3, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 1
+  4: PUSH     NW
+Pilha de dados:
+
+[ NW,  Terreno {ESTRADA},  Tile {0, 4, 0, 0},  0,  Terreno {GRAMA},  Tile {1, 20, 1, 0},  Tile {1, 10, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 3, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 1
+  5: PUSH     MOV
+Pilha de dados:
+
+[ MOV,  NW,  Terreno {ESTRADA},  Tile {0, 4, 0, 0},  0,  Terreno {GRAMA},  Tile {1, 20, 1, 0},  Tile {1, 10, 0, 0},  Tile {2, 0, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 1
+  6: SYS      0
+Resposta: -1
+Pilha de dados:
+
+[ -1,  Terreno {ESTRADA},  Tile {0, 4, 0, 0},  0,  Terreno {GRAMA},  Tile {1, 20, 1, 0},  Tile {1, 10, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 3, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 2
+  2: POP      0
+Pilha de dados:
+
+[ Tile {1, 0, 0, 0},  Tile {1, 10, 0, 0},  Tile {0, 4, 0, 0},  Tile {0, 0, 1, 1},  -1,  Terreno {ESTRADA},  Tile {1, 10, 0, 0},  Tile {0, 4, 1, 0},  Tile {0, 0, 0, 1}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 2
+  3: ATR      0
+Pilha de dados:
+
+[ Terreno {ESTRADA},  Tile {1, 10, 0, 0},  Tile {0, 4, 0, 0},  Tile {0, 0, 1, 1},  -1,  Terreno {ESTRADA},  Tile {1, 10, 0, 0},  Tile {0, 4, 1, 0},  Tile {0, 0, 0, 1}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 2
+  4: PUSH     NW
+Pilha de dados:
+
+[ NW,  Terreno {ESTRADA},  Tile {1, 10, 0, 0},  Tile {0, 4, 0, 0},  Tile {0, 0, 1, 1},  -1,  Terreno {ESTRADA},  Tile {1, 10, 0, 0},  Tile {0, 4, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 2
+  5: PUSH     MOV
+Pilha de dados:
+
+[ MOV,  NW,  Terreno {ESTRADA},  Tile {1, 10, 0, 0},  Tile {0, 4, 0, 0},  Tile {0, 0, 1, 1},  -1,  Terreno {ESTRADA},  Tile {1, 10, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 2
+  6: SYS      0
+Resposta: -1
+Pilha de dados:
+
+[ -1,  Terreno {ESTRADA},  Tile {1, 10, 0, 0},  Tile {0, 4, 0, 0},  Tile {0, 0, 1, 1},  -1,  Terreno {ESTRADA},  Tile {1, 10, 0, 0},  Tile {0, 4, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 3
+  2: POP      0
+Pilha de dados:
+
+[ Tile {3, 0, 0, 0},  Tile {1, 10, 1, 0},  Tile {1, 0, 0, 0},  Tile {4, 0, 1, 0},  Tile {0, 10, 0, 0},  0,  Terreno {AGUA},  Tile {1, 0, 1, 0},  Tile {3, 0, 0, 1}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 3
+  3: ATR      0
+Pilha de dados:
+
+[ Terreno {AGUA},  Tile {1, 10, 1, 0},  Tile {1, 0, 0, 0},  Tile {4, 0, 1, 0},  Tile {0, 10, 0, 0},  0,  Terreno {AGUA},  Tile {1, 0, 1, 0},  Tile {3, 0, 0, 1}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 3
+  4: PUSH     NW
+Pilha de dados:
+
+[ NW,  Terreno {AGUA},  Tile {1, 10, 1, 0},  Tile {1, 0, 0, 0},  Tile {4, 0, 1, 0},  Tile {0, 10, 0, 0},  0,  Terreno {AGUA},  Tile {1, 0, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 3
+  5: PUSH     MOV
+Pilha de dados:
+
+[ MOV,  NW,  Terreno {AGUA},  Tile {1, 10, 1, 0},  Tile {1, 0, 0, 0},  Tile {4, 0, 1, 0},  Tile {0, 10, 0, 0},  0,  Terreno {AGUA}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 3
+  6: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Terreno {AGUA},  Tile {1, 10, 1, 0},  Tile {1, 0, 0, 0},  Tile {4, 0, 1, 0},  Tile {0, 10, 0, 0},  0,  Terreno {AGUA},  Tile {1, 0, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 4
+  2: POP      0
+Pilha de dados:
+
+[ Tile {0, 9, 0, 0},  Tile {3, 30, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 0, 0, 0},  Tile {3, 20, 1, 0},  Tile {3, 0, 0, 0},  0,  Terreno {ESTRADA},  Tile {2, 0, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 4
+  3: ATR      0
+Pilha de dados:
+
+[ Terreno {GRAMA},  Tile {3, 30, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 0, 0, 0},  Tile {3, 20, 1, 0},  Tile {3, 0, 0, 0},  0,  Terreno {ESTRADA},  Tile {2, 0, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 4
+  4: PUSH     NW
+Pilha de dados:
+
+[ NW,  Terreno {GRAMA},  Tile {3, 30, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 0, 0, 0},  Tile {3, 20, 1, 0},  Tile {3, 0, 0, 0},  0,  Terreno {ESTRADA}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 4
+  5: PUSH     MOV
+Pilha de dados:
+
+[ MOV,  NW,  Terreno {GRAMA},  Tile {3, 30, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 0, 0, 0},  Tile {3, 20, 1, 0},  Tile {3, 0, 0, 0},  0, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 4
+  6: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Terreno {GRAMA},  Tile {3, 30, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 0, 0, 0},  Tile {3, 20, 1, 0},  Tile {3, 0, 0, 0},  0,  Terreno {ESTRADA}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 5
+  2: POP      0
+Pilha de dados:
+
+[ Tile {3, 20, 1, 0},  Tile {1, 0, 0, 0},  Tile {3, 0, 0, 1},  Tile {1, 0, 0, 0},  Tile {5, 0, 0, 0},  Tile {0, 10, 0, 0},  0,  Terreno {AREIA},  Tile {3, 0, 0, 1}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 5
+  3: ATR      0
+Pilha de dados:
+
+[ Terreno {AGUA},  Tile {1, 0, 0, 0},  Tile {3, 0, 0, 1},  Tile {1, 0, 0, 0},  Tile {5, 0, 0, 0},  Tile {0, 10, 0, 0},  0,  Terreno {AREIA},  Tile {3, 0, 0, 1}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 5
+  4: PUSH     NW
+Pilha de dados:
+
+[ NW,  Terreno {AGUA},  Tile {1, 0, 0, 0},  Tile {3, 0, 0, 1},  Tile {1, 0, 0, 0},  Tile {5, 0, 0, 0},  Tile {0, 10, 0, 0},  0,  Terreno {AREIA}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 5
+  5: PUSH     MOV
+Pilha de dados:
+
+[ MOV,  NW,  Terreno {AGUA},  Tile {1, 0, 0, 0},  Tile {3, 0, 0, 1},  Tile {1, 0, 0, 0},  Tile {5, 0, 0, 0},  Tile {0, 10, 0, 0},  0, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 5
+  6: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Terreno {AGUA},  Tile {1, 0, 0, 0},  Tile {3, 0, 0, 1},  Tile {1, 0, 0, 0},  Tile {5, 0, 0, 0},  Tile {0, 10, 0, 0},  0,  Terreno {AREIA}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 0
+  0: PUSH     VER
+Pilha de dados:
+
+[ VER,  -1,  Terreno {GRAMA},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0},  -1,  Terreno {GRAMA},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 0
+  1: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Tile {0, 4, 0, 0},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0},  -1,  Terreno {GRAMA},  Tile {2, 0, 0, 0},  Tile {2, 5, 0, 0},  -1, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 1
+  0: PUSH     VER
+Pilha de dados:
+
+[ VER,  -1,  Terreno {ESTRADA},  Tile {0, 4, 0, 0},  0,  Terreno {GRAMA},  Tile {1, 20, 1, 0},  Tile {1, 10, 0, 0},  Tile {2, 0, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 1
+  1: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Tile {1, 20, 1, 0},  Tile {0, 4, 0, 0},  -1,  Terreno {ESTRADA},  Tile {0, 4, 0, 0},  0,  Terreno {GRAMA},  Tile {1, 20, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 2
+  0: PUSH     VER
+Pilha de dados:
+
+[ VER,  -1,  Terreno {ESTRADA},  Tile {1, 10, 0, 0},  Tile {0, 4, 0, 0},  Tile {0, 0, 1, 1},  -1,  Terreno {ESTRADA},  Tile {1, 10, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 2
+  1: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Tile {1, 0, 0, 0},  Tile {1, 10, 0, 0},  Tile {0, 4, 0, 0},  Tile {0, 0, 1, 1},  -1,  Terreno {ESTRADA},  Tile {1, 10, 0, 0},  Tile {0, 4, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 3
+  0: PUSH     VER
+Pilha de dados:
+
+[ VER,  0,  Terreno {AGUA},  Tile {1, 10, 1, 0},  Tile {1, 0, 0, 0},  Tile {4, 0, 1, 0},  Tile {0, 10, 0, 0},  0,  Terreno {AGUA}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 3
+  1: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Tile {0, 9, 1, 0},  Tile {1, 10, 0, 0},  Tile {3, 20, 1, 0},  0,  Terreno {AGUA},  Tile {1, 10, 1, 0},  Tile {1, 0, 0, 0},  Tile {4, 0, 1, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 4
+  0: PUSH     VER
+Pilha de dados:
+
+[ VER,  0,  Terreno {GRAMA},  Tile {3, 30, 0, 0},  Tile {2, 0, 0, 0},  Tile {1, 0, 0, 0},  Tile {3, 20, 1, 0},  Tile {3, 0, 0, 0},  0, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 4
+  1: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Tile {2, 0, 0, 0},  Tile {5, 0, 0, 0},  Tile {3, 30, 0, 0},  Tile {1, 10, 0, 0},  Tile {3, 0, 1, 0},  0,  Terreno {GRAMA},  Tile {3, 30, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 5
+  0: PUSH     VER
+Pilha de dados:
+
+[ VER,  0,  Terreno {AGUA},  Tile {1, 0, 0, 0},  Tile {3, 0, 0, 1},  Tile {1, 0, 0, 0},  Tile {5, 0, 0, 0},  Tile {0, 10, 0, 0},  0, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
+Turno da máquina 5
+  1: SYS      0
+Resposta: 0
+Pilha de dados:
+
+[ 0,  Tile {3, 0, 1, 0},  Tile {1, 10, 0, 0},  Tile {1, 0, 0, 0},  Tile {4, 0, 0, 0},  Tile {0, 10, 0, 0},  0,  Terreno {AGUA},  Tile {1, 0, 0, 0}, ]
+ Pilha de execução: 
+
+[]
+
+++++++++++++++++++++++++++++++++++
+
