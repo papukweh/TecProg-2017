@@ -3,34 +3,52 @@
 #include "pilha.h"
 #include "maq.h"
 
+
+/*
+ * Imprime mensagem na saida de erro
+ */
 static void Erro(char *msg) {
     fprintf(stderr,"%s\n", msg);
 }
 
+
+/*
+ * Imprime mensagem na saida de erro e interrompe
+ * o programa, com codigo de saida
+ */
 static void Fatal(char *msg, int cod) {
     Erro(msg);
     exit(cod);
 }
 
 
+/*
+ * Retorna uma instancia de uma pilha
+ */
 Pilha cria_pilha() {
     Pilha p;
-    //Pilha *p = (Pilha*)malloc(sizeof(Pilha));
-    //if (!p) Fatal("Memória insuficiente",4);
     p.topo = 0;
     return p;
 }
 
-void destroi_pilha(Pilha p) {
-    //free(p);
-}
-
+/*
+ * Coloca um operando no topo da pilha
+ *
+ * Caso a pilha esteja cheia, imprime erro,
+ *     mas nao interrompe a execucao
+ */
 void empilha(Pilha *p, OPERANDO op) {
     if (p->topo < PILMAX)
     p->val[p->topo++] = op;
     else Erro("Pilha cheia");
 }
 
+
+/*
+ * Retorna o operando que estava no topo da
+ * pilha e o remove dela (= mudar o topo em
+ * uma posicao)
+ */
 OPERANDO desempilha(Pilha *p) {
     if (p->topo > 0)
     return p->val[--p->topo];
@@ -40,6 +58,14 @@ OPERANDO desempilha(Pilha *p) {
     }
 }
 
+
+/*
+ * De cima para baixo, imprime todos os
+ * elementos da pilha ate um numero
+ * arbitrario inteiro
+ *
+ * Imprime tambem caracteres para auxiliar na leitura
+ */
 void imprime(Pilha *p, int n) {
     int t = p->topo-1;
     int i;

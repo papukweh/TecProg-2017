@@ -1,7 +1,7 @@
 #pragma once
 #include "arena.h"
 
-/* Códigos das instruções */
+/* Codigos das instrucoes */
 typedef enum {
     PUSH,       //Empilha argumento na pilha de dados
     POP,        //Desempilha elemento da pilha de dados
@@ -13,7 +13,7 @@ typedef enum {
     JMP,        //Pulo incondicional para argumento
     JIT,        //Pulo se verdadeiro
     JIF,        //Pulo se falso
-    CALL,       //Chama a função no endereço argumento
+    CALL,       //Chama a funcao no endereço argumento
     RET,        //Retorna  
     EQ,         //Compara os dois elementos do topo da pilha de dados (=)
     GT,         //Compara os dois elementos do topo da pilha de dados (>)
@@ -25,8 +25,8 @@ typedef enum {
     RCL,        //Empilha elemento de mem[arg] na pilha de dados
     STL,        //Desempilha elemento da pilha de dados e armazena em exec[rbp+arg]
     RCE,        //Empilha elemento de exec[rbp+arg] na pilha de dados
-    ALC,        //Aloca arg espaços na pilha de execução
-    FRE,        //Libera arg espaçoes na pilha de execução
+    ALC,        //Aloca arg espaços na pilha de execucao
+    FRE,        //Libera arg espaçoes na pilha de execucao
     SAVE,       //Salva o valor de rbp
     REST,       //Restaura o valor de rbp
     END,        //Finaliza a execução do programa
@@ -36,30 +36,30 @@ typedef enum {
 } OpCode;
 
 /* Tipos dos operandos */
-/* no momento, são todos inteiros */
 typedef enum {
     NUM,
     ACAO,
-    VAR,
+    VAR,    // No momento usado para direcoes
     TILE,
     TERRENO,
 } Tipo;
 
 
 typedef enum{
-    MOV,  // Mover robô
+    MOV,  // Mover robo
     REC,  // Recolher cristal
     DEP,  // Depositar cristal
     VER,  // Checar as vizinhanças
 } High_instr;
 
 typedef enum{
-    N,  //(i-1,j)
-    NE, //(i-1,j+1)
-    SE, //(i,j+1)
-    S,  //(i+1,j)
-    SW, //(i+1,j-1)
-    NW, //(i,j-1)
+    N,  // Norte
+    NE, // Nordeste
+    SE, // Sudeste
+    S,  // Sul
+    SW, // Sudoeste
+    NW, // Noroeste
+    CN, // Centro (posicao propria do robo)
 } Dir;
 
 /* Operando */
@@ -74,11 +74,9 @@ typedef struct {
     } valor; 
 } OPERANDO; 
 
-/* Instrução */
+/* Instrucao */
 typedef struct {
     OpCode instr;
     OPERANDO op;
 } INSTR;
 
-
-INSTR cria_instr(OpCode oC, OPERANDO o);

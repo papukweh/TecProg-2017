@@ -3,14 +3,37 @@
 #include "arena.h"
 #include "maq.h"
 
-#define DEBUG
 
+/*
+ * Possibilita executar a maquina em
+ * estado de debug.
+ *
+ * Nesse estado, a maquina realizara
+ * todas as operacoes da mesma forma
+ * porem imprimira muitas informacoes
+ * uteis com o intuito de axiliar no
+ * debug do robo. Ela imprime, por
+ * emplo, os estado de ambas as pilhas
+ */
+#define DEBUG
 #ifdef DEBUG
     #define D(X) X
 #else
 #define D(X)
 #endif
 
+
+/*
+ * As seguintes listas tem como unica funcao
+ * auxiliar o processo de impressao dos 
+ * respectivos termos
+ */ 
+ 
+ 
+/*
+ * Enumerador para as instrucoes da
+ * maquina
+ */
 char *CODES[] = {
     "PUSH",
     "POP",
@@ -44,6 +67,12 @@ char *CODES[] = {
     "ATR"
 };
 
+
+/*
+ * Enumerador para as instrucoes que exigem
+ * interpretacao da maquina virtual (ou,
+ * chamadas de sistema)
+ */
 char *Chamadas[] = {
     "MOV",
     "REC",
@@ -51,6 +80,11 @@ char *Chamadas[] = {
     "VER",
 };
 
+
+/*
+ * Enumerador para as direcoes relativas ao robo
+ * CN é onde o robo se encontra (centro)
+ */
 char *Direcao[] = {
     "N",
     "NE",
@@ -58,8 +92,15 @@ char *Direcao[] = {
     "S",
     "SW",
     "NW",
+    "CN",
 };
 
+
+/*
+ * Enumerador para o tipo de terreno que um "Tile"
+ * pode apresentar. O tipo do terreno esta 
+ * relacionado ao custo de transpo-lo
+ */
 char *Terrenos[] = {
     "GRAMA",
     "ESTRADA",
@@ -68,18 +109,42 @@ char *Terrenos[] = {
     "AREIA",
 };
 
+
+/*
+ * Imprime mensagem na saida de erro
+ */
 static void Erro(char *msg) {
     fprintf(stderr, "%s\n", msg);
 }
+
+
+/*
+ * Imprime mensagem na saida de erro e interrompe
+ * o programa, com codigo de saida
+ */
 static void Fatal(char *msg, int cod) {
     Erro(msg);
     exit(cod);
 }
 
+
+/*
+ * Instancia, inicializa e retorna maquina
+ *
+ * "pil" = pilha de dados
+ * "exec" = pila de execucao
+ * "id" = nome da maquina
+ * "posx" = posicao relativa as 'linhas' do mapa
+ * "posy" = posicao relativa as 'colunas' do mapa
+ * ip = localizacao da proxima instrucao
+ * rbp = localizacao do endereco de retorno atual
+ * time = no futuro, identificacao do time do robo
+ * instrSize = tamanho do vetor de instrucoes
+ * prog = vetor de instrucoes
+ * cristais = quantos cristais o robo esta carregando
+ */
 Maquina cria_maquina(INSTR *p, int iSize, int id, int posx, int posy) {
     Maquina m;
-    //Maquina *m = (Maquina*)malloc(sizeof(Maquina));
-    //if (!m) Fatal("Memória insuficiente",4);
     m.pil = cria_pilha();
     m.exec = cria_pilha();
     m.id = id;
@@ -94,19 +159,40 @@ Maquina cria_maquina(INSTR *p, int iSize, int id, int posx, int posy) {
     return m;
 }
 
-void destroi_maquina(Maquina m) {
-    //free(m);
-}
-
-/* Alguns macros para facilitar a leitura do código */
+/* Alguns macros para facilitar a leitura e escrita do código */
 #define ip (m->ip)
 #define pil (&m->pil)
 #define exec (&m->exec)
 #define prg (m->prog)
 #define rbp (m->rbp)
 #define id (m->id)
+#define posx (m->position[0])
+#define posy (m->position[1])
+#define cris (m->cristais)
 
+// Limpa o vetor de instrucoes do robo
+void destroi_maquina(Maquina m) {
+    free(m.prog);
+}
 
+/*
+ * Local onde o robo executa sua rotina
+ *
+ * Interpreta um instrucao por vez e realiza sua funcao
+ * 
+ * Caso o IP chegue ao fim do vetor de instrucoes, ele
+ * retorna a instrucao 0, independente do que acontecia
+ *
+ * Tanto instrucoes de alto nivel, como MOV, quanto
+ * instrucoes de baixo nivel, como PUSH, sao processadas
+ * nessa funcao
+ *
+ * A funcao executa a interpretacao de no maximo n
+ * instrucoes. De qualquer forma, uma chamada ao sistema
+ * interrompe imediatamente o funcionamento do robo.
+ * Isso faz com que a arena, apos fornecer o feedback
+ * de sua chamada, ceda a vez para outro robo
+ */
 void exec_maquina(Maquina *m, int n) {
     int i;
     OPERANDO resposta, tmpop, tmpop2;
@@ -115,7 +201,7 @@ void exec_maquina(Maquina *m, int n) {
             OpCode     opc = prg[ip].instr;
             OPERANDO arg = prg[ip].op;
 
-            D(printf("Turno da máquina %d\n", id));
+            D(printf("Turno da máquina %d: \n[Cristais: %d, X: %d, Y: %d]\n\n", id, cris, posx, posy));
             D(printf("%3d: %-4.4s     ", ip, CODES[opc]); imprime_op(arg); puts("");); 
       
         switch (opc) {
@@ -294,11 +380,6 @@ void exec_maquina(Maquina *m, int n) {
                         empilha(pil, cria_operando(NUM, 0));
                 }
                 break;
-                
-            //
-            //ate aqui tudo ok
-            //
-            
             //Aloca um espaço na pilha de execução para o vetor de variáveis
             //locais, com tamanho argumento (mudando o topo da pilha de execução)
             case ALC:
@@ -361,12 +442,20 @@ void exec_maquina(Maquina *m, int n) {
                 imprime_op(desempilha(pil));
                 puts("\n");
                 break;
+                
+            //Faz uma chamada a arena
+            //Algumas instrucoes precisam de informacoes que apenas
+            //a arena pode oferecer. Nesses caso, e necessario uma
+            //chamada ao sistema. Porem, ao chamar o sistema, o robo
+            //perde a vez
             case SYS: 
                 resposta = cria_operando(NUM, Sistema(id));
-                D(printf("Resposta: %d\n", resposta.valor.n));
+                D(printf("\nResposta: %d\n", resposta.valor.n));
                 empilha(pil, resposta);
                 i=n;
                 break;
+            //Desempilha um tile e empilha a informacao desejada sobre ele
+            //na pilha de dados
             case ATR:
                 if(pil->topo == 0) break;
                 tmpop = desempilha(pil);
@@ -387,26 +476,30 @@ void exec_maquina(Maquina *m, int n) {
                         default:
                             Erro("Atributo inexistente");
                             break;
-                    }//fecha o "switch"
-                }//fecha o "if"
-                else{
-                Erro("Tipo invalido");
+                    }
                 }
+                else
+                    Erro("Tipo invalido");
                 break;
-            } //fecha o "switch"
+            }
     
         //Imprimindo as pilhas por motivos de debug
-        D(puts("Pilha de dados:\n"));
+        D(puts("\nPilha de dados:\n"));
         D(imprime(pil,10));
-        D(puts("\n Pilha de execução: \n"));
+        D(puts("\n\n Pilha de execução: \n"));
         D(imprime(exec,10));
         D(puts("\n"));
-        D(puts("++++++++++++++++++++++++++++++++++\n"));
+        D(puts("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"));
         ip++;
-    }//fecha o "for"
-}//fecha o "exec_maquina"
+    }
+}
     
 //Funções auxiliares
+
+/*
+ * Retorna um operando tendo como base o tipo e o numero 
+ * passados como argumentos
+ */
 OPERANDO cria_operando(Tipo t, int arg){
     OPERANDO a;
     a.t = t;
@@ -427,6 +520,11 @@ OPERANDO cria_operando(Tipo t, int arg){
     return a;
 }
 
+
+/*
+ * Imprime o valor numerico do operando de uma
+ * maneira legivel
+ */
 void imprime_op(OPERANDO arg){
     switch(arg.t){
     case NUM:
@@ -439,7 +537,7 @@ void imprime_op(OPERANDO arg){
         printf("%s", Direcao[arg.valor.v]);
         break;
     case TILE:
-        printf("Tile {%d, %d, %d, %d}", arg.valor.tile.terreno, arg.valor.tile.cristais, arg.valor.tile.ocupado, arg.valor.tile.base);
+        printf("Tile {%s, %d, %d, %d}", Terrenos[arg.valor.tile.terreno], arg.valor.tile.cristais, arg.valor.tile.ocupado, arg.valor.tile.base);
         break;
     case TERRENO:
         printf("Terreno {%s}", Terrenos[arg.valor.terr]);
