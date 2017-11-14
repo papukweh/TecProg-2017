@@ -50,6 +50,7 @@ typedef enum{
     REC,  // Recolher cristal
     DEP,  // Depositar cristal
     VER,  // Checar as vizinhanças
+    ATQ,  // Atacar as vizinhanças
 } High_instr;
 
 typedef enum{

@@ -38,8 +38,8 @@
  * "MAX_INSTR" e o numero de instrucoes que podem
  *     ser executadas durante um turno
  */
-#define MAX_ROBOS 2
-#define MAX_TURNOS 5
+#define MAX_ROBOS 5
+#define MAX_TURNOS 10
 #define MAX_TIME 2
 #define MAX_INSTR 50
 
@@ -51,7 +51,7 @@
  * relacionados a dependencias e inclusoes
  */
 typedef struct{
-    Maquina robots[6];
+    Maquina robots[10];
     Mapa mapa;
 } Arena;
 
@@ -68,6 +68,7 @@ typedef struct{
 static int positions[MAX_ROBOS*MAX_TIME*2];
 static Arena arena;
 static int ids=0;
+FILE *display;
 
 // Programa teste para as chamadas de sistema
 static INSTR sis[] = {{PUSH, {ACAO, VER}}, 
@@ -80,6 +81,15 @@ static INSTR sis[] = {{PUSH, {ACAO, VER}},
                 {PUSH, {VAR, SE}},
                 {PUSH, {ACAO, REC}},
                 {SYS, {NUM, 0}},        // Testa o REC
+                {PUSH, {VAR, S}}, 
+                {PUSH, {ACAO, MOV}},    // Testa o DEP
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, S}}, 
+                {PUSH, {ACAO, MOV}},    // Testa o DEP
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, NE}}, 
+                {PUSH, {ACAO, ATQ}},    // Testa o DEP
+                {SYS, {NUM, 0}},
                 {PUSH, {VAR, CN}}, 
                 {PUSH, {ACAO, DEP}},    // Testa o DEP
                 {SYS, {NUM, 0}} };
@@ -127,6 +137,8 @@ static int instrSize = 0;
  * "Atualiza" e responsavel pelo 'GameLoop'
  */
 int main(int argc, char *argv[]){
+    srand(time(NULL));
+    display = popen("./apres", "w");
 
     if (argc > 1) {
         if (strcmp(argv[1], "fat") == 0) {
@@ -161,49 +173,115 @@ int main(int argc, char *argv[]){
  *
  * Recebe da entrada padrao instrucoes para a
  * inicializacao dos 'tiles' e para a
- * localicacao dos robos
+ * localizacao dos robos
  *
  * Realiza sua funcao lendo o arquivo usando
  * unicamente a funcao getchar()
  */
 void criaArena(){
-    int c;
+    int id=0;
     int terr;
-    int cris, ocup, base, i, j, k;
+    int base=0;
+    int cris, ocup, i, j, k;
     i = 0;
     j = 0;
     k = 0;
 
     //Escaneia o arquivo buscando por valores para os
     //atributos dos tiles
-    while((c=getchar()) != EOF ){
-        scanf("%d", &terr);
-        c = getchar();
-        scanf("%d", &cris);
-        c = getchar();
-        scanf("%d", &ocup);
-        c = getchar();
-        scanf("%d", &base);
-        arena.mapa.tiles[i][j] = Inicializa(terr, cris, ocup, base);
+    // while((c=getchar()) != EOF ){
+    //     scanf("%d", &terr);
+    //     c = getchar();
+    //     scanf("%d", &cris);
+    //     c = getchar();
+    //     scanf("%d", &ocup);
+    //     c = getchar();
+    //     scanf("%d", &base);
+    //     arena.mapa.tiles[i][j] = Inicializa(terr, cris, ocup, base);
+
+    //(1,0) e (18,11) = bases
+    //(0,0); (0,1); (2,0); (3,1); (3,0);
+    //(19, 11); (17,11); (16,11); (19, 10); (17,10)
+
+    for (int l = 0; l < 240; l++){
+        if (l == 0 || l == 1 || l == 24 || l == 25 || l == 36
+            || l == 203 || l == 214 || l == 215 || l == 238 || l == 239){
+            ocup = id;
+            terr = 1;
+            arena.mapa.tiles[i][j] = Inicializa(terr, 0, ocup, base);
+            id++;
+        }
+
+        else if (l == 12 || l == 227){
+            ocup = -1;
+            base = 1;
+            terr = 1;
+            arena.mapa.tiles[i][j] = Inicializa(terr, 0, -1, base);
+        }
+
+        else {
+            ocup = -1;
+            terr = rand() % 101;
+
+            if (terr <= 40) terr = 0;
+            else if (terr <= 60) terr = 1;
+            else if (terr <= 65 ) terr = 2;
+            else if (terr <= 80) terr = 3;
+            else terr = 4;
+
+            cris = rand() % 101;
+            if (cris <= 50) cris = rand() % 11;
+            else cris = 0;
+            arena.mapa.tiles[i][j] = Inicializa(terr, cris, ocup, base); 
+        }
 
         //Caso tenha algum robo no tile, salva a posicao
         //para que no futuro ele seja iniciado com as
         //posicoes corretas
-        if (ocup == 1) {
+        if (ocup > -1) {
             positions[k] = i;
             k++;
             positions[k] = j;
             k++;
+        }
+
+        switch(terr){
+            case GRAMA:
+                fprintf(display, "terr %d %d 100 200 100\n", i,j);
+                break;
+            case ESTRADA:
+                fprintf(display, "terr %d %d 100 100 100\n", i,j);
+                break;                
+            case MONTANHA:
+                fprintf(display, "terr %d %d 200 200 50\n", i,j);
+                break;
+            case AGUA:
+                fprintf(display, "terr %d %d 0 100 200\n", i,j);
+                break;            
+            case AREIA:
+                fprintf(display, "terr %d %d 200 120 50\n", i,j);
+                break;
         } 
 
+        if (base == 1){
+            base = 0;
+            fprintf(display, "terr %d %d 255 255 255\n", i, j);
+        }
+
+        if (cris >= 1){
+            fprintf(display, "cris %d %d\n", i, j);
+        }
+
+        fflush(display);
+        
         j++;
-        if(j==5){
+        if(j==12){
             j=0;
             i++;
         }
     }
 
-   D(imprime_arena());
+    //pclose(display);
 }
 
 
@@ -215,14 +293,24 @@ void criaArena(){
  * 'tempo' igual a "MAX_INSTR"
  */
 void Atualiza(){
+    //fflush(display);
     for(int j=0; j<MAX_TURNOS; j++){
         for(int i=0; i<ids; i++){
-            exec_maquina(&arena.robots[i], MAX_INSTR);        
+            if (arena.robots[i].cont == 0)
+                exec_maquina(&arena.robots[i], MAX_INSTR);
+            else {
+                arena.robots[i].cont--;
+                D(printf("Robô %d não consegue se mexer!\n", i));
+            }
+            fflush(display);
+            fprintf(display, "atu\n");
+            fflush(display);        
         }
-
-        // Imprime a arena apos cada turno
-        D(imprime_arena());
+        fflush(display);
+        //fprintf(display, "stop\n");
+        fflush(display);
     }
+    //fprintf(display, "stop\n");
 }
 
 
@@ -241,14 +329,26 @@ void Atualiza(){
  */
 void insereExercito(){
     
-    int k=0;
+    int k=0, x=0;
     
     for(int i = 0; i < MAX_ROBOS*MAX_TIME; i++){
+
+        if (i == 5) x = 1;
         int j = k+1;
-        arena.robots[i] = cria_maquina(p, instrSize, ids, positions[k], positions[j]);
+        arena.robots[i] = cria_maquina(p, instrSize, ids, positions[k], positions[j], 100, x);
+        if (display == NULL) {
+            fprintf(stderr,"Não encontrei o programa de exibição\n");
+            return 1;
+        }
+        if (x == 0) fprintf(display, "rob A.png\n");
+        else fprintf(display, "rob B.png\n");
+        fprintf(display, "%d 99 99 %d %d\n", ids, positions[k], positions[j]);
+        printf("robô %d posicionado\n", ids);
         ids++;
         k+=2;
+        //fflush(display);
     }
+
 }
 
 /*
@@ -324,10 +424,12 @@ int Sistema(int id){
             // Checa se os tiles estão na arena, retorna -1 caso contrario
             if (posx >= 0 && posx <= 4 && posy >= 0 && posy <= 4) {
                 ver.valor.tile = arena.mapa.tiles[posx][posy];
-                empilha(&arena.robots[id].pil, ver);
+                arena.robots[id].Mem[i] = ver;
+                //empilha(&arena.robots[id].pil, ver);
             }
             else 
-                empilha(&arena.robots[id].pil, cria_operando(NUM, -1));
+                //empilha(&arena.robots[id].pil, cria_operando(NUM, -1));
+                arena.robots[id].Mem[i] = cria_operando(NUM, -1);
 
             posx = old_posx;
             posy = old_posy;
@@ -367,17 +469,47 @@ int Sistema(int id){
         }
 
         // Retorna -1 se estiver fora da arena
-        if(posx < 0 || posy > 4 || posx > 4 || posy < 0) return -1;
+        if(posx < 0 || posy > 11 || posx > 20 || posy < 0) return -1;
             
         switch(instr.valor.ac){
             // Move o robo caso o tile nao esteja ocupado
             case MOV:
-                if(arena.mapa.tiles[posx][posy].ocupado == 0){
+                if(arena.mapa.tiles[posx][posy].ocupado == -1){
                     arena.robots[id].position[0] = posx;
                     arena.robots[id].position[1] = posy;
-                    arena.mapa.tiles[posx][posy].ocupado = 1;
-                    arena.mapa.tiles[old_posx][old_posy].ocupado = 0;
-                    D(printf("\nRobô %d se moveu para %s (posição %d, %d)\n", id, Direc[arg.valor.v], posx, posy));
+                    arena.mapa.tiles[posx][posy].ocupado = id;
+                    arena.mapa.tiles[old_posx][old_posy].ocupado = -1;
+                    printf("\nRobô %d se moveu para %s (posição %d, %d)\n", id, Direc[arg.valor.v], posx, posy);
+                    fprintf(display, "%d %d %d %d %d\n", id, old_posx, old_posy, posx, posy);
+
+                    if (arena.mapa.tiles[old_posx][old_posy].cristais >= 1){
+                        fprintf(display, "cris %d %d\n", old_posx, old_posy);
+                    }
+
+                    Terreno terr = arena.mapa.tiles[posx][posy].terreno;
+
+                    switch(terr){
+                        case GRAMA:
+                            arena.robots[id].cont +=1;
+                            D(printf("Robô %d pisou na GRAMA: +1\n", id));
+                            break;
+                        case ESTRADA:
+                            D(printf("Robô %d pisou na ESTRADA: +0\n", id));
+                            break;
+                        case MONTANHA:
+                            arena.robots[id].cont +=4;
+                            D(printf("Robô %d pisou na MONTANHA: +4\n", id));
+                            break;
+                        case AGUA:
+                            arena.robots[id].cont +=3;
+                            D(printf("Robô %d pisou na AGUA: +3\n", id));
+                            break;
+                        case AREIA:
+                            arena.robots[id].cont +=2;
+                            D(printf("Robô %d pisou na AREIA: +2\n", id));
+                            break;
+                    }
+
                     return 0;
                 }
                 else return 1;
@@ -387,80 +519,48 @@ int Sistema(int id){
                 if(arena.mapa.tiles[posx][posy].cristais > 0){
                     arena.mapa.tiles[posx][posy].cristais--;
                     arena.robots[id].cristais++;
-                    D(printf("\nRobô %d recolheu um cristal no %s (posição %d, %d)\n", id, Direc[arg.valor.v], posx, posy));
+                    printf("\nRobô %d recolheu um cristal no %s (posição %d, %d)\n", id, Direc[arg.valor.v], posx, posy);
+                    fprintf(display, "terr %d %d 0 0 0\n", posx, posy);
+                    int cid = arena.mapa.tiles[posx][posy].ocupado;
+                    if (cid > -1) 
+                        fprintf(display, "%d %d %d %d %d\n", cid, 99, 99, posx, posy);
                     return 0;
                 }
+                else return 1;
 
             // Deposita um cristal se o robo o tiver
             case DEP:
                 if(arena.robots[id].cristais > 0){
                     arena.mapa.tiles[posx][posy].cristais++;
                     arena.robots[id].cristais--;
+                    fprintf(display, "terr %d %d 255 0 0\n", posx, posy);
                     D(printf("\nRobô %d depositou um cristal no %s (posição %d, %d)\n", id, Direc[arg.valor.v], posx, posy));
+                    int cid = arena.mapa.tiles[posx][posy].ocupado;
+                    if (cid > -1) 
+                        fprintf(display, "%d %d %d %d %d\n", cid, 99, 99, posx, posy);
                     return 0;
                 }
+                else return 1;
+            // Ataca um tile vizinho, pode conter um robo ou nao
+            case ATQ:
+                if(arena.mapa.tiles[posx][posy].ocupado > -1){
+                    int eid = arena.mapa.tiles[posx][posy].ocupado;
+                    arena.robots[eid].vida = arena.robots[eid].vida - 50;
+                    D(printf("\nRobô %d atacou o robô %d\n", id, eid));
+                    D(printf("\nRobô %d agora tem %d de vida restante!\n", eid, arena.robots[eid].vida));
+
+                    if (arena.robots[eid].vida <= 0){
+                        D(printf("\nOh, não! Robô %d morreu! :(\n", eid));
+                        arena.robots[eid].position[0] = 99;
+                        arena.robots[eid].position[1] = 99;
+                        fprintf(display, "morte %d %d %d\n", eid, posx, posy);
+                    }
+
+                    return 0;
+                }
+                else return -1;
         }
     }
     return 1;
 }
 
-
-/*
- * Imprime estado atual da arena
- *
- * Segue a forma:
- *    |tile.terreno    tile.cristais|
- *    |                             |
- *    |tile.ocupado    tile.base    |
- *
- * Nessa representacao as posicoes sao da forma:
- * 
- *       |  N  | 
- *       |     | 
- *    | NW  |  NE | 
- *    |     |     | 
- *       |  CN | 
- *       |     | 
- *    |     |     | 
- *    | SW  |  SE | 
- *       |     | 
- *       |  S  | 
- *
- * OBS: CN é o tile onde o robo se encontra
- */
-void imprime_arena(){
-    for (int i = 0; i < 5; i++){
-        // Nossa organizacao de "mapa" tem comportamento
-        // diferente para linhas pares e impares, logo,
-        // precisamos trata-los de maneira especifica
-        if(i % 2 == 0){
-            printf("| %d %d | %d %d | %d %d | %d %d | %d %d |\n", arena.mapa.tiles[i][0].terreno,
-                arena.mapa.tiles[i][0].cristais, arena.mapa.tiles[i][1].terreno,
-                arena.mapa.tiles[i][1].cristais, arena.mapa.tiles[i][2].terreno,
-                arena.mapa.tiles[i][2].cristais, arena.mapa.tiles[i][3].terreno,
-                arena.mapa.tiles[i][3].cristais, arena.mapa.tiles[i][4].terreno,
-                arena.mapa.tiles[i][4].cristais);
-            printf("| %d %d | %d %d | %d %d | %d %d | %d %d |\n", arena.mapa.tiles[i][0].ocupado,
-                arena.mapa.tiles[i][0].base, arena.mapa.tiles[i][1].ocupado,
-                arena.mapa.tiles[i][1].base, arena.mapa.tiles[i][2].ocupado,
-                arena.mapa.tiles[i][2].base, arena.mapa.tiles[i][3].ocupado,
-                arena.mapa.tiles[i][3].base, arena.mapa.tiles[i][4].ocupado,
-                arena.mapa.tiles[i][4].base);
-        }
-        else{
-            printf("   | %d %d | %d %d | %d %d | %d %d | %d %d |\n", arena.mapa.tiles[i][0].terreno,
-                arena.mapa.tiles[i][0].cristais, arena.mapa.tiles[i][1].terreno,
-                arena.mapa.tiles[i][1].cristais, arena.mapa.tiles[i][2].terreno,
-                arena.mapa.tiles[i][2].cristais, arena.mapa.tiles[i][3].terreno,
-                arena.mapa.tiles[i][3].cristais, arena.mapa.tiles[i][4].terreno,
-                arena.mapa.tiles[i][4].cristais);
-            printf("   | %d %d | %d %d | %d %d | %d %d | %d %d |\n", arena.mapa.tiles[i][0].ocupado,
-                arena.mapa.tiles[i][0].base, arena.mapa.tiles[i][1].ocupado,
-                arena.mapa.tiles[i][1].base, arena.mapa.tiles[i][2].ocupado,
-                arena.mapa.tiles[i][2].base, arena.mapa.tiles[i][3].ocupado,
-                arena.mapa.tiles[i][3].base, arena.mapa.tiles[i][4].ocupado,
-                arena.mapa.tiles[i][4].base);           
-        }
-    }
-    puts("\n");
-}

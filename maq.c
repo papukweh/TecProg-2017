@@ -78,6 +78,7 @@ char *Chamadas[] = {
     "REC",
     "DEP",
     "VER",
+    "ATQ",
 };
 
 
@@ -143,7 +144,7 @@ static void Fatal(char *msg, int cod) {
  * prog = vetor de instrucoes
  * cristais = quantos cristais o robo esta carregando
  */
-Maquina cria_maquina(INSTR *p, int iSize, int id, int posx, int posy) {
+Maquina cria_maquina(INSTR *p, int iSize, int id, int posx, int posy, int vida, int time) {
     Maquina m;
     m.pil = cria_pilha();
     m.exec = cria_pilha();
@@ -152,7 +153,9 @@ Maquina cria_maquina(INSTR *p, int iSize, int id, int posx, int posy) {
     m.position[1]=posy;
     m.ip = 0;
     m.rbp = 0;
-    m.time = 0;
+    m.time = time;
+    m.cont = 0;
+    m.vida = vida;
     m.instrSize = iSize;
     m.prog = p;
     m.cristais = 0;

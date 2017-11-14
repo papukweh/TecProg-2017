@@ -8,11 +8,11 @@
  * relacionado ao custo de transpo-lo
  */
 typedef enum {
-    GRAMA,
-    ESTRADA,
-    MONTANHA,
-    AGUA,
-    AREIA,
+    GRAMA,      //Dificuldade de percorrer: 1
+    ESTRADA,    //Dificuldade de percorrer: 0
+    MONTANHA,   //Dificuldade de percorrer: 4
+    AGUA,       //Dificuldade de percorrer: 3
+    AREIA,      //Dificuldade de percorrer: 2
 } Terreno;
 
 
@@ -41,7 +41,7 @@ typedef struct {
  * tiles que e administrado pela arena
  */
 typedef struct{
-    Tile tiles[5][5];
+    Tile tiles[20][12];
 } Mapa;
 
 
@@ -110,26 +110,3 @@ void Atualiza();
  */
 int Sistema();
 
-
-/*
- * Imprime estado atual da arena
- *
- * Segue a forma:
- *    |tile.terreno    tile.cirstais|
- *    |                             |
- *    |tile.ocupado    tile.base    |
- *
- * Nessa representacao as posicoes sao da forma:
- * 
- *       |  N  | 
- *       |     | 
- *    | NW  |  NE | 
- *    |     |     | 
- *       |  CN | 
- *       |     | 
- *    |     |     | 
- *    | SW  |  SE | 
- *       |     | 
- *       |  S  | 
- */
-void imprime_arena();

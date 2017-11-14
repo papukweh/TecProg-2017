@@ -26,6 +26,8 @@ typedef struct {
     int rbp;
     int id;
     int time;
+    int cont;
+    int vida;
     int position[2];
     int cristais;
 } Maquina;
@@ -34,7 +36,7 @@ typedef struct {
 /*
  * Instancia, inicializa e retorna maquina
  */
-Maquina cria_maquina(INSTR *p, int iSize, int id, int posx, int posy);
+Maquina cria_maquina(INSTR *p, int iSize, int id, int posx, int posy, int vida, int time);
 
 
 // Costumava "desalocar" o robo
