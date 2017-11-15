@@ -5,6 +5,7 @@ import fileinput
 from math import *
 
 pg.init()                                 # inicialização do sistema
+myfont = pg.font.SysFont("monospace", 15)
 
 # altura e largura da arena, em células
 H, W = 40,24
@@ -18,7 +19,7 @@ l = 25
 L = 2*l/sqrt(3)
 
 # cria a janela
-scr = pg.display.set_mode((int(1.5*W*L + 1.5*L), int(l*H/2 + 1.5*l)))
+scr = pg.display.set_mode((int(1.5*W*L+0.7*l), int(l*H/2 + 1.5*l)+150))
 # só para simplificar, atualização da imagem
 atu = pg.display.update
 
@@ -158,6 +159,8 @@ for line in fileinput.input():
     # o segundo argumento na linha é a imagem   
     if r[0] == 'rob':
         robs.append(Robô(r[1]))
+        label = myfont.render("Robô", 2, (0,0,0))
+        scr.blit(label, (10+(len(robs)-1)*100, 550))
         continue
 
     if r[0] == 'morte':

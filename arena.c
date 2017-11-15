@@ -39,7 +39,7 @@
  *     ser executadas durante um turno
  */
 #define MAX_ROBOS 5
-#define MAX_TURNOS 10
+#define MAX_TURNOS 1000
 #define MAX_TIME 2
 #define MAX_INSTR 50
 
@@ -70,8 +70,157 @@ static Arena arena;
 static int ids=0;
 FILE *display;
 
+static INSTR sis[] = {
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, S}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, S}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}}, 
+                {PUSH, {VAR, NW}},     
+                {PUSH, {ACAO, MOV}}, 
+                {SYS, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, REC}},
+                {SYS, {NUM, 0}},  
+                {PUSH, {ACAO, VER}},
+                {SYS, {NUM, 0}},
+                {RCE, {NUM, 5}},
+                {ATR, {NUM, 3}},
+                {JIF, {NUM, 0}},
+                {PUSH, {VAR, CN}},
+                {PUSH, {ACAO, DEP}},
+                {SYS, {NUM, 0}},
+                };
+
 // Programa teste para as chamadas de sistema
-static INSTR sis[] = {{PUSH, {ACAO, VER}}, 
+static INSTR siss[] = {{PUSH, {ACAO, VER}}, 
                 {SYS, {NUM, 0}},        // Testa o VER     
                 {POP, {NUM, 0}},     
                 {ATR, {NUM, 0}},        // Testa o ATR
@@ -182,7 +331,8 @@ void criaArena(){
     int id=0;
     int terr;
     int base=0;
-    int cris, ocup, i, j, k;
+    int cris=0;
+    int ocup, i, j, k;
     i = 0;
     j = 0;
     k = 0;
@@ -293,8 +443,10 @@ void criaArena(){
  * 'tempo' igual a "MAX_INSTR"
  */
 void Atualiza(){
+    //(1,0) e (18,11) = bases
     //fflush(display);
     for(int j=0; j<MAX_TURNOS; j++){
+
         for(int i=0; i<ids; i++){
             if (arena.robots[i].cont == 0)
                 exec_maquina(&arena.robots[i], MAX_INSTR);
@@ -306,7 +458,20 @@ void Atualiza(){
             fprintf(display, "atu\n");
             fflush(display);        
         }
-        fflush(display);
+        if (arena.mapa.tiles[1][0].cristais >= 1 || arena.mapa.tiles[18][11].cristais >= 1) {
+            fprintf(display, "stop\n");
+            printf("Fim de jogo! Alguém ganhou, yay!") ;
+            fprintf(display, "fim\n");
+            fflush(display);
+            break;
+        }
+        else if (j == MAX_TURNOS-1){
+            fprintf(display, "stop\n");
+            printf("Fim de jogo (por turnos)");
+            fprintf(display, "fim\n");
+            fflush(display);
+            break;
+        }
         //fprintf(display, "stop\n");
         fflush(display);
     }
@@ -434,7 +599,7 @@ int Sistema(int id){
             posx = old_posx;
             posy = old_posy;
         }
-        return 0;
+        return 1;
     }
 
     // Demais chamadas: primeiro define o vizinho sobre o qual
@@ -510,9 +675,9 @@ int Sistema(int id){
                             break;
                     }
 
-                    return 0;
+                    return 1;
                 }
-                else return 1;
+                else return -1;
 
             // Recolhe um cristal se o tile o tiver
             case REC:
@@ -524,9 +689,9 @@ int Sistema(int id){
                     int cid = arena.mapa.tiles[posx][posy].ocupado;
                     if (cid > -1) 
                         fprintf(display, "%d %d %d %d %d\n", cid, 99, 99, posx, posy);
-                    return 0;
+                    return 1;
                 }
-                else return 1;
+                else return -1;
 
             // Deposita um cristal se o robo o tiver
             case DEP:
@@ -538,9 +703,9 @@ int Sistema(int id){
                     int cid = arena.mapa.tiles[posx][posy].ocupado;
                     if (cid > -1) 
                         fprintf(display, "%d %d %d %d %d\n", cid, 99, 99, posx, posy);
-                    return 0;
+                    return 1;
                 }
-                else return 1;
+                else return -1;
             // Ataca um tile vizinho, pode conter um robo ou nao
             case ATQ:
                 if(arena.mapa.tiles[posx][posy].ocupado > -1){
@@ -556,11 +721,11 @@ int Sistema(int id){
                         fprintf(display, "morte %d %d %d\n", eid, posx, posy);
                     }
 
-                    return 0;
+                    return 1;
                 }
                 else return -1;
         }
     }
-    return 1;
+    return -1;
 }
 
