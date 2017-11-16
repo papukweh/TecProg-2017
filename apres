@@ -130,13 +130,21 @@ for i in range(int(H/2)):
     for j in range(int(W/2)):
         arena[i].append(cell(i,j, 200, 200, 200))
         arena[i][j].draw()
-        #pg.time.wait(10)
-        #atu()
+
+wpx, hpx = pg.display.get_surface().get_size()
+label = myfont.render("Base", 2, (0,0,0))
+ui_cor = (100, 100, 100)
+ui_pontos = ( (0, 4*hpx/5), (wpx, 4*hpx/5), (wpx, hpx), (0, hpx))
+pg.draw.polygon(scr, ui_cor, ui_pontos, 0)
+scr.blit(label, (10, 4*hpx/5))
+scr.blit(label, (1000, 4*hpx/5))
 
 # lista dos robôs definidos
 robs = []
 
 cris = Cristal("cris.png")
+vida = pg.image.load("vida.png")
+bigcris = pg.image.load("bigcris.png")
 
 # atualiza a janela
 atu()
@@ -159,8 +167,15 @@ for line in fileinput.input():
     # o segundo argumento na linha é a imagem   
     if r[0] == 'rob':
         robs.append(Robô(r[1]))
-        label = myfont.render("Robô", 2, (0,0,0))
-        scr.blit(label, (10+(len(robs)-1)*100, 550))
+        label = myfont.render("Robô "+str((len(robs)-1)), 2, (0,0,0))
+        life = myfont.render("    100", 2, (0,0,0))
+        cristais = myfont.render("    0", 2, (0,0,0))
+        scr.blit(label, (len(robs)*90, 4*hpx/5))
+        scr.blit(robs[len(robs)-1].image, (len(robs)*90, 4*hpx/5 + 25))
+        scr.blit(life, (len(robs)*90, 4*hpx/5 + 70))
+        scr.blit(vida, (len(robs)*90, 4*hpx/5 + 60))
+        scr.blit(cristais, (len(robs)*90, 4*hpx/5 + 110))
+        scr.blit(bigcris, (len(robs)*90, 4*hpx/5 + 100))
         continue
 
     if r[0] == 'morte':
@@ -202,8 +217,6 @@ for line in fileinput.input():
 
     # tempo de espera para atualização, apenas para testes
     #pg.time.wait(100)
-
-    atu()
 
 pg.quit()
 
