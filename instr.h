@@ -32,7 +32,8 @@ typedef enum {
     END,        //Finaliza a execução do programa
     PRN,        //Desempilha e imprime o elemento da pilha de dados
     SYS,        //Chamada para o sistema (arena)
-    ATR,        //empilha um atributo de um tile especifico na memoria
+    ATR,        //Empilha um atributo de um tile especifico na memoria
+    RCM,        //Empilha elemento de mem[topo_da_pilha] na pilha de dados
 } OpCode;
 
 /* Tipos dos operandos */
@@ -44,13 +45,14 @@ typedef enum {
     TERRENO,
 } Tipo;
 
-
 typedef enum{
     MOV,  // Mover robo
     REC,  // Recolher cristal
     DEP,  // Depositar cristal
     VER,  // Checar as vizinhanças
     ATQ,  // Atacar as vizinhanças
+    JGC,  // Jogar cristal
+    KMK,  // Kamikaze
 } High_instr;
 
 typedef enum{

@@ -15,7 +15,7 @@
  * debug do robo. Ela imprime, por
  * emplo, os estado de ambas as pilhas
  */
-#define DEBUG
+//#define DEBUG
 #ifdef DEBUG
     #define D(X) X
 #else
@@ -79,6 +79,8 @@ char *Chamadas[] = {
     "DEP",
     "VER",
     "ATQ",
+    "JGC",
+    "KMK"
 };
 
 
@@ -146,6 +148,7 @@ static void Fatal(char *msg, int cod) {
  */
 Maquina cria_maquina(INSTR *p, int iSize, int id, int posx, int posy, int vida, int time) {
     Maquina m;
+    for (int i = 0; i < 100; i++) m.Mem[i] = cria_operando(NUM, 0);
     m.pil = cria_pilha();
     m.exec = cria_pilha();
     m.id = id;
@@ -425,6 +428,11 @@ void exec_maquina(Maquina *m, int n) {
                 if(arg.t!=NUM) break;
                 empilha(pil,m->Mem[arg.valor.n]);
                 break;
+            case RCM:
+                if(pil->topo == 0) break;
+                  tmpop = desempilha(pil);
+                if(tmpop.t!=NUM) break;
+                  empilha(pil, m->Mem[tmpop.valor.n]);
             //Remove o primeiro elemento da pilha de dados e armazena
             // no vetor de variáveis locais (posição rbp+argumento)
             case STL:
@@ -453,8 +461,10 @@ void exec_maquina(Maquina *m, int n) {
             //perde a vez
             case SYS: 
                 resposta = cria_operando(NUM, Sistema(id));
-                D(printf("\nResposta: %d\n", resposta.valor.n));
-                empilha(pil, resposta);
+                m->Mem[10] = m->Mem[9];
+                m->Mem[9] = m->Mem[8];
+                m->Mem[8] = m->Mem[7];
+                m->Mem[7] = resposta;
                 i=n;
                 break;
             //Desempilha um tile e empilha a informacao desejada sobre ele
@@ -486,11 +496,14 @@ void exec_maquina(Maquina *m, int n) {
                 break;
             }
     
-        //Imprimindo as pilhas por motivos de debug
+        //Imprimindo as pilhas e a memória por motivos de debug
         D(puts("\nPilha de dados:\n"));
         D(imprime(pil,10));
         D(puts("\n\n Pilha de execução: \n"));
         D(imprime(exec,10));
+        D(puts("\n"));
+        D(puts("\nMemória:\n"));
+        D(imprime_mem(m));
         D(puts("\n"));
         D(puts("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"));
         ip++;
@@ -547,4 +560,19 @@ void imprime_op(OPERANDO arg){
     default:
         break;
     }
+}
+
+/*
+ * Funcao auxiliar que imprime as primeiras
+ * 10 posicoes da memoria do robo
+ */
+void imprime_mem(Maquina *m){
+    printf("[");
+    for (int i = 0; i <= 10; i++){ 
+    printf(" ");
+    imprime_op(m->Mem[i]);
+    printf(", ");
+    }
+    printf("]");
+    return;
 }

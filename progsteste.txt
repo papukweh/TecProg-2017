@@ -1,0 +1,94 @@
+{
+//Anda ate o centro da tela
+{PUSH, {VAR, SE}},
+{PUSH, {ACAO, MOV}},
+{PUSH, {VAR, SE}},
+{PUSH, {ACAO, MOV}},
+{PUSH, {VAR, SE}},
+{PUSH, {ACAO, MOV}},
+{PUSH, {VAR, SE}},
+{PUSH, {ACAO, MOV}},
+{PUSH, {VAR, SE}},
+{PUSH, {ACAO, MOV}},
+
+//Anda em circulos
+{PUSH, {VAR, N}},
+{PUSH, {ACAO, MOV}},
+{PUSH, {VAR, NE}},
+{PUSH, {ACAO, MOV}},
+{PUSH, {VAR, NW}},
+{PUSH, {ACAO, MOV},
+{PUSH, {VAR, SW}},
+{PUSH, {ACAO, MOV}},
+{PUSH, {VAR, SE}},
+{PUSH, {ACAO, MOV}},
+{PUSH, {VAR, S}},
+{PUSH, {ACAO, MOV}},
+
+//Anda ate o ponto de inicio
+{PUSH, {VAR, NW}},
+{PUSH, {ACAO, MOV}},
+{PUSH, {VAR, NW}}
+{PUSH, {ACAO, MOV}},
+{PUSH, {VAR, NW}},
+{PUSH, {ACAO, MOV}},
+{PUSH, {VAR, NW}},
+{PUSH, {ACAO, MOV}},
+{PUSH, {VAR, NW}},
+{PUSH, {ACAO, MOV}},
+};
+
+
+
+{
+{PUSH, {ACAO, VER}},
+{SYS, {NUM, 0}},
+
+{PUSH, {NUM, 7}},
+{STO, {NUM, 11}},
+
+{PUSH, {NUM, 0}},
+{POP, {NUM, 0}},   <------ START 0
+
+{RCL, {NUM, 11}},
+{DUP, {NUM, 0}},
+{PUSH, {NUM, 0}},
+{LT, {NUM, 0}},
+{JIT, {NUM, 30}}, ------------> OUT 1
+
+{PUSH, {NUM, 1}},
+{SUB, {NUM, 0}},
+{DUP, {NUM, O}},
+{STO, {NUM, 11}}
+
+{RCM, {NUM, 0}},
+
+
+{DUP, {VAR, 0}},
+{STO, {NUM, 12}},
+{ATR, {NUM, 1}},
+{STO, {NUM, 13}},
+
+{PUSH, {NUM, 0}},
+{RCL, {NUM, 13}},
+
+{EQ, {NUM, 0}},
+{DUP, {NUM, 0}},
+
+
+
+{JIT, {NUM, 5}}, -----------> OUT 0
+
+{RCL, {NUM, 12}}, ----------> END 0
+{PUSH, {ACAO, MOV}},
+{STO, {NUM, 11}},
+{PUSH, {ACAO, REC}},
+{STO, {NUM, 11}},
+{PUSH, {NUM, 1}},
+{JIT, {NUM, 0}},
+
+{RCL, {TILE, 14}}, ---------> END 1
+{PUSH, {ACAO, MOV}},
+{SYS, {NUM, 0}}
+};
+

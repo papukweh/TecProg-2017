@@ -105,8 +105,8 @@ void Atualiza();
  * da pilha)
  * 
  * Retorna valores como identificacao de problemas
- * ret == 0, tudo OK
- * ret != 0, algum problema
+ * ret == 1, tudo OK
+ * ret == -1, algum problema
  */
 int Sistema();
 

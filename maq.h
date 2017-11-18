@@ -9,12 +9,15 @@
  * "id" = nome da maquina
  * "posx" = posicao relativa as 'linhas' do mapa
  * "posy" = posicao relativa as 'colunas' do mapa
- * ip = localizacao do topo da pilha de execucao
+ * ip = aponta para o proxima instrucao a ser executada
  * rbp = localizacao do endereco de retorno atual
  * time = no futuro, identificacao do time do robo
  * instrSize = tamanho da pilha de instrucoes
  * prog = pilha de instrucoes
  * cristais = quantos cristais o robo esta carregando
+ * vida = quanta vida o robo ainda tem (comeca em 100)
+ * cont = contador de ocupacao do robo: determina se ele
+ * pode executar seu programa no proximo turno
  */
 typedef struct {
     Pilha pil;

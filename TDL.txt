@@ -1,0 +1,8 @@
+TDL:
+>> Robôs realmente "morrerem" ok
+>> Atualizar o texto da UI	ok
+>> Relatório/comentários
+>> Testes - uns programas bem legais
+>> Sons/imagens 1/2ok
+>> Tipos de ataque
+>> 

@@ -1,14 +1,16 @@
 #!/usr/bin/python3
 import pygame as pg
 import fileinput
+import sys
 
 from math import *
 
 pg.init()                                 # inicialização do sistema
-myfont = pg.font.SysFont("monospace", 15)
+myfont = pg.font.SysFont("monospace", 16, bold=True) # setando a fonte
 
 # altura e largura da arena, em células
 H, W = 40,24
+# Posições importantes:
 #(1,0) e (18,11) = bases
 #time1 = (0,0); (0,1); (2,0); (3,1); (3,0);
 #time2 = (19, 11); (17,11); (16,11); (19, 10); (17,10)
@@ -22,7 +24,6 @@ L = 2*l/sqrt(3)
 scr = pg.display.set_mode((int(1.5*W*L+0.7*l), int(l*H/2 + 1.5*l)+150))
 # só para simplificar, atualização da imagem
 atu = pg.display.update
-
 
 # pinta o fundo da janela
 scr.fill((0,200,0))
@@ -65,8 +66,11 @@ class Robô(pg.sprite.Sprite):
         s.rect.topleft = [x-l1/2,y-h1/2]
         # desenha
         scr.blit(s.image, s.rect)
-
+    
 class Cristal(pg.sprite.Sprite):
+    """
+    Representa um Cristal, possui uma imagem
+    """
     def __init__(s, img):
         """
         Construtor, img é o nome do arquivo com a imagem
@@ -77,7 +81,7 @@ class Cristal(pg.sprite.Sprite):
 
     def draw(s, i,j):
         """
-        Desenha o robô na célula (i,j)
+        Desenha o cristal na célula (i,j)
         """
         x, y = convert(i,j)
 
@@ -131,33 +135,44 @@ for i in range(int(H/2)):
         arena[i].append(cell(i,j, 200, 200, 200))
         arena[i][j].draw()
 
+# Pega as dimensões da tela
 wpx, hpx = pg.display.get_surface().get_size()
-label = myfont.render("Base", 2, (0,0,0))
-ui_cor = (100, 100, 100)
-ui_pontos = ( (0, 4*hpx/5), (wpx, 4*hpx/5), (wpx, hpx), (0, hpx))
-pg.draw.polygon(scr, ui_cor, ui_pontos, 0)
-scr.blit(label, (10, 4*hpx/5))
-scr.blit(label, (1000, 4*hpx/5))
 
-# lista dos robôs definidos
-robs = []
-
+# Carrega algumas imagens da UI e define algumas labels
 cris = Cristal("cris.png")
 vida = pg.image.load("vida.png")
 bigcris = pg.image.load("bigcris.png")
+base = pg.image.load("hexbase.png")
+label = myfont.render("Base", 2, (0,0,0))
+
+# Define o retângulo cinza sobre o qual os elementos da UI serão desenhados
+ui_cor = (100, 100, 100)
+ui_pontos = ( (0, 4*hpx/5), (wpx, 4*hpx/5), (wpx, hpx), (0, hpx))
+pg.draw.polygon(scr, ui_cor, ui_pontos, 0)
+
+# Desenha as informações referentes às bases
+scr.blit(label, (10, 4*hpx/5))
+scr.blit(label, (1000, 4*hpx/5))
+scr.blit(base, (10, 4*hpx/5 + 65))
+scr.blit(base, (wpx - 70, 4*hpx/5 + 65))
+scr.blit(bigcris, (22.5, 4*hpx/5 + 25) )
+scr.blit(bigcris, (wpx - 57.5, 4*hpx/5 + 25) )
+
+# lista dos robôs definidos
+robs = []
 
 # atualiza a janela
 atu()
 
 # Leitura dos comandos pela entrada padrão ou de um arquivo
 for line in fileinput.input():
-   # pg.time.wait(50)
     r = line.split()
 
     # linha começando com 'fim', termina o programa
     if r[0] == 'fim':
         break
 
+    # linha começando com 'atu', atualiza a tela e faz uma breve pausa
     if r[0] == 'atu':
         atu()
         pg.time.wait(100)
@@ -167,25 +182,86 @@ for line in fileinput.input():
     # o segundo argumento na linha é a imagem   
     if r[0] == 'rob':
         robs.append(Robô(r[1]))
+
+        # Cria labels para a id do robô, sua vida e o número de cristais
         label = myfont.render("Robô "+str((len(robs)-1)), 2, (0,0,0))
-        life = myfont.render("    100", 2, (0,0,0))
+        life = myfont.render("   100", 2, (0,0,0))
         cristais = myfont.render("    0", 2, (0,0,0))
+
+        # Desenha 
         scr.blit(label, (len(robs)*90, 4*hpx/5))
         scr.blit(robs[len(robs)-1].image, (len(robs)*90, 4*hpx/5 + 25))
         scr.blit(life, (len(robs)*90, 4*hpx/5 + 70))
         scr.blit(vida, (len(robs)*90, 4*hpx/5 + 60))
         scr.blit(cristais, (len(robs)*90, 4*hpx/5 + 110))
         scr.blit(bigcris, (len(robs)*90, 4*hpx/5 + 100))
+        pg.time.wait(30)
         continue
 
+    # linha começando com 'UI_atu': atualiza os elementos da UI:
+    if r[0] == 'UI_atu':
+        idn, nvida, ncris, morte, base1, base2 = list(map(int, r[1:]))
+        
+        # Para não termos vida negativa
+        if nvida <= 0:
+            nvida = 0;
+
+        # Define o retângulo branco que é desenhado por baixo do texto
+        # Assim temos uma maneira de apagar o texto antes de atualizar
+        ui_rectangle = (((1+idn)*90,4*hpx/5 + 25), ((1+idn)*90 + 70,4*hpx/5 + 25),
+                        ((1+idn)*90 + 70, hpx ), (((1+idn)*90, hpx)))
+        bg_color = (255, 255, 255)
+        pg.draw.polygon(scr, bg_color, ui_rectangle, 0)
+
+        # Atualiza as labels correspondentes à vida, número de cristais
+        # e estado de um robô
+        life = myfont.render("   "+str(nvida), 2, (0,0,0))
+        cristais = myfont.render("    "+str(ncris), 2, (0,0,0))
+        estado = robs[idn].image
+
+        # Se o robô estiver morto, deitar seu sprite
+        if morte == 1:
+            pg.transform.rotate(estado, 90)
+
+        # Redesenha e reescreve tudo por cima do novo retângulo:
+        base1 = myfont.render(str(base1), 2, (0,0,0))
+        base2 = myfont.render(str(base2), 2, (0,0,0))
+        scr.blit(estado, ((1+idn)*90, 4*hpx/5 + 25))
+        scr.blit(life, ((1+idn)*90, 4*hpx/5 + 70))
+        scr.blit(vida, ((1+idn)*90, 4*hpx/5 + 60))
+        scr.blit(cristais, ((1+idn)*90, 4*hpx/5 + 110))
+        scr.blit(bigcris, ((1+idn)*90, 4*hpx/5 + 100))
+        scr.blit(base, (10, 4*hpx/5 + 65))
+        scr.blit(base, (wpx - 70, 4*hpx/5 + 65))
+        scr.blit(base1, (32, 4*hpx/5 + 82.5))
+        scr.blit(base2, (wpx - 47, 4*hpx/5 + 82.5))
+        pg.time.wait(30)
+        continue
+
+    # linha começando com 'morte': desenha o sprite do robô
+    # "morto" deitado na arena
     if r[0] == 'morte':
         idn, i, j = list(map(int, r[1:]))
         arena[i][j].draw()
-        pg.transform.rotate(robs[idn].image, 90)
+        dead = pg.transform.rotate(robs[idn].image, 90)
+        robs[idn].image = dead
         robs[idn].draw(i, j)
         atu()
         continue
 
+    # linha começando com 'ress': "ressucita" um robô morto
+    # colocando seu sprite na orientação original
+    if r[0] == 'ress':
+        idn, i, j = list(map(int, r[1:]))
+        arena[i][j].draw()
+        back = pg.transform.rotate(robs[idn].image, 270)
+        robs[idn].image = back
+        robs[idn].draw(i, j)
+        atu()
+        continue
+
+    # linha começando com 'terr': pinta o tile (i, j)
+    # de acordo com o tipo de terreno
     if r[0] == 'terr':
         i, j, r, g, b = list(map(int, r[1:]))
         arena[i][j] = cell(i,j,r,g,b)
@@ -193,11 +269,14 @@ for line in fileinput.input():
         atu()
         continue
 
+    # linha começando com 'cris': desenha um pequeno cristal
+    # no tile (i,j) da arena
     if r[0] == 'cris':
         i, j = list(map(int, r[1:]))
         cris.draw(i, j)
         continue
 
+    # linha começando com 'stop': pausa o jogo por um tempo
     if r[0] == 'stop':
         pg.time.wait(9999)
         break
