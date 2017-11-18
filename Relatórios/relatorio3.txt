@@ -15,7 +15,7 @@ As principais alterações em 'arena.c' foram:
 de 20x12; serão apenas dois times com 5 robôs em cada; e as bases estarão sempre
 em posições pré-determinadas ((1,0) e (18,11)), de lados opostos da Arena.
 
--	As bases terão sempre terreno Estrada ao seu redor, porém o resto da Arena é gerada
+-	As bases terão sempre terreno Estrada ao seu redor, porém o resto da Arena é gerado
 aleatoriamente. Terrenos mais difíceis de serem atravessados possuem chance menor de
 aparecerem.
 
