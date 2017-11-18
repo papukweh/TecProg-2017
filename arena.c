@@ -47,7 +47,7 @@
 
 /*
  * Struct da Arena.
- * Nossa arena e composta de um mapa e de um 
+ * Nossa arena e composta de um mapa e de um
  * numero definido de robos.
  * A struct e definida aqui devido a problemas
  * relacionados a dependencias e inclusoes
@@ -62,9 +62,9 @@ typedef struct{
  * Definicao das variaveis globais.
  * "positions" guarda a posicao de robos sendo
  *     positions[k]=pos.X e positions[k+1]=pos.Y
- * "arena" e a unica instancia da struct arena. 
+ * "arena" e a unica instancia da struct arena.
  *     Usamos "arena" como o 'runner' do jogo.
- * "ids" e a variavel usada para acessar cada 
+ * "ids" e a variavel usada para acessar cada
  *     robo pelo 'nome'
  */
 static int positions[MAX_ROBOS*MAX_TIME*2];
@@ -132,144 +132,144 @@ static INSTR smart[] = {
 // Programa teste para as condicoes de
 // vitoria:
 static INSTR win[] = {
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
     {SYS, {NUM, 0}},
     {PUSH, {VAR, CN}},
     {PUSH, {ACAO, ATQ}},
     {SYS, {NUM, 0}},
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
-    {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}},
-    {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
-    {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}},
-    {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
-    {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}},
-    {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
-    {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}},
-    {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
-    {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}},
-    {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
-    {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}},
-    {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
-    {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}},
-    {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
-    {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}},
-    {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
-    {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}},
-    {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
-    {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}},
-    {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
-    {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}},
-    {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
-    {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}},
-    {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
-    {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}},
-    {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
-    {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}},
-    {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
-    {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}},
-    {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
-    {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}},
-    {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
-    {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}},
-    {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, S}},     
-    {PUSH, {ACAO, MOV}}, 
-    {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}},
-    {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, S}},     
-    {PUSH, {ACAO, MOV}}, 
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
     {SYS, {NUM, 0}},
     {PUSH, {VAR, CN}},
     {PUSH, {ACAO, REC}},
     {SYS, {NUM, 0}},
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
     {SYS, {NUM, 0}},
     {PUSH, {VAR, CN}},
     {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
     {SYS, {NUM, 0}},
     {PUSH, {VAR, CN}},
     {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
     {SYS, {NUM, 0}},
     {PUSH, {VAR, CN}},
     {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}},  
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, CN}},
+    {PUSH, {ACAO, REC}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, CN}},
+    {PUSH, {ACAO, REC}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, CN}},
+    {PUSH, {ACAO, REC}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, CN}},
+    {PUSH, {ACAO, REC}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, CN}},
+    {PUSH, {ACAO, REC}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, CN}},
+    {PUSH, {ACAO, REC}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, CN}},
+    {PUSH, {ACAO, REC}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, CN}},
+    {PUSH, {ACAO, REC}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, CN}},
+    {PUSH, {ACAO, REC}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, CN}},
+    {PUSH, {ACAO, REC}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, CN}},
+    {PUSH, {ACAO, REC}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, CN}},
+    {PUSH, {ACAO, REC}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, CN}},
+    {PUSH, {ACAO, REC}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, S}},
+    {PUSH, {ACAO, MOV}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, CN}},
+    {PUSH, {ACAO, REC}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, S}},
+    {PUSH, {ACAO, MOV}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, CN}},
+    {PUSH, {ACAO, REC}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, CN}},
+    {PUSH, {ACAO, REC}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, CN}},
+    {PUSH, {ACAO, REC}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, CN}},
+    {PUSH, {ACAO, REC}},
+    {SYS, {NUM, 0}},
     {PUSH, {ACAO, VER}},
     {SYS, {NUM, 0}},
     {RCE, {NUM, 5}},
@@ -281,26 +281,26 @@ static INSTR win[] = {
     };
 
 // Programa teste para as chamadas de sistema
-static INSTR sis[] = {{PUSH, {ACAO, VER}}, 
-    {SYS, {NUM, 0}},        // Testa o VER     
-    {POP, {NUM, 0}},     
+static INSTR sis[] = {{PUSH, {ACAO, VER}},
+    {SYS, {NUM, 0}},        // Testa o VER
+    {POP, {NUM, 0}},
     {ATR, {NUM, 0}},        // Testa o ATR
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
     {SYS, {NUM, 0}},        // Testa o MOV
     {PUSH, {VAR, SE}},
     {PUSH, {ACAO, REC}},
     {SYS, {NUM, 0}},        // Testa o REC
-    {PUSH, {VAR, S}}, 
-    {PUSH, {ACAO, MOV}},    // Testa o DEP
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, S}}, 
+    {PUSH, {VAR, S}},
     {PUSH, {ACAO, MOV}},    // Testa o DEP
     {SYS, {NUM, 0}},
-    {PUSH, {VAR, NE}}, 
+    {PUSH, {VAR, S}},
+    {PUSH, {ACAO, MOV}},    // Testa o DEP
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NE}},
     {PUSH, {ACAO, ATQ}},    // Testa o DEP
     {SYS, {NUM, 0}},
-    {PUSH, {VAR, CN}}, 
+    {PUSH, {VAR, CN}},
     {PUSH, {ACAO, DEP}},    // Testa o DEP
     {SYS, {NUM, 0}} };
 
@@ -330,19 +330,19 @@ static INSTR fat[] = {
     {RCE,  {NUM, 0}},  // 21 n
     {MUL,  {NUM, 0}},  // 22 n * fat(n-1)
     {FRE,  {NUM, 1}},  // 23
-    {RET,  {NUM, 0}} };   // 24 
+    {RET,  {NUM, 0}} };   // 24
 
 // Programa teste para os tipos de ataque:
 // ATQ, JGC e KMK
 static INSTR atk[] = {
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
     {SYS, {NUM, 0}},
     {PUSH, {VAR, CN}},
     {PUSH, {ACAO, REC}},
-    {SYS, {NUM, 0}}, 
-    {PUSH, {VAR, NW}},     
-    {PUSH, {ACAO, MOV}}, 
+    {SYS, {NUM, 0}},
+    {PUSH, {VAR, NW}},
+    {PUSH, {ACAO, MOV}},
     {SYS, {NUM, 0}},
     {PUSH, {VAR, CN}},
     {PUSH, {ACAO, REC}},
@@ -367,13 +367,13 @@ static int instrSize = 0;
  * Recebe como argumento qual programa sera testado
  *
  * "CriaArena" e "insereExercito" sao
- * responsaveis pela inicialização e 
+ * responsaveis pela inicialização e
  * "Atualiza" e responsavel pelo 'GameLoop'
  */
 int main(int argc, char *argv[]){
     srand(time(NULL));
 
-    // Abre o pipe que fara a comunicacao com a parte 
+    // Abre o pipe que fara a comunicacao com a parte
     // visual do "apres"
     display = popen("./apres", "w");
 
@@ -476,7 +476,7 @@ void criaArena(){
             cris = rand() % 101;
             if (cris <= 60) cris = rand() % 11;
             else cris = 0;
-            arena.mapa.tiles[i][j] = Inicializa(terr, cris, ocup, base); 
+            arena.mapa.tiles[i][j] = Inicializa(terr, cris, ocup, base);
         }
 
         // Caso tenha algum robo no tile, salva a posicao
@@ -487,6 +487,7 @@ void criaArena(){
             k++;
             positions[k] = j;
             k++;
+            cris = 0;
         }
 
         // Parte gráfica: para cada tile, mandamos a arena recolorir
@@ -498,33 +499,40 @@ void criaArena(){
                 break;
             case ESTRADA:
                 fprintf(display, "terr %d %d 100 100 100\n", i,j);
-                break;                
+                break;
             case MONTANHA:
                 fprintf(display, "terr %d %d 200 200 50\n", i,j);
                 break;
             case AGUA:
                 fprintf(display, "terr %d %d 0 100 200\n", i,j);
-                break;            
+                break;
             case AREIA:
                 fprintf(display, "terr %d %d 200 120 50\n", i,j);
                 break;
-        } 
+        }
 
         // Parte gráfica: mandamos a arena recolorir os tiles que
         // representam as bases com a cor branca
         if (base == 1){
             base = 0;
+            cris = 0;
             fprintf(display, "terr %d %d 255 255 255\n", i, j);
         }
 
-        // Parte gráfica: se houver cristais no tile, mandamos a 
+        // Parte gráfica: se houver um cristal no tile, mandamos a
         // arena imprimir um pequeno cristal no tile correspondente
-        if (cris >= 1){
+        if (cris >= 1 && cris < 3){
             fprintf(display, "cris %d %d\n", i, j);
         }
 
+        // se houver 3 ou mais cristais, imprimimos a imagem de um
+        // pequeno lote de cristais
+        else if (cris >= 3) {
+            fprintf(display, "lotecris %d %d\n", i, j);
+        }
+
         fflush(display);
-        
+
         j++;
         if(j==12){
             j=0;
@@ -554,7 +562,7 @@ void Atualiza(){
                 exec_maquina(&arena.robots[i], MAX_INSTR);
 
             // Senao, decrementa o contador e imprime uma mensagem no log
-            // Tambem restaura a vida do robo caso ele possa voltar no 
+            // Tambem restaura a vida do robo caso ele possa voltar no
             // proximo turno
             else {
                 arena.robots[i].cont--;
@@ -569,10 +577,10 @@ void Atualiza(){
             // graficos da UI na parte inferior da tela
             int estado = 0;
             if (arena.robots[i].vida <= 0) estado = 1;
-            fprintf(display, "UI_atu %d %d %d %d %d %d\n", i, arena.robots[i].vida, arena.robots[i].cristais, estado, 
+            fprintf(display, "UI_atu %d %d %d %d %d %d\n", i, arena.robots[i].vida, arena.robots[i].cristais, estado,
                 arena.mapa.tiles[1][0].cristais, arena.mapa.tiles[18][11].cristais);
             fprintf(display, "atu\n");
-            fflush(display);        
+            fflush(display);
         }
 
         // Condições de parada:
@@ -615,15 +623,15 @@ void Atualiza(){
  * Utiliza a funcao cria_maquina de maq.c
  */
 void insereExercito(){
-    
+
     int k=0, x=0;
-    
+
     for(int i = 0; i < MAX_ROBOS*MAX_TIME; i++){
 
         if (i == 5) x = 1;
         int j = k+1;
         arena.robots[i] = cria_maquina(p, instrSize, ids, positions[k], positions[j], 100, x);
-        
+
         if (display == NULL) {
             fprintf(stderr,"Não encontrei o programa de exibição\n");
             exit(1);
@@ -666,7 +674,7 @@ Tile Inicializa(Terreno terr, int cris, int ocup, int base){
  * Realiza tarefas especificas com base na
  * "solicitacao" feita pelo robo (instrucoes
  * da pilha)
- * 
+ *
  * Retorna valores como identificacao de problemas
  * ret == 0, tudo OK
  * ret != 0, algum problema
@@ -681,14 +689,14 @@ int Sistema(int id){
     int old_posy = posy;
 
     // Chamadas que nao precisam de direcao:
-    // VER: guarda nas 7 primeiras posicoes da memoria 
+    // VER: guarda nas 7 primeiras posicoes da memoria
     // os 6 tiles vizinhos e o proprio tile do robo
     if(instr.valor.ac==VER){
         ver.t = TILE;
         for (int i = 0; i < 7; i++) {
             switch (i) {
             case N:
-                posx -= 2;  
+                posx -= 2;
                 break;
             case NE:
                 if(posx % 2 != 0) posy++;
@@ -718,7 +726,7 @@ int Sistema(int id){
                 ver.valor.tile = arena.mapa.tiles[posx][posy];
                 arena.robots[id].Mem[i] = ver;
             }
-            else 
+            else
                 arena.robots[id].Mem[i] = cria_operando(NUM, -1);
 
             posx = old_posx;
@@ -727,7 +735,7 @@ int Sistema(int id){
         return 1;
     }
 
-    // KMK: robo se explode causando dano a si mesmo e 
+    // KMK: robo se explode causando dano a si mesmo e
     // a qualquer robo nos tiles vizinhos (mesmo que
     // eles sejam do mesmo time)
     else if (instr.valor.ac == KMK){
@@ -737,7 +745,7 @@ int Sistema(int id){
         for (int i = 0; i < 6; i++){
             switch (i) {
             case N:
-                posx -= 2;  
+                posx -= 2;
                 break;
             case NE:
                 if(posx % 2 != 0) posy++;
@@ -759,14 +767,14 @@ int Sistema(int id){
                 posx--;
                 break;
             }
-        
+
             if (posx >= 0 && posx <= 19 && posy >= 0 && posy <= 11)
                 vizinhos[i] = arena.mapa.tiles[posx][posy].ocupado;
 
             posx = old_posx;
-            posy = old_posy;   
+            posy = old_posy;
         }
-        
+
         // Danifica o proprio robo e detecta se ele ainda esta vivo
         arena.robots[id].vida -=100;
         D(printf("\nRobô %d se explodiu!\n", id));
@@ -807,7 +815,7 @@ int Sistema(int id){
         arg = desempilha(&arena.robots[id].pil);
         switch(arg.valor.v){
         case N:
-            posx -= 2;  
+            posx -= 2;
             break;
         case NE:
             if(posx % 2 != 0) posy++;
@@ -834,7 +842,7 @@ int Sistema(int id){
 
         // Retorna -1 se estiver fora da arena
         if(posx < 0 || posy > 11 || posx > 20 || posy < 0) return -1;
-            
+
         switch(instr.valor.ac){
             // Move o robo caso o tile nao esteja ocupado
             case MOV:
@@ -848,8 +856,11 @@ int Sistema(int id){
                     // Atualiza a posicao do robo na tela e redesenha
                     // possiveis cristais que tenham sido apagados
                     fprintf(display, "%d %d %d %d %d\n", id, old_posx, old_posy, posx, posy);
-                    if (arena.mapa.tiles[old_posx][old_posy].cristais >= 1){
+                    if (arena.mapa.tiles[old_posx][old_posy].cristais >= 1 && arena.mapa.tiles[old_posx][old_posy].cristais < 3){
                         fprintf(display, "cris %d %d\n", old_posx, old_posy);
+                    }
+                    else if (arena.mapa.tiles[old_posx][old_posy].cristais >= 3) {
+                        fprintf(display, "lotecris %d %d\n", old_posx, old_posy);
                     }
 
                     // Atualiza o contador de ocupacao do robo de acordo
@@ -934,7 +945,7 @@ int Sistema(int id){
 
                     return 1;
                 }
-                else return -1;                
+                else return -1;
         }
     }
     return -1;

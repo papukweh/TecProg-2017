@@ -35,7 +35,7 @@ def convert(i ,j):
     """
     if i%2==0:
         x = (1+j)*L + 2*j*L
-        y = l + i*l        
+        y = l + i*l
     else:
         x = (2.5+j)*L + 2*j*L
         y = l + i*l
@@ -66,7 +66,7 @@ class Robô(pg.sprite.Sprite):
         s.rect.topleft = [x-l1/2,y-h1/2]
         # desenha
         scr.blit(s.image, s.rect)
-    
+
 class Cristal(pg.sprite.Sprite):
     """
     Representa um Cristal, possui uma imagem
@@ -91,9 +91,9 @@ class Cristal(pg.sprite.Sprite):
         # corrije a posição de acordo com o tamanho do sprite
         s.rect.topleft = [x-l1/2,y-h1/2]
         # desenha
-        scr.blit(s.image, s.rect)    
+        scr.blit(s.image, s.rect)
 
-    
+
 class cell:
     """
     Representa uma das células da arena
@@ -118,7 +118,7 @@ class cell:
             )
 
         #s.draw();
-        
+
     def draw(s) :
         """
         Desenha a célula
@@ -140,6 +140,7 @@ wpx, hpx = pg.display.get_surface().get_size()
 
 # Carrega algumas imagens da UI e define algumas labels
 cris = Cristal("cris.png")
+lotecris = Cristal("lotecris.png")
 vida = pg.image.load("vida.png")
 bigcris = pg.image.load("bigcris.png")
 base = pg.image.load("hexbase.png")
@@ -179,7 +180,7 @@ for line in fileinput.input():
         continue
 
     # linha começando com 'rob', inclui um robô,
-    # o segundo argumento na linha é a imagem   
+    # o segundo argumento na linha é a imagem
     if r[0] == 'rob':
         robs.append(Robô(r[1]))
 
@@ -188,7 +189,7 @@ for line in fileinput.input():
         life = myfont.render("   100", 2, (0,0,0))
         cristais = myfont.render("    0", 2, (0,0,0))
 
-        # Desenha 
+        # Desenha
         scr.blit(label, (len(robs)*90, 4*hpx/5))
         scr.blit(robs[len(robs)-1].image, (len(robs)*90, 4*hpx/5 + 25))
         scr.blit(life, (len(robs)*90, 4*hpx/5 + 70))
@@ -201,7 +202,7 @@ for line in fileinput.input():
     # linha começando com 'UI_atu': atualiza os elementos da UI:
     if r[0] == 'UI_atu':
         idn, nvida, ncris, morte, base1, base2 = list(map(int, r[1:]))
-        
+
         # Para não termos vida negativa
         if nvida <= 0:
             nvida = 0;
@@ -274,6 +275,13 @@ for line in fileinput.input():
     if r[0] == 'cris':
         i, j = list(map(int, r[1:]))
         cris.draw(i, j)
+        continue
+
+    # linha começando com 'lotecris': desenha um pequeno lote
+    # de cristais no tile (i,j) da arena
+    if r[0] == 'lotecris' :
+        i, j = list(map(int, r[1:]))
+        lotecris.draw(i, j)
         continue
 
     # linha começando com 'stop': pausa o jogo por um tempo
