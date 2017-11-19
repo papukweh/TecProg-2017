@@ -26,7 +26,7 @@ scr = pg.display.set_mode((int(1.5*W*L+0.7*l), int(l*H/2 + 1.5*l)+150))
 atu = pg.display.update
 
 # pinta o fundo da janela
-scr.fill((0,200,0))
+scr.fill((97,196,0))
 atu()
 
 def convert(i ,j):
@@ -98,14 +98,18 @@ class cell:
     """
     Representa uma das células da arena
     """
-    def __init__(s,i,j,r,g,b):
+    def __init__(s,i,j,img):
         """
         Construtor, i e j formam a coordenada
         """
+        pg.sprite.Sprite.__init__(s)
+        s.image = pg.image.load(img)
+        s.rect = s.image.get_rect()
+
         # Posição do centro
         s.cx, s.cy = convert(i,j)
         # Cor (pode ser passada para o construtor no futuro)
-        s.cor = (r,g,b)
+        s.cor = (0,0,0)
 
         # Vértices do hexágono
         s.pontos = (
@@ -119,12 +123,22 @@ class cell:
 
         #s.draw();
 
-    def draw(s) :
+    def draw(s, i, j) :
         """
         Desenha a célula
         """
         pg.draw.polygon(scr, s.cor, s.pontos, 0)
         pg.draw.lines(scr, (0,0,0), True, s.pontos, 3)
+
+        x, y = convert(i,j)
+
+        # fronteiras do sprite
+        l0,h0,l1,h1 = s.rect
+
+        # corrije a posição de acordo com o tamanho do sprite
+        s.rect.topleft = [x-l1/2,y-h1/2]
+        # desenha
+        scr.blit(s.image, s.rect)
 
 
 # Construção da matriz que representa a arena
@@ -132,8 +146,8 @@ arena = []
 for i in range(int(H/2)):
     arena.append([])
     for j in range(int(W/2)):
-        arena[i].append(cell(i,j, 200, 200, 200))
-        arena[i][j].draw()
+        arena[i].append(cell(i,j, "hexbase.png"))
+        arena[i][j].draw(i,j)
 
 # Pega as dimensões da tela
 wpx, hpx = pg.display.get_surface().get_size()
@@ -143,7 +157,8 @@ cris = Cristal("cris.png")
 lotecris = Cristal("lotecris.png")
 vida = pg.image.load("vida.png")
 bigcris = pg.image.load("bigcris.png")
-base = pg.image.load("hexbase.png")
+basea = pg.image.load("basea.png")
+baseb= pg.image.load("baseb.png")
 label = myfont.render("Base", 2, (0,0,0))
 
 # Define o retângulo cinza sobre o qual os elementos da UI serão desenhados
@@ -154,8 +169,8 @@ pg.draw.polygon(scr, ui_cor, ui_pontos, 0)
 # Desenha as informações referentes às bases
 scr.blit(label, (10, 4*hpx/5))
 scr.blit(label, (1000, 4*hpx/5))
-scr.blit(base, (10, 4*hpx/5 + 65))
-scr.blit(base, (wpx - 70, 4*hpx/5 + 65))
+scr.blit(basea, (10, 4*hpx/5 + 65))
+scr.blit(baseb, (wpx - 70, 4*hpx/5 + 65))
 scr.blit(bigcris, (22.5, 4*hpx/5 + 25) )
 scr.blit(bigcris, (wpx - 57.5, 4*hpx/5 + 25) )
 
@@ -232,8 +247,8 @@ for line in fileinput.input():
         scr.blit(vida, ((1+idn)*90, 4*hpx/5 + 60))
         scr.blit(cristais, ((1+idn)*90, 4*hpx/5 + 110))
         scr.blit(bigcris, ((1+idn)*90, 4*hpx/5 + 100))
-        scr.blit(base, (10, 4*hpx/5 + 65))
-        scr.blit(base, (wpx - 70, 4*hpx/5 + 65))
+        scr.blit(basea, (10, 4*hpx/5 + 65))
+        scr.blit(baseb, (wpx - 70, 4*hpx/5 + 65))
         scr.blit(base1, (32, 4*hpx/5 + 82.5))
         scr.blit(base2, (wpx - 47, 4*hpx/5 + 82.5))
         pg.time.wait(30)
@@ -243,7 +258,7 @@ for line in fileinput.input():
     # "morto" deitado na arena
     if r[0] == 'morte':
         idn, i, j = list(map(int, r[1:]))
-        arena[i][j].draw()
+        arena[i][j].draw(i,j)
         dead = pg.transform.rotate(robs[idn].image, 90)
         robs[idn].image = dead
         robs[idn].draw(i, j)
@@ -254,19 +269,34 @@ for line in fileinput.input():
     # colocando seu sprite na orientação original
     if r[0] == 'ress':
         idn, i, j = list(map(int, r[1:]))
-        arena[i][j].draw()
+        arena[i][j].draw(i,j)
         back = pg.transform.rotate(robs[idn].image, 270)
         robs[idn].image = back
         robs[idn].draw(i, j)
         atu()
         continue
 
-    # linha começando com 'terr': pinta o tile (i, j)
+    # linha começando com 'terr': desenha o tile (i, j)
     # de acordo com o tipo de terreno
     if r[0] == 'terr':
-        i, j, r, g, b = list(map(int, r[1:]))
-        arena[i][j] = cell(i,j,r,g,b)
-        arena[i][j].draw()
+        i, j, t = list(map(int, r[1:]))
+        if t == 0:
+          img = "grama.png"
+        if t == 1:
+          img = "estrada.png"
+        if t == 2:
+          img = "montanha.png"
+        if t == 3:
+          img = "agua.png"
+        if t == 4:
+          img = "areia.png"
+        if t == 5:
+          img = "basea.png"
+        if t == 6:
+          img = "baseb.png"
+
+        arena[i][j] = cell(i,j,img)
+        arena[i][j].draw(i,j)
         atu()
         continue
 
@@ -295,7 +325,7 @@ for line in fileinput.input():
 
     # redesenha a célula original (apaga o robô)
     if 0 <= oi  < H/2 and 0 <= oj < W/2:
-        arena[oi][oj].draw()
+        arena[oi][oj].draw(oi, oj)
         atu()
     # desenha o robô na célula de destino
     if 0 <= di  < H/2 and 0 <= dj < W/2 and ri < len(robs):

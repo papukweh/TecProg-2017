@@ -431,6 +431,7 @@ void criaArena(){
     int terr;
     int base=0;
     int cris=0;
+    int ntime = 5;
     int ocup, i, j, k;
     i = 0;
     j = 0;
@@ -495,19 +496,19 @@ void criaArena(){
         // tipo de terreno terá uma textura própria)
         switch(terr){
             case GRAMA:
-                fprintf(display, "terr %d %d 100 200 100\n", i,j);
+                fprintf(display, "terr %d %d 0\n", i,j);
                 break;
             case ESTRADA:
-                fprintf(display, "terr %d %d 100 100 100\n", i,j);
+                fprintf(display, "terr %d %d 1\n", i,j);
                 break;
             case MONTANHA:
-                fprintf(display, "terr %d %d 200 200 50\n", i,j);
+                fprintf(display, "terr %d %d 2\n", i,j);
                 break;
             case AGUA:
-                fprintf(display, "terr %d %d 0 100 200\n", i,j);
+                fprintf(display, "terr %d %d 3\n", i,j);
                 break;
             case AREIA:
-                fprintf(display, "terr %d %d 200 120 50\n", i,j);
+                fprintf(display, "terr %d %d 4\n", i,j);
                 break;
         }
 
@@ -516,7 +517,8 @@ void criaArena(){
         if (base == 1){
             base = 0;
             cris = 0;
-            fprintf(display, "terr %d %d 255 255 255\n", i, j);
+            fprintf(display, "terr %d %d %d\n", i, j, ntime);
+            ntime++;
         }
 
         // Parte gráfica: se houver um cristal no tile, mandamos a
@@ -920,7 +922,7 @@ int Sistema(int id){
                     D(printf("\nRobô %d atacou o robô %d\n", id, eid));
                     D(printf("\nRobô %d agora tem %d de vida restante!\n", eid, arena.robots[eid].vida));
 
-                    if (arena.robots[eid].vida <= 0 && arena.robots[eid].cont == 0){
+                    if (arena.robots[eid].vida <= 0 && arena.robots[eid].cont >= 0){
                         arena.robots[eid].cont = 5;
                         D(printf("\nOh, não! Robô %d morreu!\n", eid));
                         fprintf(display, "morte %d %d %d\n", eid, posx, posy);
