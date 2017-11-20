@@ -1,4 +1,4 @@
-CFLAGS = -Wall --std=c11 -Wno-missing-braces -g
+CFLAGS = -Wall --std=c11 -Wno-missing-braces -Wno-switch -Wno-int-conversion -Wno-unused-function -g
 CC=gcc
 
 .PHONY: clean

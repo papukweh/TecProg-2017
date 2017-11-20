@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "arena.h"
 #include "maq.h"
 
@@ -13,7 +14,7 @@
  * porem imprimira muitas informacoes
  * uteis com o intuito de axiliar no
  * debug do robo. Ela imprime, por
- * emplo, os estado de ambas as pilhas
+ * exemplo, os estado de ambas as pilhas
  */
 //#define DEBUG
 #ifdef DEBUG
@@ -34,7 +35,7 @@
  * Enumerador para as instrucoes da
  * maquina
  */
-char *CODES[] = {
+extern char *CODES[] = {
     "PUSH",
     "POP",
     "DUP",
@@ -64,7 +65,8 @@ char *CODES[] = {
     "END",
     "PRN",
     "SYS",
-    "ATR"
+    "ATR",
+    "RCM",
 };
 
 
@@ -73,14 +75,14 @@ char *CODES[] = {
  * interpretacao da maquina virtual (ou,
  * chamadas de sistema)
  */
-char *Chamadas[] = {
+extern char *Chamadas[] = {
     "MOV",
     "REC",
     "DEP",
     "VER",
     "ATQ",
     "JGC",
-    "KMK"
+    "KMK",
 };
 
 
@@ -88,7 +90,7 @@ char *Chamadas[] = {
  * Enumerador para as direcoes relativas ao robo
  * CN é onde o robo se encontra (centro)
  */
-char *Direcao[] = {
+extern char *Direcao[] = {
     "N",
     "NE",
     "SE",
@@ -104,12 +106,24 @@ char *Direcao[] = {
  * pode apresentar. O tipo do terreno esta 
  * relacionado ao custo de transpo-lo
  */
-char *Terrenos[] = {
+extern char *Terrenos[] = {
     "GRAMA",
     "ESTRADA",
     "MONTANHA",
     "AGUA",
     "AREIA",
+};
+
+/*
+ * Enumerador para os tipos de valores que
+ * um operando pode apresentar
+ */
+extern  char *Tipos[] = {
+    "NUM",
+    "ACAO",
+    "VAR",
+    "TILE",
+    "TERRENO"
 };
 
 
@@ -129,7 +143,6 @@ static void Fatal(char *msg, int cod) {
     Erro(msg);
     exit(cod);
 }
-
 
 /*
  * Instancia, inicializa e retorna maquina
@@ -160,7 +173,8 @@ Maquina cria_maquina(INSTR *p, int iSize, int id, int posx, int posy, int vida, 
     m.cont = 0;
     m.vida = vida;
     m.instrSize = iSize;
-    m.prog = p;
+    m.prog = (INSTR*)malloc(sizeof(INSTR) * m.instrSize);
+    memcpy(m.prog, p, sizeof(INSTR) * m.instrSize);
     m.cristais = 0;
     return m;
 }
@@ -311,7 +325,7 @@ void exec_maquina(Maquina *m, int n) {
             //Desempilha dois operandos da pilha de dados, caso sejam iguais,
             //empilha '1' e caso sejam diferentes, empilha '0'
             case EQ:
-                if(pil->topo < 1) break;
+                if(pil->topo < 2) break;
                 tmpop = desempilha(pil);
                 tmpop2 = desempilha(pil);
                 if(tmpop.t == NUM && tmpop2.t == NUM){
@@ -324,7 +338,7 @@ void exec_maquina(Maquina *m, int n) {
             //Desempilha dois operandos da pilha de dados, caso o primeiro seja
             //menor que o segundo, empilha '1', caso contrario, empilha '0'
             case GT:
-                if(pil->topo < 1) break;
+                if(pil->topo < 2) break;
                 tmpop = desempilha(pil);
                 tmpop2 = desempilha(pil);
                 if(tmpop.t == NUM && tmpop2.t == NUM){
@@ -337,7 +351,7 @@ void exec_maquina(Maquina *m, int n) {
             //Desempilha dois operandos da pilha de dados, caso o primeiro seja
             //menor ou igual ao segundo, empilha '1', caso contrario, empilha '0'
             case GE:
-                if(pil->topo < 1) break;
+                if(pil->topo < 2) break;
                 tmpop = desempilha(pil);
                 tmpop2 = desempilha(pil);
                 if(tmpop.t == NUM && tmpop2.t == NUM){
@@ -350,7 +364,7 @@ void exec_maquina(Maquina *m, int n) {
             //Desempilha dois operandos da pilha de dados, caso o primeiro seja
             //maior que o segundo, empilha '1', caso contrario, empilha '0'
             case LT:
-                if(pil->topo < 1) break;
+                if(pil->topo < 2) break;
                 tmpop = desempilha(pil);
                 tmpop2 = desempilha(pil);
                 if(tmpop.t == NUM && tmpop2.t == NUM){
@@ -363,7 +377,7 @@ void exec_maquina(Maquina *m, int n) {
             //Desempilha dois operandos da pilha de dados, caso o primeiro seja
             //maior ou igual ao segundo, empilha '1', caso contrario, empilha '0'
             case LE:
-                if(pil->topo < 1) break;
+                if(pil->topo < 2) break;
                 tmpop = desempilha(pil);
                 tmpop2 = desempilha(pil);
                 if(tmpop.t == NUM && tmpop2.t == NUM){
@@ -376,7 +390,7 @@ void exec_maquina(Maquina *m, int n) {
             //Desempilha dois operandos da pilha de dados, caso sejam diferentes,
             //empilha '1' e caso sejam diferentes, empilha '0'
             case DIFF:
-                if(pil->topo < 1) break;
+                if(pil->topo < 2) break;
                 tmpop = desempilha(pil);
                 tmpop2 = desempilha(pil);
                 if(tmpop.t == NUM && tmpop2.t == NUM){
@@ -430,9 +444,10 @@ void exec_maquina(Maquina *m, int n) {
                 break;
             case RCM:
                 if(pil->topo == 0) break;
-                  tmpop = desempilha(pil);
+                tmpop = desempilha(pil);
                 if(tmpop.t!=NUM) break;
-                  empilha(pil, m->Mem[tmpop.valor.n]);
+                empilha(pil, m->Mem[tmpop.valor.n]);
+                break;
             //Remove o primeiro elemento da pilha de dados e armazena
             // no vetor de variáveis locais (posição rbp+argumento)
             case STL:
@@ -536,6 +551,16 @@ OPERANDO cria_operando(Tipo t, int arg){
     return a;
 }
 
+/*
+ * Retorna uma instrucao tendo como base o opcode e o OPERANDO 
+ * passados como argumentos
+ */
+INSTR cria_instr(OpCode opc, OPERANDO arg){
+    INSTR comando;
+    comando.instr = opc;
+    comando.op = arg;
+    return comando;
+}
 
 /*
  * Imprime o valor numerico do operando de uma
@@ -568,7 +593,7 @@ void imprime_op(OPERANDO arg){
  */
 void imprime_mem(Maquina *m){
     printf("[");
-    for (int i = 0; i <= 10; i++){ 
+    for (int i = 0; i <= 15; i++){ 
     printf(" ");
     imprime_op(m->Mem[i]);
     printf(", ");

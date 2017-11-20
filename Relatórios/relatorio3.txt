@@ -40,6 +40,15 @@ cristais nela (nessa fase deixamos x = 1 por motivos de teste, porém na fase fi
 alterado), ou o jogo exceder o número de turnos (no momento, 100 turnos) sem vitória de nenhum 
 dos times.
 
+-	Os programas de cada robô são lidos da entrada padrão pela função readProg, seguindo um padrão
+muito específico, como o do exemplo:
+	
+p0 -> Indica o início do programa
+{PUSH, {NUM, 0}},
+{END, {NUM, 0}},
+; -> Indica o fim do programa
+
+Nota: Por padrão, se a instrução não tiver argumento, usamos {NUM, 0}
 
 As principais implementações feitas em 'apres' foram:
 
@@ -50,10 +59,36 @@ Sudeste, Sul, Sudoeste e Noroeste.
 -	As texturas correspondem ao tipo de terreno daquela célula (Grama, Estrada, Montanha,
 Água, Areia ou Base).
 
--	É possível visualizar cristais nas células, desaparecendo se forem recolhidas.
+-	É possível visualizar cristais nas células, desaparecendo se forem recolhidos.
 
 -	Foi adicionada uma pequena interface na parte inferior da arena para informar ao usuário
 a quantidade de cristais e vida de cada robô, assim como a quantidade de cristais em cada base.
 Isso facilita o entendimento do que está acontecendo no jogo.
 
+Quanto aos testes, criamos 5 exemplos de programas, um para cada robô do time, que em conjunto
+testam todas as funções implementadas até agora
 
+-	Traveler: Um robô que apenas anda na direção da base inimiga
+
+-	Aggresive: Um robô que anda na direção da base inimiga e ataca quem estiver no caminho
+
+-	Exploding: Um robô que anda até perto do centro da tela e se explode
+
+-	Mathematician: Um robô que só anda na direção da base inimiga quando termina de calcular
+o fatorial de 5
+
+-	Smart: Um robô que caminha na direção da base inimiga, recolhe cristais, joga cristais
+quando encontra um inimigo e deposita cristais se chegar na base.
+
+Esses programas estão agrupados no arquivo progsteste.txt.
+Para rodar os testes, portanto, basta rodar:
+
+./arena < progsteste.txt
+
+Além da representação visual dos acontecimentos, o arena.c em modo debug também imprime um
+log dos acontecimentos na saída padrão.
+
+Problemas: No momento, ao rodarmos o arena, ele termina sua execução quase de imediato e o
+apres apenas mostra os acontecimentos depois. Não há uma comunicação em tempo real entre os
+programas, portanto se o jogador quisesse eventualmente mudar o programa de algum dos robôs
+durante o jogo, isso não seria possível (pois o jogo já acabou). 

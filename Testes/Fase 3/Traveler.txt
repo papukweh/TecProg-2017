@@ -1,0 +1,25 @@
+Programinha que faz o robô andar na
+direção da base inimiga
+
+p0
+{RCL, {NUM, 12}},
+{PUSH, {NUM, 1}},
+{EQ, {NUM, 0}},
+{JIT, {NUM, 17}},
+{PUSH, {ACAO, VER}},
+{SYS, {NUM, 0}},
+{RCL, {NUM, 6}},
+{ATR, {NUM, 2}},
+{PUSH, {NUM, 5}},
+{LT, {NUM, 0}},
+{JIT, {NUM, 13}},
+{PUSH, {VAR, NW}},
+{JMP, {NUM, 14}},
+{PUSH, {VAR, SE}},
+{STO, {NUM, 11}},
+{PUSH, {NUM, 1}},
+{STO, {NUM, 12}},
+{RCL, {NUM, 11}},
+{PUSH, {ACAO, MOV}},
+{SYS, {NUM, 0}},
+;

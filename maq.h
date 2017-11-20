@@ -45,6 +45,15 @@ Maquina cria_maquina(INSTR *p, int iSize, int id, int posx, int posy, int vida, 
 // Costumava "desalocar" o robo
 void destroi_maquina(Maquina m);
 
+/*
+ * Declarando as variaveis globais que auxiliam
+ * na impressao dos dados
+ */
+extern char *CODES[];
+extern char *Chamadas[];
+extern char *Direcao[];
+extern char *Terrenos[];
+extern char *Tipos[];
 
 
 /*
@@ -67,16 +76,26 @@ void destroi_maquina(Maquina m);
  */
 void exec_maquina(Maquina *m, int n);
 
-
 /*
  * Retorna um operando tendo como base o tipo e o numero 
  * passados como argumentos
  */
 OPERANDO cria_operando(Tipo t, int arg);
 
+/*
+ * Retorna uma instrucao tendo como base o 
+ * OpCode e Operando passados como argumentos
+ */
+INSTR cria_instr(OpCode op, OPERANDO arg);
 
 /*
  * Imprime o valor numerico dooperando de uma
  * maneira legivel
  */
 void imprime_op(OPERANDO arg);
+
+/*
+ * Funcao auxiliar que imprime as primeiras
+ * 10 posicoes da memoria do robo
+ */
+void imprime_mem(Maquina *m);
