@@ -7,6 +7,7 @@ from math import *
 
 pg.init()                                 # inicialização do sistema
 myfont = pg.font.SysFont("monospace", 16, bold=True) # setando a fonte
+logfont = pg.font.SysFont("monospace", 12, bold=True)
 
 # altura e largura da arena, em células
 H, W = 40,24
@@ -21,7 +22,7 @@ l = 25
 L = 2*l/sqrt(3)
 
 # cria a janela
-scr = pg.display.set_mode((int(1.5*W*L+0.7*l), int(l*H/2 + 1.5*l)+150))
+scr = pg.display.set_mode((int(1.5*W*L+0.7*l)+200, int(l*H/2 + 1.5*l)+150))
 # só para simplificar, atualização da imagem
 atu = pg.display.update
 
@@ -140,6 +141,28 @@ class cell:
         # desenha
         scr.blit(s.image, s.rect)
 
+pos=0
+IDG = [0,1,2,3,4,5]
+
+LOG_TEXTOS = (  "[%d] se moveu" %IDG[0],#0
+                "[%d] atacou [%d]" %(IDG[0],IDG[1]),#1 
+                "[%d] recolheu cristal" %IDG[0],#2
+                "[%d] depositou cristal" %IDG[0],#3
+                "[%d] jogou um cristal" %IDG[0],#4
+                "em [%d]" %IDG[1],#5  
+                "[%d] se explodiu" %IDG[0], #6
+                "[%d] ferido" %IDG[0],#7
+                "[%d] e [%d] feridos" %(IDG[0],IDG[1]),#8
+                "[%d], [%d] e [%d] feridos" %(IDG[0],IDG[1],IDG[2]),#9
+                "[%d], [%d], [%d] e "%(IDG[0],IDG[1],IDG[2]),#10
+                "[%d] feridos" %IDG[3],#11
+                "[%d], [%d], [%d], [%d]" %(IDG[0],IDG[1],IDG[2],IDG[3]), #12 
+                "e [%d] feridos" %IDG[4],#13
+                "[%d], [%d], [%d], [%d]," %(IDG[0],IDG[1],IDG[2],IDG[3]), #14  
+                "[%d] e [%d] feridos" %(IDG[4],IDG[5]),#15
+                "[%d]  morreu" %IDG[0],#16
+                "[%d] está incapacitado" %IDG[0]  )#17 
+
 
 # Construção da matriz que representa a arena
 arena = []
@@ -151,6 +174,7 @@ for i in range(int(H/2)):
 
 # Pega as dimensões da tela
 wpx, hpx = pg.display.get_surface().get_size()
+log_pos = [(wpx -180, 25)]
 
 # Carrega algumas imagens da UI e define algumas labels
 cris = Cristal("cris.png")
@@ -159,20 +183,36 @@ vida = pg.image.load("vida.png")
 bigcris = pg.image.load("bigcris.png")
 basea = pg.image.load("basea.png")
 baseb= pg.image.load("baseb.png")
+erase = pg.image.load("erase.png")
 label = myfont.render("Base", 2, (0,0,0))
+
+log = logfont.render((LOG_TEXTOS[9]), 2, (255,255,255))
 
 # Define o retângulo cinza sobre o qual os elementos da UI serão desenhados
 ui_cor = (100, 100, 100)
 ui_pontos = ( (0, 4*hpx/5), (wpx, 4*hpx/5), (wpx, hpx), (0, hpx))
 pg.draw.polygon(scr, ui_cor, ui_pontos, 0)
 
+# Define o retângulo preto sobre o qual o log será impresso
+log_cor = (0, 0, 0)
+log_pontos = ( (wpx -10, hpx-10) , (wpx-190, hpx-10) , (wpx-190, 10), (wpx-10, 10) )
+pg.draw.polygon(scr, log_cor, log_pontos, 0)
+
+log = logfont.render((LOG_TEXTOS[9]), 2, (255,255,255))
+
+for i in range(1, 22):
+    if i%2 == 0:
+        log_pos.append((log_pos[i-1][0], log_pos[i-1][1] + 40))
+    else:
+        log_pos.append((log_pos[i-1][0], log_pos[i-1][1] + 20))
+
 # Desenha as informações referentes às bases
 scr.blit(label, (10, 4*hpx/5))
 scr.blit(label, (1000, 4*hpx/5))
 scr.blit(basea, (10, 4*hpx/5 + 65))
-scr.blit(baseb, (wpx - 70, 4*hpx/5 + 65))
+scr.blit(baseb, (wpx - 270, 4*hpx/5 + 65))
 scr.blit(bigcris, (22.5, 4*hpx/5 + 25) )
-scr.blit(bigcris, (wpx - 57.5, 4*hpx/5 + 25) )
+scr.blit(bigcris, (wpx - 257.5, 4*hpx/5 + 25) )
 
 # lista dos robôs definidos
 robs = []
@@ -225,7 +265,7 @@ for line in fileinput.input():
         # Define o retângulo branco que é desenhado por baixo do texto
         # Assim temos uma maneira de apagar o texto antes de atualizar
         ui_rectangle = (((1+idn)*90,4*hpx/5 + 25), ((1+idn)*90 + 70,4*hpx/5 + 25),
-                        ((1+idn)*90 + 70, hpx ), (((1+idn)*90, hpx)))
+                        ((1+idn)*90 + 70, hpx-10 ), (((1+idn)*90, hpx-10)))
         bg_color = (255, 255, 255)
         pg.draw.polygon(scr, bg_color, ui_rectangle, 0)
 
@@ -248,10 +288,44 @@ for line in fileinput.input():
         scr.blit(cristais, ((1+idn)*90, 4*hpx/5 + 110))
         scr.blit(bigcris, ((1+idn)*90, 4*hpx/5 + 100))
         scr.blit(basea, (10, 4*hpx/5 + 65))
-        scr.blit(baseb, (wpx - 70, 4*hpx/5 + 65))
+        scr.blit(baseb, (wpx - 270, 4*hpx/5 + 65))
         scr.blit(base1, (32, 4*hpx/5 + 82.5))
-        scr.blit(base2, (wpx - 47, 4*hpx/5 + 82.5))
+        scr.blit(base2, (wpx - 247, 4*hpx/5 + 82.5))
         pg.time.wait(30)
+        continue
+
+    if r[0] == 'log':
+        if pos >= 22:
+            pos = 0
+        IDG[0], IDG[1], IDG[2], IDG[3], IDG[4], IDG[5], code1, code2 = list(map(int, r[1:]))
+        towrite = LOG_TEXTOS[code1]
+
+        if IDG[0] > 4:
+            cor = (200, 10, 10)
+        else:
+            cor = (10, 10, 200)
+
+        for i in range(5):
+            if IDG[i] == -1:
+                break
+            towrite = towrite.replace(str(i), str(IDG[i]))
+
+        log = logfont.render(towrite, 2, cor )
+        scr.blit(erase, log_pos[pos])
+        scr.blit(log, log_pos[pos])
+        pos = pos+1
+        if code2 >= 0:
+            towrite = LOG_TEXTOS[code2]
+
+            for i in range(5):
+                if IDG[i] == -1:
+                    break
+                towrite = towrite.replace(str(i), str(IDG[i]))
+
+            log = logfont.render(towrite, 2, cor )
+            scr.blit(erase, log_pos[pos])
+            scr.blit(log, log_pos[pos])
+        pos = pos+1
         continue
 
     # linha começando com 'morte': desenha o sprite do robô

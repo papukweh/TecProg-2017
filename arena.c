@@ -443,9 +443,9 @@ void Atualiza(){
         // na base inimiga para finalizar o jogo
         if (arena.mapa.tiles[1][0].cristais >= 1 || arena.mapa.tiles[18][11].cristais >= 1) {
             if (arena.mapa.tiles[1][0].cristais >= 1)
-                printf("Fim de jogo! O time 2 ganhou, yay!\n");
+                printf("Fim de jogo! O time vermelho ganhou, yay!\n");
             else
-                printf("Fim de jogo! O time 1 ganhou, yay!\n");
+                printf("Fim de jogo! O time azul ganhou, yay!\n");
             fprintf(display, "fim\n");
             fflush(display);
             break;
@@ -594,6 +594,7 @@ int Sistema(int id){
         arena.robots[id].vida -=100;
         D(printf("\nRobô %d se explodiu!\n", id));
         D(printf("\nRobô %d agora tem %d de vida restante!\n", id, arena.robots[id].vida));
+        fprintf(display, "log %d %d %d %d %d %d %d %d\n", id, -1,-1,-1,-1,-1, 6, -1);
 
         // Incrementa o contador do robo em 5 e atualiza seu sprite
         // na arena para refletir sua condicao ("morte")
@@ -675,6 +676,8 @@ int Sistema(int id){
                         fprintf(display, "cris %d %d\n", old_posx, old_posy);
                     }
 
+                    fprintf(display, "log %d %d %d %d %d %d %d %d\n", id, -1,-1,-1,-1,-1, 0, -1);
+
                     // Atualiza o contador de ocupacao do robo de acordo
                     // com o custo de cada terreno
                     Terreno terr = arena.mapa.tiles[posx][posy].terreno;
@@ -711,6 +714,7 @@ int Sistema(int id){
                     arena.mapa.tiles[posx][posy].cristais--;
                     arena.robots[id].cristais++;
                     D(printf("\nRobô %d recolheu um cristal no %s (posição %d, %d)\n", id, Direcao[arg.valor.v], posx, posy));
+                    fprintf(display, "log %d %d %d %d %d %d %d %d\n", id, -1,-1,-1,-1,-1, 2, -1);
                     return 1;
                 }
                 else return -1;
@@ -721,6 +725,7 @@ int Sistema(int id){
                     arena.mapa.tiles[posx][posy].cristais++;
                     arena.robots[id].cristais--;
                     D(printf("\nRobô %d depositou um cristal no %s (posição %d, %d)\n", id, Direcao[arg.valor.v], posx, posy));
+                    fprintf(display, "log %d %d %d %d %d %d %d %d\n", id, -1,-1,-1,-1,-1, 3, -1);
                     return 1;
                 }
                 else return -1;
@@ -732,6 +737,7 @@ int Sistema(int id){
                         arena.robots[eid].vida -= 100;
                         D(printf("\nRobô %d atacou o robô %d\n", id, eid));
                         D(printf("\nRobô %d agora tem %d de vida restante!\n", eid, arena.robots[eid].vida));
+                        fprintf(display, "log %d %d %d %d %d %d %d %d\n", id, eid,-1,-1,-1,-1, 1, -1);
 
                         if (arena.robots[eid].vida <= 0){
                             arena.robots[eid].cont = 5;
@@ -753,12 +759,13 @@ int Sistema(int id){
                     arena.robots[eid].cont +=2;
                     D(printf("\nRobô %d lançou um cristal no robô %d!\n", id, eid));
                     D(printf("\nRobô %d agora está incapacitado por 2 turnos!\n", eid));
-            if (arena.robots[eid].cristais > 0){
+                    if (arena.robots[eid].cristais > 0){
                         arena.mapa.tiles[posx][posy].cristais += arena.robots[eid].cristais;
                         arena.robots[eid].cristais = 0; 
                         D(printf("\nRobô %d derrubou todos os seus cristais!\n", eid));
                     }
                     arena.robots[id].cristais--;
+                    fprintf(display, "log %d %d %d %d %d %d %d %d\n", id, eid,-1,-1,-1,-1, 4, 5);
                     return 1;
                 }
                 else return -1;
