@@ -48,6 +48,8 @@ typedef struct{
     Mapa mapa;
 } Arena;
 
+static char *robs[] = {"rob0", "rob1", "rob2", "rob3", "rob4",
+                "rob5", "rob6", "rob7", "rob8", "rob9"};
 
 /*
  * Definicao das variaveis globais.
@@ -65,7 +67,8 @@ typedef struct{
 static int positions[MAX_ROBOS*MAX_TIME*2];
 static Arena arena;
 static int ids=0;
-static int instrSize=0;
+//static int instrSize=0;
+static INSTR prog[2000];
 FILE *display;
 
 /*
@@ -212,149 +215,6 @@ void criaArena(){
 }
 
 /*
- * Funcao que le um programa da entrada padrao e
- * retorna um ponteiro para o mesmo
- * Recebe como argumento o ponteiro no qual devera
- * armazenar o programa
- *
- * Um programa deve obrigatoriamente ter a seguinte
- * estrutura:
- *
- * p(id)\n -> Indica o inicio do programa
- * {OpCode, {Tipo, Arg}},\n -> Instrucoes
- * ; -> Indica o fim do programa
- * \n -> Separa os dois programas
- * p(id++)\n -> Indica o inicio de um novo programa
- *
- */
-INSTR* readProg(INSTR* prog){
-    char *op = malloc(15*sizeof(char));
-    char *tipo = malloc(15*sizeof(char));
-    char *arg = malloc(5*sizeof(char));
-    int instr = 0;
-    int i,j,k,o,t,a;
-    int c;
-
-    // Pega o p(id)\n
-    getchar();
-    getchar();
-    getchar();
-    while (1){
-
-        // Detecta o fim do programa
-        c = getchar();
-        if (c == ';') break;
-        else c = getchar();
-
-        // Constroi o operando
-        i = 0;
-        while (c != ',' && c != EOF){
-            op[i++] = c;
-            c = getchar();
-        }
-
-        // Apaga "residuos" do opcode anterior
-        if (i < 5) op[i] = NULL;
-
-        // Pega o " {" antes do tipo
-        getchar();
-        getchar();
-        c = getchar();
-
-        // Constroi o tipo
-        j = 0;
-        while (c != ',' && c != EOF){
-            tipo[j++] = c;
-            c = getchar();
-        }
-
-        // Apaga "residuos" do tipo anterior
-        if (j < 5) tipo[j] = NULL;
-
-        // Pega o " " antes do argumento
-        getchar();
-        c = getchar();
-
-        // Constroi o argumento
-        k = 0;
-        while (c != '}' && c != EOF){
-            arg[k++] = c;
-            c = getchar();
-        }
-
-        // Apaga "residuos" do argumento anterior
-        if (k < 4) arg[k] = NULL;
-
-        // Pega o "},\n" antes da proxima instrucao
-        getchar();
-        getchar();
-        getchar();
-
-        // Parsea a instrucao obtida e coloca os valores dos enums
-        // correspondentes
-
-        // Parser do tipo
-        for (int i = 0; i < 5; i++){
-            char *aux = Tipos[i];
-            if (strcmp(tipo, aux) == 0){
-                t = i;
-                break;
-            }
-        }
-
-        // Se o tipo for num, converte o argumento para inteiro
-        if (t == 0) a = atoi(arg);
-
-        // Se for ACAO, parsear o argumento como uma Chamada:
-        else if (t == 1){
-            for (int i = 0; i < 7; i++){
-                char *aux = Chamadas[i];
-                if (strcmp(arg, aux) == 0){
-                    a = i;
-                    break;
-                }
-            }
-        }
-
-        // Se for VAR, parsear o argument como uma Direcao:
-        else if (t == 2) {
-            for (int i = 0; i < 7; i++){
-                char *aux = Direcao[i];
-                if (strcmp(arg, aux) == 0){
-                    a = i;
-                    break;
-                }
-            }
-        }
-
-        else fprintf(stderr, "Problemas no código\n");
-
-        // Parsear o opcode
-        for (int i = 0; i < 31; i++){
-            char *aux = CODES[i];
-            if (strcmp(op, aux) == 0){
-                o = i;
-                break;
-            }
-        }
-
-        // Por fim, cria a instrucao
-        prog[instr++] = cria_instr((OpCode)o, cria_operando((Tipo)t, a));  
-    }
-    
-    // Pega o "\n\n" antes do proximo programa
-    getchar();
-    getchar();
-    instrSize = instr; 
-
-    free(op);
-    free(tipo);
-    free(arg);
-
-    return prog;
-}
-
-/*
  * Insere todos os robos na arena
  *
  * Cria, para cada um dos robos um programa correspondente
@@ -374,16 +234,17 @@ void insereExercito(){
         exit(1);
     }
 
-    // Cria cada robo, individualmente, com programas distintos
+    //Cria cada robo, individualmente, com programas distintos
     ids = 0;
     for(int i = 0; i < MAX_ROBOS*MAX_TIME; i++){
         int j = k+1;
         if (i == 5) x = 1;
 
-        INSTR *p = malloc(sizeof(INSTR)*100);
-        p = readProg(p);
-        arena.robots[i] = cria_maquina(p, instrSize, ids, positions[k], positions[j], 100, x);
-        free(p);
+        FILE* p = stdin;
+        p = fopen(robs[i],"r");    
+        int instrSize = compilador(p, prog);
+
+        arena.robots[i] = cria_maquina(prog, instrSize, ids, positions[k], positions[j], 100, x);
 
         // Para cada robo, associa-o com o sprite de seu time
         // e o desenha em sua posicao inicial
@@ -602,9 +463,12 @@ int Sistema(int id){
                     arena.robots[id].cont = 5;
                     D(printf("\nOh, não! Robô %d morreu!\n", id));
                     fprintf(display, "morte %d %d %d\n", id, posx, posy);
+                    fprintf(display, "log %d %d %d %d %d %d %d %d\n", id, -1,-1,-1,-1,-1, 16, -1);
         }
 
         // Danifica os demais robos e detecta se eles ainda estao vivos
+        int damaged[] = {-1, -1, -1, -1, -1, -1};
+        int j = 0;
         for (int i = 0; i < 6; i++){
             if (vizinhos[i] != -1){
                 int eid = vizinhos[i];
@@ -612,6 +476,7 @@ int Sistema(int id){
                     arena.robots[eid].vida -=100;
                     D(printf("\nRobô %d foi danificado na explosão!\n", eid));
                     D(printf("\nRobô %d agora tem %d de vida restante!\n", eid, arena.robots[eid].vida));
+                    damaged[j++] = eid;
 
                     // Incrementa o contador do robo em 5 e atualiza seu sprite
                     // na arena para refletir sua condicao ("morte")
@@ -623,6 +488,25 @@ int Sistema(int id){
                 }
             }
         }
+
+        if (j == 1)
+            fprintf(display, "log %d %d %d %d %d %d %d %d\n", damaged[0], damaged[1], damaged[2], damaged[3], 
+                                                         damaged[4], damaged[5], 7, -1);
+        else if (j == 2)
+            fprintf(display, "log %d %d %d %d %d %d %d %d\n", damaged[0], damaged[1], damaged[2], damaged[3], 
+                                                         damaged[4], damaged[5], 8, -1);            
+        else if (j == 3)
+            fprintf(display, "log %d %d %d %d %d %d %d %d\n", damaged[0], damaged[1], damaged[2], damaged[3], 
+                                                         damaged[4], damaged[5], 9, -1);            
+        else if (j == 4)
+            fprintf(display, "log %d %d %d %d %d %d %d %d\n", damaged[0], damaged[1], damaged[2], damaged[3], 
+                                                         damaged[4], damaged[5], 10, 11);            
+        else if (j == 5)
+            fprintf(display, "log %d %d %d %d %d %d %d %d\n", damaged[0], damaged[1], damaged[2], damaged[3], 
+                                                         damaged[4], damaged[5], 12, 13);        
+        else
+            fprintf(display, "log %d %d %d %d %d %d %d %d\n", damaged[0], damaged[1], damaged[2], damaged[3], 
+                                                         damaged[4], damaged[5], 14, 15);
     }
 
     // Demais chamadas: primeiro define o vizinho sobre o qual
@@ -743,6 +627,7 @@ int Sistema(int id){
                             arena.robots[eid].cont = 5;
                             D(printf("\nOh, não! Robô %d morreu!\n", eid));
                             fprintf(display, "morte %d %d %d\n", eid, posx, posy);
+                            fprintf(display, "log %d %d %d %d %d %d %d %d\n", eid, -1, -1, -1, -1, -1, 16, -1);                            
                         }
 
                         return 1;
@@ -757,6 +642,7 @@ int Sistema(int id){
                 if(arena.mapa.tiles[posx][posy].ocupado > -1 && arena.robots[id].cristais > 0){
                     int eid = arena.mapa.tiles[posx][posy].ocupado;
                     arena.robots[eid].cont +=2;
+                    arena.robots[id].cristais--;
                     D(printf("\nRobô %d lançou um cristal no robô %d!\n", id, eid));
                     D(printf("\nRobô %d agora está incapacitado por 2 turnos!\n", eid));
                     if (arena.robots[eid].cristais > 0){
@@ -764,7 +650,6 @@ int Sistema(int id){
                         arena.robots[eid].cristais = 0; 
                         D(printf("\nRobô %d derrubou todos os seus cristais!\n", eid));
                     }
-                    arena.robots[id].cristais--;
                     fprintf(display, "log %d %d %d %d %d %d %d %d\n", id, eid,-1,-1,-1,-1, 4, 5);
                     return 1;
                 }

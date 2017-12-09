@@ -2,6 +2,7 @@
 #include "pilha.h"
 
 #define MAXMEM 100
+#define MAXFRAMES 30
 
 /*
  * "pil" = pilha de dados
@@ -27,6 +28,7 @@ typedef struct {
     int ip;
     int instrSize;
     int rbp;
+    int pilret[MAXFRAMES];
     int id;
     int time;
     int cont;
@@ -44,6 +46,10 @@ Maquina cria_maquina(INSTR *p, int iSize, int id, int posx, int posy, int vida, 
 
 // Costumava "desalocar" o robo
 void destroi_maquina(Maquina m);
+
+int new_frame(Maquina *m, int pos);
+
+int del_frame(Maquina *m);
 
 /*
  * Declarando as variaveis globais que auxiliam

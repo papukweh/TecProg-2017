@@ -1,0 +1,24 @@
+def explode(){
+	kamikaze();
+	return 0;
+}
+
+x = 4;
+while (x > 0){
+	x = x-1;
+	move(NW);
+	y = ver(NW);
+	y = y.cristais;
+	if (y > 0){
+		recolhe(NW);
+	}
+}
+
+x = 3;
+while (x > 0){
+	x = x -1;
+	move(N);
+	joga_cristal(S);
+}
+
+explode();

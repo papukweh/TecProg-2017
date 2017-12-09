@@ -303,7 +303,7 @@ for line in fileinput.input():
         if IDG[0] > 4:
             cor = (200, 10, 10)
         else:
-            cor = (10, 10, 200)
+            cor = (50, 50, 200)
 
         for i in range(5):
             if IDG[i] == -1:

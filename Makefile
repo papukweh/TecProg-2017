@@ -7,7 +7,7 @@ CC=gcc
 all: arena
 
 
-arena: arena.o maq.o pilha.o
+arena: arena.o maq.o pilha.o compila.tab.o lex.yy.o symrec.o acertos.o -lfl
 	$(CC) -o $@ $^
 
 %.o: %.c %.h
@@ -18,5 +18,19 @@ arena: arena.o maq.o pilha.o
 	$(CC) $(CFLAGS) -c $< -o $@
 
 
+compila: compila.tab.o lex.yy.o symrec.o acertos.o maq.o arena.o pilha.o
+	gcc -o $@ $^ -lm -lfl
+
+compila.tab.o: compila.y
+	bison -d compila.y
+	gcc -c -g compila.tab.c
+
+lex.yy.o: compila.l
+	flex compila.l
+	gcc -c -g lex.yy.c
+
+
 clean:
-	rm -f *.o *~ *.out arena
+	rm -f *.o lex.yy.c compila.tab.c compila.tab.h *~ compila
+
+

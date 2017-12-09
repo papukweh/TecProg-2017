@@ -25,8 +25,8 @@ typedef enum {
     RCL,        //Empilha elemento de mem[arg] na pilha de dados
     STL,        //Desempilha elemento da pilha de dados e armazena em exec[rbp+arg]
     RCE,        //Empilha elemento de exec[rbp+arg] na pilha de dados
-    ALC,        //Aloca arg espaços na pilha de execucao
-    FRE,        //Libera arg espaçoes na pilha de execucao
+    ENTRY,
+    LEAVE,
     SAVE,       //Salva o valor de rbp
     REST,       //Restaura o valor de rbp
     END,        //Finaliza a execução do programa

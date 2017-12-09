@@ -1,0 +1,12 @@
+def f(x,y){
+  local = 42;
+  kamikaze();
+
+  while (x < 10) {
+	y = y * 3;
+	x = x + g(1);
+  }
+  return(x+y);
+}
+
+f(local, 0);

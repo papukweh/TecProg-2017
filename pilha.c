@@ -38,6 +38,8 @@ Pilha cria_pilha() {
  *     mas nao interrompe a execucao
  */
 void empilha(Pilha *p, OPERANDO op) {
+    // printf("TO EMPILHANDO ESSA PORRA:");
+    // imprime_op(op);
     if (p->topo < PILMAX)
     p->val[p->topo++] = op;
     else Erro("Pilha cheia");

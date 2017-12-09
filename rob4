@@ -1,0 +1,13 @@
+x = 2;
+if(x == 2){
+	ataca(N);
+	move(SW);
+	if (x <= 2){
+		kamikaze();
+	}
+	if (x > 2){
+		move(N);
+	}
+}
+move(S);
+move(S);

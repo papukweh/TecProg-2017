@@ -58,8 +58,8 @@ extern char *CODES[] = {
     "RCL",
     "STL",
     "RCE",
-    "ALC",
-    "FRE",
+    "ENTRY",
+    "LEAVE",
     "SAVE",
     "REST",
     "END",
@@ -173,8 +173,8 @@ Maquina cria_maquina(INSTR *p, int iSize, int id, int posx, int posy, int vida, 
     m.cont = 0;
     m.vida = vida;
     m.instrSize = iSize;
-    m.prog = (INSTR*)malloc(sizeof(INSTR) * m.instrSize);
-    memcpy(m.prog, p, sizeof(INSTR) * m.instrSize);
+    m.prog = malloc(iSize*sizeof(INSTR));
+    memcpy(m.prog, p, iSize*sizeof(INSTR));
     m.cristais = 0;
     return m;
 }
@@ -193,6 +193,20 @@ Maquina cria_maquina(INSTR *p, int iSize, int id, int posx, int posy, int vida, 
 // Limpa o vetor de instrucoes do robo
 void destroi_maquina(Maquina m) {
     free(m.prog);
+}
+
+int new_frame(Maquina *m, int n) {
+    int ibc = rbp;
+    if (ibc < MAXFRAMES-1) {
+        m->pilret[++rbp] = n+ibc;
+        return rbp;
+    }
+    return -1;
+}
+
+int del_frame(Maquina *m) {
+    if (rbp > 0) return --rbp;
+    return -1;
 }
 
 /*
@@ -247,7 +261,7 @@ void exec_maquina(Maquina *m, int n) {
                     tmpop = desempilha(pil);
                     tmpop2 = desempilha(pil);
                     if (tmpop.t==NUM && tmpop2.t==NUM)
-                            empilha(pil, cria_operando(NUM, tmpop2.valor.n-tmpop.valor.n));
+                            empilha(pil, cria_operando(NUM, tmpop.valor.n-tmpop2.valor.n));
                         else {
                             empilha(pil, tmpop2);
                             empilha(pil, tmpop);
@@ -277,7 +291,7 @@ void exec_maquina(Maquina *m, int n) {
                     tmpop = desempilha(pil);
                     tmpop2 = desempilha(pil);
                     if (tmpop.t==NUM && tmpop2.t==NUM)
-                        empilha(pil, cria_operando(NUM, tmpop2.valor.n/tmpop.valor.n));
+                        empilha(pil, cria_operando(NUM, tmpop.valor.n/tmpop2.valor.n));
                     else {
                         empilha(pil, tmpop2);
                         empilha(pil, tmpop);
@@ -300,7 +314,7 @@ void exec_maquina(Maquina *m, int n) {
                 break;
             //Desempilha o topo da pilha de dados e, caso o valor seja igual a zero,
             //move o ponteiro de instrucoes para o valor desempilhado
-            case JIF: //k
+            case JIF: 
                 if(pil->topo == 0) break;
                 if (desempilha(pil).valor.n == 0) {
                     ip = arg.valor.n;
@@ -313,13 +327,13 @@ void exec_maquina(Maquina *m, int n) {
                 if (arg.t==NUM) {
                     empilha(exec, cria_operando(NUM, ip));
                     ip = arg.valor.n;
-                    rbp = exec->topo;
+                    // rbp = exec->topo;
                     continue;
                 }
             //Atualiza o valor do topo para o valor de rbp e muda
             // o ip para o endereço de retorno
             case RET:
-                exec->topo = rbp;
+                // exec->topo = rbp;
                 ip = desempilha(exec).valor.n;
                 break;
             //Desempilha dois operandos da pilha de dados, caso sejam iguais,
@@ -400,26 +414,16 @@ void exec_maquina(Maquina *m, int n) {
                         empilha(pil, cria_operando(NUM, 0));
                 }
                 break;
-            //Aloca um espaço na pilha de execução para o vetor de variáveis
-            //locais, com tamanho argumento (mudando o topo da pilha de execução)
-            case ALC:
-                if(arg.t!=NUM) break;
-                exec->topo = exec->topo + arg.valor.n;
+
+            case ENTRY:
+                if (arg.t==NUM)
+                    new_frame(m, arg.valor.n);
                 break;
-            //Libera o espaço alocado (o argumento deve ser o mesmo do usado em ALC),
-            //retornando o valor do topo da pilha para o que era antes da alocação
-            case FRE:
-                if(arg.t!=NUM) break;
-                exec->topo = exec->topo - arg.valor.n;
+              
+            case LEAVE:
+                del_frame(m);
                 break;
-            //Salva o valor de rbp, empilhando-o na pilha de execução
-            case SAVE:
-                empilha(exec, cria_operando(NUM, rbp));
-                break;
-            //Restaura o valor de rbp, desempilhando-o da pilha de execução
-            case REST:
-                rbp = desempilha(exec).valor.n;
-                break;
+
             case PUSH:
                 empilha(pil, arg);
                 break;
