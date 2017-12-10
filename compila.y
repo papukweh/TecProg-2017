@@ -6,26 +6,29 @@
 #include "symrec.h"
 #include "acertos.h"
 #include "instr.h"
-  
+
+// Declarações do lex:  
 int yylex();
 void yyerror(char const *);
-int compila(FILE *, INSTR *);
-static int ip  = 0;					/* ponteiro de instruções */
-static int mem = 11;
-static int ip3 = 0;	
-static int last = 0;
-static int lastlast = 0;				/* ponteiro da memória */
-static INSTR *prog;
-static INSTR *prog2;
-static int parmcnt = 0;		/* contador de parâmetros */
 
+//int compilador(FILE *, INSTR *);
+static int ip  = 0;					// ponteiro de instruções 
+static int mem = 11;				// ponteiro da memória 
+static INSTR *prog;					// programa
+static int parmcnt = 0;		// contador de parâmetros //
+
+// Variáveis auxiliares para armazenar a última expressão
+// de um "for"
+static int ip2 = 0;
+static INSTR prog2[10];
+
+// Funções auxiliares
 void AddInstr(OpCode op, OPERANDO valor) {
   	prog[ip++] = (INSTR) {op,  valor};
 }
 
 void AddInstr2(OpCode op, OPERANDO valor){
-	fprintf(stderr, "ip is %d\n", ip3);
-	prog2[ip3++] = (INSTR) {op, valor};
+	prog2[ip2++] = (INSTR) {op, valor};
 }
 %}
 
@@ -34,11 +37,8 @@ void AddInstr2(OpCode op, OPERANDO valor){
 	int num;
 	double val;
 	Dir direc;
-	/* symrec *cod; */
 	char cod[30];
 }
-
-/* %type  Expr */
 
 %token <num> ATRt
 %token <val>  NUMt
@@ -46,8 +46,8 @@ void AddInstr2(OpCode op, OPERANDO valor){
 %token <direc> DIRECAOt
 %token ADDt SUBt MULt DIVt ASGN OPEN CLOSE RETt EOL
 %token ADDs SUBs MULs DIVs 
-%token EQt NEt LTt LEt GTt GEt INCt DECt ABRE FECHA SEP PONTO ATRt
-%token IF ELSE WHILE FOR FUNC PRINT VERt MOVt RECt DEPt ATQt JGCt KMKt DIRECAOt
+%token EQt NEt LTt LEt GTt GEt INCt DECt ABRE FECHA SEP PONTO NEW
+%token IF ELSE WHILE FOR FUNC PRINT VERt MOVt RECt DEPt ATQt JGCt KMKt
 
 %right ASGN
 %left ADDt SUBt
@@ -60,40 +60,56 @@ void AddInstr2(OpCode op, OPERANDO valor){
 /* Gramatica */
 %%
 
+// Programa: sequência de comandos
 Programa: Comando
        | Programa Comando
 	   ;
 
+// Comando: expressão, condicional, laço, print, return ou chama de sistema
 Comando: Expr EOL
        | Cond
        | Loop
        | Func
 	   | PRINT Expr EOL { AddInstr(PRN, (OPERANDO) {NUM, 0}); }
-	   | RETt EOL {
-		 	    AddInstr(LEAVE, (OPERANDO) {NUM, 0});
-			    AddInstr(RET, (OPERANDO) {NUM, 0});
- 			}
-	   
-	   | RETt OPEN  Expr CLOSE EOL {
-		 	   AddInstr(LEAVE, (OPERANDO) {NUM, 0});
-			   AddInstr(RET, (OPERANDO) {NUM, 0});
- 		    }
- 		| Sis EOL
-	   /* | EOL {printf("--> %d\n", ip);} */
+	   | Return
+ 	   | Sis EOL
 ;
 
+// Return: Pode retornar um valor ou não (com ou sem parênteses)
+Return:  RETt EOL {
+		 	AddInstr(LEAVE, (OPERANDO) {NUM, 0});
+			AddInstr(RET, (OPERANDO) {NUM, 0});
+ 		}
+ 		| RETt Expr EOL {
+		 	   AddInstr(LEAVE, (OPERANDO) {NUM, 0});
+			   AddInstr(RET, (OPERANDO) {NUM, 0});
+ 		}
+
+// Expressão condicional: expressão seguida de <, >, <=, >=, == ou !=
+// seguido de outra expressão
+ExprC:  Expr LTt Expr  { AddInstr(LT,   (OPERANDO) {NUM, 0});}
+	| Expr GTt Expr  { AddInstr(GT,   (OPERANDO) {NUM, 0});}
+	| Expr LEt Expr  { AddInstr(LE,   (OPERANDO) {NUM, 0});}
+	| Expr GEt Expr  { AddInstr(GE,   (OPERANDO) {NUM, 0});}
+	| Expr EQt Expr  { AddInstr(EQ,   (OPERANDO) {NUM, 0});}
+	| Expr NEt Expr  { AddInstr(NE,   (OPERANDO) {NUM, 0});}
+
+// Expressão:
 Expr: NUMt {  AddInstr(PUSH, (OPERANDO) {NUM, $1});}
+	| NEW ID ASGN Expr {symrec *s = putsym($2); /* não definida */
+						AddInstr(STO, (OPERANDO) {NUM, mem + s->val});
+						}
     | ID   {
 	        symrec *s = getsym($1);
 			if (s==0) s = putsym($1); /* não definida */
 			AddInstr(RCL, (OPERANDO) {NUM, mem + s->val});
 	       }
 	| ID ASGN Expr {
-	         symrec *s = getsym($1);
-			 if (s==0) s = putsym($1); /* não definida */
-			 AddInstr(STO, (OPERANDO) {NUM, mem + s->val});
+	        symrec *s = getsym($1);
+			if (s==0) s = putsym($1); /* não definida */
+			AddInstr(STO, (OPERANDO) {NUM, mem + s->val});
  		 }
- 	| ver
+ 	| Ver
 	| ID PONTO ATRt  { 
 	         symrec *s = getsym($1); 
 	  		 if (s==0) s = putsym($1);  
@@ -105,14 +121,8 @@ Expr: NUMt {  AddInstr(PUSH, (OPERANDO) {NUM, $1});}
 	| Expr SUBt Expr { AddInstr(SUB,  (OPERANDO) {NUM, 0});}
 	| Expr MULt Expr { AddInstr(MUL,  (OPERANDO) {NUM, 0});}
 	| Expr DIVt Expr { AddInstr(DIV,  (OPERANDO) {NUM, 0});}
-//    | '-' Expr %prec NEG  { printf("  {CHS,  0},\n"); }
+//    | '-' Expr %pRec NEG  { printf("  {CHS,  0},\n"); }
 	| OPEN Expr CLOSE
-	| Expr LTt Expr  { AddInstr(LT,   (OPERANDO) {NUM, 0});}
-	| Expr GTt Expr  { AddInstr(GT,   (OPERANDO) {NUM, 0});}
-	| Expr LEt Expr  { AddInstr(LE,   (OPERANDO) {NUM, 0});}
-	| Expr GEt Expr  { AddInstr(GE,   (OPERANDO) {NUM, 0});}
-	| Expr EQt Expr  { AddInstr(EQ,   (OPERANDO) {NUM, 0});}
-	| Expr NEt Expr  { AddInstr(NE,   (OPERANDO) {NUM, 0});}
 	| ID INCt {
 	         symrec *s = getsym($1);
 			 if (s==0) s = putsym($1); /* não definida */
@@ -166,11 +176,11 @@ ExprM: NUMt {  AddInstr2(PUSH, (OPERANDO) {NUM, $1});}
 			AddInstr2(RCL, (OPERANDO) {NUM, mem + s->val});
 	       }
 	| ID ASGN ExprM {
-	         symrec *s = getsym($1);
-			 if (s==0) s = putsym($1); /* não definida */
-			 AddInstr2(STO, (OPERANDO) {NUM, mem + s->val});
+	        symrec *s = getsym($1);
+			if (s==0) s = putsym($1); /* não definida */
+			AddInstr2(STO, (OPERANDO) {NUM, mem + s->val});
  		 }
- 	| ver
+ 	| Ver
 	| ID PONTO ATRt  { 
 	         symrec *s = getsym($1); 
 	  		 if (s==0) s = putsym($1);  
@@ -182,14 +192,8 @@ ExprM: NUMt {  AddInstr2(PUSH, (OPERANDO) {NUM, $1});}
 	| ExprM SUBt ExprM { AddInstr2(SUB,  (OPERANDO) {NUM, 0});}
 	| ExprM MULt ExprM { AddInstr2(MUL,  (OPERANDO) {NUM, 0});}
 	| ExprM DIVt ExprM { AddInstr2(DIV,  (OPERANDO) {NUM, 0});}
-//    | '-' Expr %prec NEG  { printf("  {CHS,  0},\n"); }
+//    | '-' Expr %pRec NEG  { printf("  {CHS,  0},\n"); }
 	| OPEN ExprM CLOSE
-	| ExprM LTt ExprM  { AddInstr2(LT,   (OPERANDO) {NUM, 0});}
-	| ExprM GTt ExprM  { AddInstr2(GT,   (OPERANDO) {NUM, 0});}
-	| ExprM LEt ExprM  { AddInstr2(LE,   (OPERANDO) {NUM, 0});}
-	| ExprM GEt ExprM  { AddInstr2(GE,   (OPERANDO) {NUM, 0});}
-	| ExprM EQt ExprM  { AddInstr2(EQ,   (OPERANDO) {NUM, 0});}
-	| ExprM NEt ExprM  { AddInstr2(NE,   (OPERANDO) {NUM, 0});}
 	| ID INCt {
 	         symrec *s = getsym($1);
 			 if (s==0) s = putsym($1); /* não definida */
@@ -238,7 +242,8 @@ ExprM: NUMt {  AddInstr2(PUSH, (OPERANDO) {NUM, $1});}
 
 ;
 
-Cond: IF OPEN {AddInstr(PUSH, (OPERANDO) {NUM, 0});} Expr {
+// Condicionais: if (expressão condicional) sozinho ou if seguido de um else
+Cond: IF OPEN {AddInstr(PUSH, (OPERANDO) {NUM, 0});} ExprC {
   	  	 	   salva_end(ip);
 			   AddInstr(JIF,  (OPERANDO) {NUM, 0});
  		 }
@@ -249,75 +254,80 @@ Cond: IF OPEN {AddInstr(PUSH, (OPERANDO) {NUM, 0});} Expr {
 		| Cond ELSE {salva_end(ip); AddInstr(JIT, (OPERANDO) {NUM, 0}); }
 				Bloco {prog[pega_end()].op.valor.n = ip;}
 
+// Loops: while (expressão condicional) ou 
+// for (expressão, expressão condicional, expressão)
 Loop: WHILE OPEN  {salva_end(ip);}
-	  		Expr  { salva_end(ip); AddInstr(JIF, (OPERANDO) {NUM, 0}); }
+	  		ExprC  { salva_end(ip); AddInstr(JIF, (OPERANDO) {NUM, 0}); }
 	  		CLOSE Bloco {
-				int ip2 = pega_end();
+				int tmp = pega_end();
 				AddInstr(JMP, (OPERANDO) {NUM, pega_end()});
-				prog[ip2].op.valor.n = ip;
+				prog[tmp].op.valor.n = ip;
 			} 
 		| FOR OPEN Expr EOL {salva_end(ip);} 
-		Expr EOL{ salva_end(ip); AddInstr(JIF, (OPERANDO) {NUM, 0});}
-		 ExprM { lastlast = last; last = ip3;
-		 		fprintf(stderr, "ll=%d\n", lastlast);
-		 		fprintf(stderr, "l=%d\n", last);
-		 		fprintf(stderr, "ip3=%d\n", ip3);} 
+		ExprC EOL{ salva_end(ip); AddInstr(JIF, (OPERANDO) {NUM, 0});}
+		 ExprM { salva_end(ip2); while(ip2 > 0){push(prog2[--ip2]);}}
 		 CLOSE Bloco  { 
-		 	for (int i = last-lastlast; i<last; i++){ 
-		 		prog[ip++] = prog2[i];}
-		 	last = lastlast;
-			int ip2 = pega_end();
+		 	int a = pega_end();
+		 	for (int i = 0; i < a; i++) 
+		 		prog[ip++] = pop();
+			int tmp = pega_end();
 			AddInstr(JMP, (OPERANDO) {NUM, pega_end()});
-			prog[ip2].op.valor.n = ip;
-			}
+			prog[tmp].op.valor.n = ip;
+		}
 
-Sis: mov
-	| rec
-	| dep
-	| atq
-	| jgc
-	| kmk
+// Chamadas de sistema: Move, Recolher cristal, Depositar cristal,
+// atacar, jogar cristal ou kamikaze
+Sis: Mov
+	| Rec
+	| Dep
+	| Atq
+	| Jgc
+	| Kmk
 
-mov: MOVt OPEN  Direcao CLOSE { 
+Mov: MOVt OPEN  Direcao CLOSE { 
 								   AddInstr(PUSH, (OPERANDO) {ACAO, MOV});
 								   AddInstr(SYS, (OPERANDO) {NUM, 0});
 								}
-rec: RECt OPEN  Direcao CLOSE { 
+Rec: RECt OPEN  Direcao CLOSE { 
 								   AddInstr(PUSH, (OPERANDO) {ACAO, REC});
 								   AddInstr(SYS, (OPERANDO) {NUM, 0});
 								}
-dep: DEPt OPEN  Direcao CLOSE { 
+Dep: DEPt OPEN  Direcao CLOSE { 
 								   AddInstr(PUSH, (OPERANDO) {ACAO, DEP});
 								   AddInstr(SYS, (OPERANDO) {NUM, 0});
 								}	
-atq: ATQt OPEN  Direcao CLOSE { 
+Atq: ATQt OPEN  Direcao CLOSE { 
 								   AddInstr(PUSH, (OPERANDO) {ACAO, ATQ});
 								   AddInstr(SYS, (OPERANDO) {NUM, 0});
 								}							
-jgc: JGCt OPEN  Direcao CLOSE { 
+Jgc: JGCt OPEN  Direcao CLOSE { 
 								   AddInstr(PUSH, (OPERANDO) {ACAO, JGC});
 								   AddInstr(SYS, (OPERANDO) {NUM, 0});
 								}
-ver: VERt OPEN Direcao_esp CLOSE {
+Ver: VERt OPEN Direcao_esp CLOSE {
 								   AddInstr(PUSH, (OPERANDO) {ACAO, VER});
 								   AddInstr(SYS, (OPERANDO) {NUM, 0});
 								   AddInstr(RCM, (OPERANDO) {NUM, 0}); }
 
 
-kmk: KMKt OPEN  CLOSE { AddInstr(PUSH, (OPERANDO) {ACAO, KMK});
+Kmk: KMKt OPEN  CLOSE { AddInstr(PUSH, (OPERANDO) {ACAO, KMK});
 								   AddInstr(SYS, (OPERANDO) {NUM, 0});
 								}
+
 
 Direcao: DIRECAOt {AddInstr(PUSH, (OPERANDO) {VAR, $1});}
 
 Direcao_esp: DIRECAOt {AddInstr(PUSH, (OPERANDO) {NUM, $1});}
 
+// Bloco: { comandos }
 Bloco: ABRE Comandos FECHA ;
 
+// Comandos: Sequência de comando(s)
 Comandos: Comando 
     | Comandos Comando
 	;
 
+// Declaração de função: def (argumentos)
 Func: FUNC ID
 	  {
 		salva_end(ip);
@@ -331,7 +341,7 @@ Func: FUNC ID
 		s->val = ip;
 	  } OPEN
 	  {
-		newtab(0);
+		newtab(lastval());
 	  }
 	  Args CLOSE  Bloco
 	  {
@@ -342,6 +352,7 @@ Func: FUNC ID
 	  }
 	  ;
 
+// Argumentos: identificadores separados por ","
 Args: 
 	| ID {
 	  	 putsym($1);
@@ -351,6 +362,7 @@ Args:
 	  }
 	;
 
+// Chamada de função:
 Chamada: ID OPEN
 		 {
 			 parmcnt = mem;
@@ -386,21 +398,12 @@ void yyerror(char const *msg) {
 }
 
 int compilador(FILE *cod, INSTR *dest) {
-	prog2 = malloc(sizeof(INSTR)*20);
 	ip = 0;
+	cleartab();
 	yyin = cod;
 	prog = dest;
 	int r = yyparse();
 	AddInstr(END,(OPERANDO) {NUM, 0});
-	free(prog2);
+	deltab();
 	return ip;
 }
-
-// int main(int ac, char **av){ 
-// 	ac --; av++; 
-// 	if (ac>0) 
-// 		yyin = fopen(*av,"r"); 
-
-// 	yyparse(); 
-// 	return 0; 
-// } 

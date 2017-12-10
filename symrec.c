@@ -27,7 +27,7 @@ symrec *putsym (char *sym_name)
   ptr->val = SymStack[topss].base++;
   ptr->next = table;
 
-  /* printf("Inclui: %2d: %s, %d\n", topss, ptr->name, ptr->val); */
+  fprintf(stderr, "Inclui: %2d: %s, %d\n", topss, ptr->name, ptr->val);
   SymStack[topss].syms = ptr;
   return ptr;
 }
@@ -56,8 +56,10 @@ symrec *getsym(char *sym_name)
 {
   symrec *ptr;
   for (int t = topss; t >= 0; t--)
-	if ((ptr = getsym_i(t, sym_name)) != NULL)
+	if ((ptr = getsym_i(t, sym_name)) != NULL){
+    fprintf(stderr, "Found %s in %d\n", sym_name, ptr->val);
 	  return ptr;
+  }
   return 0;
 }
 
@@ -97,6 +99,13 @@ symrec *deltab() {
   return SymStack[--topss].syms;
 }
 
+void cleartab() {
+  while (topss) {
+  deltab();
+  }
+  delsymtab(SymStack[0]);
+  SymStack[0].syms = NULL;
+}
 
 int lastval() {
   return SymStack[topss].base;

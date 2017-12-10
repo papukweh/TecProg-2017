@@ -1,9 +1,11 @@
-for(x=0; x<2; x++){
-	for(y=0; y<2; y++){
-		print(y);
-	}
+i = 5;
+
+def papu(){
+	new i = 1;
+	a = 2+i;
+	b = 3;
+	print(a+b);
 }
 
-for(z=0; z<2; z++){
-	print(25);
-}
+papu();
+print(i);

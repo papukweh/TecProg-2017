@@ -1,11 +1,11 @@
 x = 10;
 while (x > 0){
 	x = x-1;
-	move(SE);
-	y = ver(SE);
+	move(NW);
+	y = ver(NW);
 	y = y.cristais;
 	if (y > 0){
-		recolhe(SE);
+		recolhe(NW);
 	}
 }
 

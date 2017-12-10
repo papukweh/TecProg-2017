@@ -16,7 +16,7 @@
  * debug do robo. Ela imprime, por
  * exemplo, os estado de ambas as pilhas
  */
-//#define DEBUG
+#define DEBUG
 #ifdef DEBUG
     #define D(X) X
 #else
@@ -35,7 +35,7 @@
  * Enumerador para as instrucoes da
  * maquina
  */
-extern char *CODES[] = {
+ char *CODES[] = {
     "PUSH",
     "POP",
     "DUP",
@@ -60,8 +60,6 @@ extern char *CODES[] = {
     "RCE",
     "ENTRY",
     "LEAVE",
-    "SAVE",
-    "REST",
     "END",
     "PRN",
     "SYS",
@@ -75,7 +73,7 @@ extern char *CODES[] = {
  * interpretacao da maquina virtual (ou,
  * chamadas de sistema)
  */
-extern char *Chamadas[] = {
+char *Chamadas[] = {
     "MOV",
     "REC",
     "DEP",
@@ -90,7 +88,7 @@ extern char *Chamadas[] = {
  * Enumerador para as direcoes relativas ao robo
  * CN é onde o robo se encontra (centro)
  */
-extern char *Direcao[] = {
+char *Direcao[] = {
     "N",
     "NE",
     "SE",
@@ -106,7 +104,7 @@ extern char *Direcao[] = {
  * pode apresentar. O tipo do terreno esta 
  * relacionado ao custo de transpo-lo
  */
-extern char *Terrenos[] = {
+char *Terrenos[] = {
     "GRAMA",
     "ESTRADA",
     "MONTANHA",
@@ -118,7 +116,7 @@ extern char *Terrenos[] = {
  * Enumerador para os tipos de valores que
  * um operando pode apresentar
  */
-extern  char *Tipos[] = {
+char *Tipos[] = {
     "NUM",
     "ACAO",
     "VAR",
@@ -139,10 +137,10 @@ static void Erro(char *msg) {
  * Imprime mensagem na saida de erro e interrompe
  * o programa, com codigo de saida
  */
-static void Fatal(char *msg, int cod) {
-    Erro(msg);
-    exit(cod);
-}
+// static void Fatal(char *msg, int cod) {
+//     Erro(msg);
+//     exit(cod);
+// }
 
 /*
  * Instancia, inicializa e retorna maquina
@@ -466,6 +464,7 @@ void exec_maquina(Maquina *m, int n) {
                 empilha(pil, exec->val[rbp + arg.valor.n]);
                 break;
             case END:
+                ip = 0;
                 return;
             case PRN:
                 if(pil->topo == 0) break;
@@ -551,6 +550,7 @@ OPERANDO cria_operando(Tipo t, int arg){
     case TERRENO:
         a.valor.terr = arg;
         break;
+    default: ;
     }
     return a;
 }

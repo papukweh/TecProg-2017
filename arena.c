@@ -5,6 +5,7 @@
 #include <time.h>
 #include "arena.h"
 #include "maq.h"
+#include "compila.tab.h"
 
 
 /*
@@ -31,9 +32,9 @@
  * "MAX_INSTR" e o numero de instrucoes que podem
  *     ser executadas durante um turno
  */
-#define MAX_ROBOS 5
-#define MAX_TURNOS 100
-#define MAX_TIME 2
+#define MAX_ROBOS 1
+#define MAX_TURNOS 200
+#define MAX_TIME 1
 #define MAX_INSTR 50
 
 /*
@@ -67,7 +68,6 @@ static char *robs[] = {"rob0", "rob1", "rob2", "rob3", "rob4",
 static int positions[MAX_ROBOS*MAX_TIME*2];
 static Arena arena;
 static int ids=0;
-//static int instrSize=0;
 static INSTR prog[2000];
 FILE *display;
 
@@ -654,6 +654,8 @@ int Sistema(int id){
                     return 1;
                 }
                 else return -1;
+
+            default: ;
         }
     }
     return -1;

@@ -74,21 +74,22 @@ extern int yydebug;
     FECHA = 284,
     SEP = 285,
     PONTO = 286,
-    IF = 287,
-    ELSE = 288,
-    WHILE = 289,
-    FOR = 290,
-    FUNC = 291,
-    PRINT = 292,
-    VERt = 293,
-    MOVt = 294,
-    RECt = 295,
-    DEPt = 296,
-    ATQt = 297,
-    JGCt = 298,
-    KMKt = 299,
-    NEG = 300,
-    PWR = 301
+    NEW = 287,
+    IF = 288,
+    ELSE = 289,
+    WHILE = 290,
+    FOR = 291,
+    FUNC = 292,
+    PRINT = 293,
+    VERt = 294,
+    MOVt = 295,
+    RECt = 296,
+    DEPt = 297,
+    ATQt = 298,
+    JGCt = 299,
+    KMKt = 300,
+    NEG = 301,
+    PWR = 302
   };
 #endif
 
@@ -97,12 +98,11 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 33 "compila.y" /* yacc.c:1909  */
+#line 30 "compila.y" /* yacc.c:1909  */
 
 	int num;
 	double val;
 	Dir direc;
-	/* symrec *cod; */
 	char cod[30];
 
 #line 109 "compila.tab.h" /* yacc.c:1909  */

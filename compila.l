@@ -59,6 +59,7 @@ deposita {return DEPt; }
 joga_cristal {return JGCt;}
 kamikaze {return KMKt;}
 ver {return VERt;}
+new {return NEW; }
 {DIRECAO} { yylval.direc = acha_dir(yytext); return DIRECAOt;}
 {ATRIBUTO} {yylval.num = acha_atr(yytext); return ATRt; }
 

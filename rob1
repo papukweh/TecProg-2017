@@ -1,12 +1,14 @@
-def f(x,y){
-  local = 42;
-  kamikaze();
-
-  while (x < 10) {
-	y = y * 3;
-	x = x + g(1);
-  }
-  return(x+y);
+x = 10;
+while (x > 0){
+	x = x-1;
+	move(SE);
+	y = ver(SE);
+	y = y.cristais;
+	if (y > 0){
+		recolhe(SE);
+	}
 }
 
-f(local, 0);
+deposita(N);
+joga_cristal(CN);
+move(NW);

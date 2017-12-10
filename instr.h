@@ -27,8 +27,6 @@ typedef enum {
     RCE,        //Empilha elemento de exec[rbp+arg] na pilha de dados
     ENTRY,
     LEAVE,
-    SAVE,       //Salva o valor de rbp
-    REST,       //Restaura o valor de rbp
     END,        //Finaliza a execução do programa
     PRN,        //Desempilha e imprime o elemento da pilha de dados
     SYS,        //Chamada para o sistema (arena)
