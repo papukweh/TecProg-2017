@@ -33,9 +33,9 @@
  *     ser executadas durante um turno
  */
 #define MAX_ROBOS 5
-#define MAX_TURNOS 50
+#define MAX_TURNOS 100
 #define MAX_TIME 2
-#define MAX_INSTR 25
+#define MAX_INSTR 50
 
 /*
  * Struct da Arena.

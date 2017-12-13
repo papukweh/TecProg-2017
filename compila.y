@@ -125,8 +125,8 @@ Expr: NUMt {  AddInstr(PUSH, (OPERANDO) {NUM, $1});}
 			if (s==0) s = putsym($1); 
 			AddInstr(STO, (OPERANDO) {NUM, mem + s->val});
  		 	}
- 	| Resposta
-	| Direcao	 	
+ 	| Resposta	 
+ 	| Direcao	
  	| Checa_dir
  	| Terreno
 	| ID PONTO ATRt  { 

@@ -104,11 +104,11 @@ char *Direcao[] = {
  * relacionado ao custo de transpo-lo
  */
 char *Terrenos[] = {
-    "GRAMA",
     "ESTRADA",
-    "MONTANHA",
-    "AGUA",
+    "GRAMA",
     "AREIA",
+    "AGUA",
+    "MONTANHA",
 };
 
 /*
@@ -360,12 +360,12 @@ void exec_maquina(Maquina *m, int n) {
                 if(pil->topo < 2) break;
                 tmpop = desempilha(pil);
                 tmpop2 = desempilha(pil);
-                if(tmpop.t == NUM && tmpop2.t == NUM){
+
                     if (tmpop.valor.n < tmpop2.valor.n)
                         empilha(pil, cria_operando(NUM, 1));
                     else
                         empilha(pil, cria_operando(NUM, 0));
-                }
+                
                 break;
             //Desempilha dois operandos da pilha de dados, caso o primeiro seja
             //menor ou igual ao segundo, empilha '1', caso contrario, empilha '0'
@@ -373,12 +373,12 @@ void exec_maquina(Maquina *m, int n) {
                 if(pil->topo < 2) break;
                 tmpop = desempilha(pil);
                 tmpop2 = desempilha(pil);
-                if(tmpop.t == NUM && tmpop2.t == NUM){
+
                     if (tmpop.valor.n <= tmpop2.valor.n)
                         empilha(pil, cria_operando(NUM, 1));
                     else
                         empilha(pil, cria_operando(NUM, 0));
-                }
+                
                 break;
             //Desempilha dois operandos da pilha de dados, caso o primeiro seja
             //maior que o segundo, empilha '1', caso contrario, empilha '0'
@@ -386,12 +386,12 @@ void exec_maquina(Maquina *m, int n) {
                 if(pil->topo < 2) break;
                 tmpop = desempilha(pil);
                 tmpop2 = desempilha(pil);
-                if(tmpop.t == NUM && tmpop2.t == NUM){
+                
                     if (tmpop.valor.n > tmpop2.valor.n)
                         empilha(pil, cria_operando(NUM, 1));
                     else
                         empilha(pil, cria_operando(NUM, 0));
-                }
+                
                 break;
             //Desempilha dois operandos da pilha de dados, caso o primeiro seja
             //maior ou igual ao segundo, empilha '1', caso contrario, empilha '0'
@@ -399,12 +399,12 @@ void exec_maquina(Maquina *m, int n) {
                 if(pil->topo < 2) break;
                 tmpop = desempilha(pil);
                 tmpop2 = desempilha(pil);
-                if(tmpop.t == NUM && tmpop2.t == NUM){
+                
                     if (tmpop.valor.n >= tmpop2.valor.n)
                         empilha(pil, cria_operando(NUM, 1));
                     else
                         empilha(pil, cria_operando(NUM, 0));
-                }
+                
                 break;
             //Desempilha dois operandos da pilha de dados, caso sejam diferentes,
             //empilha '1' e caso sejam diferentes, empilha '0'
@@ -412,12 +412,12 @@ void exec_maquina(Maquina *m, int n) {
                 if(pil->topo < 2) break;
                 tmpop = desempilha(pil);
                 tmpop2 = desempilha(pil);
-                if(tmpop.t == NUM && tmpop2.t == NUM){
+                
                     if (tmpop.valor.n != tmpop2.valor.n)
                         empilha(pil, cria_operando(NUM, 1));
                     else
                         empilha(pil, cria_operando(NUM, 0));
-                }
+                
                 break;
             //Troca o sinal do topo da pilha
             case NEG:

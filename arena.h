@@ -8,11 +8,11 @@
  * relacionado ao custo de transpo-lo
  */
 typedef enum {
-    GRAMA,      //Dificuldade de percorrer: 1
     ESTRADA,    //Dificuldade de percorrer: 0
-    MONTANHA,   //Dificuldade de percorrer: 4
-    AGUA,       //Dificuldade de percorrer: 3
+    GRAMA,      //Dificuldade de percorrer: 1
     AREIA,      //Dificuldade de percorrer: 2
+    AGUA,       //Dificuldade de percorrer: 3
+    MONTANHA,   //Dificuldade de percorrer: 4
 } Terreno;
 
 

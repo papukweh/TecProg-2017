@@ -1,8 +1,32 @@
-x = 10;
-while(x > 0){
-	print(x);
-	x--;
+def converte(temp){
+	if(temp == 1){
+		return N;
+	}
+	if(temp == 2){
+		return NE;
+	}
+	if(temp == 3){
+		return SE;
+	}
+	if(temp == 4){
+		return S;
+	}
+	if(temp == 5){
+		return SW;
+	}
+	if(temp == 6){
+		return NW;
+	}
 }
+
+x = converte(1);
+move(x);
+x = 2;
+move(x);
+move(x);
+move(x);
+move(x);
+
 # def melhor_terreno(a, b){
 # 	x = 0;
 # 	y = 0;

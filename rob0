@@ -1,29 +1,34 @@
-def defende(){
-	ver();
-	s = checa(S);
-	se = checa(SE);
+# def defende(){
+# 	ver();
+# 	s = checa(S);
+# 	se = checa(SE);
 
-	if (s.cristais > 0){
-		recolhe(S);
-	}
+# 	if (s.cristais > 0){
+# 		recolhe(S);
+# 	}
 
-	if (sw.ocupado > 4){
-		ataca(SE);
-	}
+# 	if (sw.ocupado > 4){
+# 		ataca(SE);
+# 	}
 
-	if (sw.ocupado > 4){
-		if (s.ocupado > 4){
-			kamikaze();
-		}
-	}
-}
+# 	if (sw.ocupado > 4){
+# 		if (s.ocupado > 4){
+# 			kamikaze();
+# 		}
+# 	}
+# }
 
-x = resposta();
-while(x < 1){
-	move(S);
-	x = resposta();
-}
+# x = resposta();
+# while(x < 1){
+# 	move(S);
+# 	x = resposta();
+# }
 
-while (true){
-	defende();
-}
+# while (true){
+# 	defende();
+# }
+
+x = 5;
+print(x);
+x = 1 - x;
+print(x);
