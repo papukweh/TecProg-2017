@@ -54,10 +54,9 @@
     "LT",
     "LE",
     "DIFF",
+    "NEG",
     "STO",
     "RCL",
-    "STL",
-    "RCE",
     "ENTRY",
     "LEAVE",
     "END",
@@ -128,7 +127,7 @@ char *Tipos[] = {
 /*
  * Imprime mensagem na saida de erro
  */
-static void Erro(char *msg) {
+void Erro(char *msg) {
     fprintf(stderr, "%s\n", msg);
 }
 
@@ -137,10 +136,10 @@ static void Erro(char *msg) {
  * Imprime mensagem na saida de erro e interrompe
  * o programa, com codigo de saida
  */
-// static void Fatal(char *msg, int cod) {
-//     Erro(msg);
-//     exit(cod);
-// }
+void Fatal(char *msg, int cod) {
+    Erro(msg);
+    exit(cod);
+}
 
 /*
  * Instancia, inicializa e retorna maquina
@@ -193,6 +192,10 @@ void destroi_maquina(Maquina m) {
     free(m.prog);
 }
 
+/*
+ * Cria um novo frame, colocando
+ * o rbp na pilha de retornos
+ */
 int new_frame(Maquina *m, int n) {
     int ibc = rbp;
     if (ibc < MAXFRAMES-1) {
@@ -202,6 +205,10 @@ int new_frame(Maquina *m, int n) {
     return -1;
 }
 
+/*
+ * Deleta um frame, decrementando
+ * o rbp
+ */
 int del_frame(Maquina *m) {
     if (rbp > 0) return --rbp;
     return -1;
@@ -259,7 +266,7 @@ void exec_maquina(Maquina *m, int n) {
                     tmpop = desempilha(pil);
                     tmpop2 = desempilha(pil);
                     if (tmpop.t==NUM && tmpop2.t==NUM)
-                            empilha(pil, cria_operando(NUM, tmpop.valor.n-tmpop2.valor.n));
+                            empilha(pil, cria_operando(NUM, tmpop2.valor.n-tmpop.valor.n));
                         else {
                             empilha(pil, tmpop2);
                             empilha(pil, tmpop);
@@ -412,60 +419,66 @@ void exec_maquina(Maquina *m, int n) {
                         empilha(pil, cria_operando(NUM, 0));
                 }
                 break;
-
+            //Troca o sinal do topo da pilha
+            case NEG:
+                if(pil->topo < 1) break;
+                tmpop = desempilha(pil);
+                if (tmpop.t == NUM)
+                    empilha(pil, cria_operando(NUM, -tmpop.valor.n));
+                else
+                    Erro("Operação inválida");
+                break;
+            // Cria um novo frame iniciando na posição arg
             case ENTRY:
                 if (arg.t==NUM)
                     new_frame(m, arg.valor.n);
                 break;
-              
+            // Deleta um frame  
             case LEAVE:
                 del_frame(m);
                 break;
-
+            // Empilha o argumento na pilha de dados
             case PUSH:
                 empilha(pil, arg);
                 break;
+            // Desempilha um operando da pilha de dados
             case POP:
                 if(pil->topo == 0) break;
                 desempilha(pil);
                 break;
+            // Duplica o topo da pilha
             case DUP:
                 if(pil->topo == 0) break;
                 tmpop = desempilha(pil);
                 empilha(pil, tmpop);
                 empilha(pil, tmpop);
                 break;
+            // Store: desempilha um operando da pilha de dados
+            // e armazena na posição de memória dada por arg
             case STO:
                 if(pil->topo == 0) break;
                 if(arg.t!=NUM) break;
                 m->Mem[arg.valor.n] = desempilha(pil);
                 break;
+            // Recall: empilha um operando na pilha de dados
+            // localizado na memória na posição arg   
             case RCL:
                 if(arg.t!=NUM) break;
                 empilha(pil,m->Mem[arg.valor.n]);
                 break;
+            // Recall Memory: desempilha um operando da pilha de
+            // dados e usa seu valor para buscar outro operando na
+            // memória, empilhando-o na pilha de dados
             case RCM:
                 if(pil->topo == 0) break;
                 tmpop = desempilha(pil);
                 if(tmpop.t!=NUM) break;
                 empilha(pil, m->Mem[tmpop.valor.n]);
                 break;
-            //Remove o primeiro elemento da pilha de dados e armazena
-            // no vetor de variáveis locais (posição rbp+argumento)
-            case STL:
-                if(pil->topo == 0) break;
-                if(arg.t!=NUM) break;
-                exec->val[rbp + arg.valor.n] = desempilha(pil);
-                break;
-            //Empilha o elemento do vetor de variáveis locais na posição
-            // rbp+argumento na pilha de dados
-            case RCE:
-                if(arg.t!=NUM) break;
-                empilha(pil, exec->val[rbp + arg.valor.n]);
-                break;
+            // Fim do programa: robo torna-se inativo
             case END:
-                ip = 0;
                 return;
+            // Imprime o topo da pilha
             case PRN:
                 if(pil->topo == 0) break;
                 imprime_op(desempilha(pil));
@@ -479,10 +492,7 @@ void exec_maquina(Maquina *m, int n) {
             //perde a vez
             case SYS: 
                 resposta = cria_operando(NUM, Sistema(id));
-                m->Mem[10] = m->Mem[9];
-                m->Mem[9] = m->Mem[8];
-                m->Mem[8] = m->Mem[7];
-                m->Mem[7] = resposta;
+                m->Mem[8] = resposta;
                 i=n;
                 break;
             //Desempilha um tile e empilha a informacao desejada sobre ele
@@ -593,7 +603,7 @@ void imprime_op(OPERANDO arg){
 
 /*
  * Funcao auxiliar que imprime as primeiras
- * 10 posicoes da memoria do robo
+ * 15 posicoes da memoria do robo
  */
 void imprime_mem(Maquina *m){
     printf("[");

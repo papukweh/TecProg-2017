@@ -21,12 +21,11 @@ typedef enum {
     LT,         //Compara os dois elementos do topo da pilha de dados (<)
     LE,         //Compara os dois elementos do topo da pilha de dados (<=)
     DIFF,       //Compara os dois elementos do topo da pilha de dados (!=)
+    NEG,        //Troca o sinal do topo da pilha
     STO,        //Desempilha elemento da pilha de dados e armazena em mem[arg]
     RCL,        //Empilha elemento de mem[arg] na pilha de dados
-    STL,        //Desempilha elemento da pilha de dados e armazena em exec[rbp+arg]
-    RCE,        //Empilha elemento de exec[rbp+arg] na pilha de dados
-    ENTRY,
-    LEAVE,
+    ENTRY,      //Inicia um novo frame
+    LEAVE,      //Deleta um frame
     END,        //Finaliza a execução do programa
     PRN,        //Desempilha e imprime o elemento da pilha de dados
     SYS,        //Chamada para o sistema (arena)

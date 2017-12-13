@@ -32,10 +32,10 @@
  * "MAX_INSTR" e o numero de instrucoes que podem
  *     ser executadas durante um turno
  */
-#define MAX_ROBOS 1
-#define MAX_TURNOS 200
-#define MAX_TIME 1
-#define MAX_INSTR 50
+#define MAX_ROBOS 5
+#define MAX_TURNOS 2
+#define MAX_TIME 2
+#define MAX_INSTR 25
 
 /*
  * Struct da Arena.
@@ -242,7 +242,7 @@ void insereExercito(){
 
         FILE* p = stdin;
         p = fopen(robs[i],"r");    
-        int instrSize = compilador(p, prog);
+        int instrSize = compilador(p, prog, ids);
 
         arena.robots[i] = cria_maquina(prog, instrSize, ids, positions[k], positions[j], 100, x);
 
@@ -302,21 +302,23 @@ void Atualiza(){
         // Condições de parada:
         // No momento, para fins de debug, basta que um robo deposite um cristal
         // na base inimiga para finalizar o jogo
-        if (arena.mapa.tiles[1][0].cristais >= 1 || arena.mapa.tiles[18][11].cristais >= 1) {
-            if (arena.mapa.tiles[1][0].cristais >= 1)
+        if (arena.mapa.tiles[1][0].cristais >= 5 || arena.mapa.tiles[18][11].cristais >= 5) {
+            if (arena.mapa.tiles[1][0].cristais >= 5){
                 printf("Fim de jogo! O time vermelho ganhou, yay!\n");
-            else
+                fprintf(display, "fim 1\n");
+            }
+            else{
                 printf("Fim de jogo! O time azul ganhou, yay!\n");
-            fprintf(display, "fim\n");
+                fprintf(display, "fim 2\n");
+            }
             fflush(display);
             break;
         }
 
         // Numero maximo de turnos atingido
         else if (j == MAX_TURNOS-1){
-            fprintf(display, "stop\n");
             printf("Fim de jogo (por turnos)\n");
-            fprintf(display, "fim\n");
+            fprintf(display, "fim 3\n");
             fflush(display);
             break;
         }
@@ -456,6 +458,7 @@ int Sistema(int id){
         D(printf("\nRobô %d se explodiu!\n", id));
         D(printf("\nRobô %d agora tem %d de vida restante!\n", id, arena.robots[id].vida));
         fprintf(display, "log %d %d %d %d %d %d %d %d\n", id, -1,-1,-1,-1,-1, 6, -1);
+        // fprintf(display, "sfx 0\n");
 
         // Incrementa o contador do robo em 5 e atualiza seu sprite
         // na arena para refletir sua condicao ("morte")
@@ -618,10 +621,12 @@ int Sistema(int id){
                 if(arena.mapa.tiles[posx][posy].ocupado > -1){
                     int eid = arena.mapa.tiles[posx][posy].ocupado;
                     if (arena.robots[eid].vida > 0) {
-                        arena.robots[eid].vida -= 100;
+                        arena.robots[eid].vida -= 50;
                         D(printf("\nRobô %d atacou o robô %d\n", id, eid));
                         D(printf("\nRobô %d agora tem %d de vida restante!\n", eid, arena.robots[eid].vida));
                         fprintf(display, "log %d %d %d %d %d %d %d %d\n", id, eid,-1,-1,-1,-1, 1, -1);
+                        // fprintf(display, "anim 0 %d %d %d %d %d\n", id, old_posx, old_posy, posx, posy);
+                        // fprintf(display, "sfx 2\n");
 
                         if (arena.robots[eid].vida <= 0){
                             arena.robots[eid].cont = 5;
@@ -651,6 +656,7 @@ int Sistema(int id){
                         D(printf("\nRobô %d derrubou todos os seus cristais!\n", eid));
                     }
                     fprintf(display, "log %d %d %d %d %d %d %d %d\n", id, eid,-1,-1,-1,-1, 4, 5);
+                    // fprintf(display, "sfx 1\n");
                     return 1;
                 }
                 else return -1;

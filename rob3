@@ -2,7 +2,8 @@ x = 10;
 while (x > 0){
 	x = x-1;
 	move(SE);
-	y = ver(SE);
+	ver();
+	y = checa(SE);
 	y = y.cristais;
 	if (y > 0){
 		recolhe(SE);

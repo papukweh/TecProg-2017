@@ -1,11 +1,6 @@
-i = 5;
-
-def papu(){
-	new i = 1;
-	a = 2+i;
-	b = 3;
-	print(a+b);
+for (i = 6; i > 0; i/=2){
+	move(S);
+	if (resposta() == -1){
+		ataca(S);
+	}
 }
-
-papu();
-print(i);

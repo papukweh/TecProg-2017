@@ -3,25 +3,6 @@
 #include "pilha.h"
 #include "maq.h"
 
-
-/*
- * Imprime mensagem na saida de erro
- */
-static void Erro(char *msg) {
-    fprintf(stderr,"%s\n", msg);
-}
-
-
-/*
- * Imprime mensagem na saida de erro e interrompe
- * o programa, com codigo de saida
- */
-static void Fatal(char *msg, int cod) {
-    Erro(msg);
-    exit(cod);
-}
-
-
 /*
  * Retorna uma instancia de uma pilha
  */
@@ -38,10 +19,8 @@ Pilha cria_pilha() {
  *     mas nao interrompe a execucao
  */
 void empilha(Pilha *p, OPERANDO op) {
-    // printf("TO EMPILHANDO ESSA PORRA:");
-    // imprime_op(op);
     if (p->topo < PILMAX)
-    p->val[p->topo++] = op;
+        p->val[p->topo++] = op;
     else Erro("Pilha cheia");
 }
 
@@ -53,10 +32,10 @@ void empilha(Pilha *p, OPERANDO op) {
  */
 OPERANDO desempilha(Pilha *p) {
     if (p->topo > 0)
-    return p->val[--p->topo];
+        return p->val[--p->topo];
     else {
-    Erro("Pilha vazia");
-    return cria_operando(NUM, -1);
+        Erro("Pilha vazia");
+        return cria_operando(NUM, -1);
     }
 }
 

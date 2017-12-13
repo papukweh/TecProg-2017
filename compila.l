@@ -50,15 +50,18 @@ if      { return IF; }
 else	{return ELSE; }
 while	{ return WHILE; }
 for 	{ return FOR;}
+true|True	{return TRUEt; }
 func|def { return FUNC; }
 print   { return PRINT; }
 move	{ return MOVt; }
-ataca	{ return ATQt; } //ataca(ne)
-recolhe	{ return RECt; } //recolhe(nw);
+ataca	{ return ATQt; } 
+recolhe	{ return RECt; } 
 deposita {return DEPt; }
 joga_cristal {return JGCt;}
 kamikaze {return KMKt;}
 ver {return VERt;}
+checa {return VERt2; }
+resposta {return RESPt; }
 new {return NEW; }
 {DIRECAO} { yylval.direc = acha_dir(yytext); return DIRECAOt;}
 {ATRIBUTO} {yylval.num = acha_atr(yytext); return ATRt; }

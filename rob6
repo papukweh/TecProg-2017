@@ -7,7 +7,8 @@ x = 4;
 while (x > 0){
 	x = x-1;
 	move(NW);
-	y = ver(NW);
+	ver();
+	y = checa(NW);
 	y = y.cristais;
 	if (y > 0){
 		recolhe(NW);
@@ -16,7 +17,7 @@ while (x > 0){
 
 x = 3;
 while (x > 0){
-	x = x -1;
+	x = x-1;
 	move(N);
 	joga_cristal(S);
 }

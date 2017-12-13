@@ -1,14 +1,1 @@
-x = 10;
-while (x > 0){
-	x = x-1;
-	move(SE);
-	y = ver(SE);
-	y = y.cristais;
-	if (y > 0){
-		recolhe(SE);
-	}
-}
-
-deposita(N);
-joga_cristal(CN);
-move(NW);
+x = 5;

@@ -105,3 +105,14 @@ void imprime_op(OPERANDO arg);
  * 10 posicoes da memoria do robo
  */
 void imprime_mem(Maquina *m);
+
+/*
+ * Imprime mensagem na saida de erro
+ */
+void Erro(char *msg);
+
+/*
+ * Imprime mensagem na saida de erro e interrompe
+ * o programa, com codigo de saida
+ */
+void Fatal(char *msg, int cod);
