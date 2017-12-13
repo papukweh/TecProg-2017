@@ -134,6 +134,7 @@ Expr: NUMt {  AddInstr(PUSH, (OPERANDO) {NUM, $1});}
 	  		AddInstr(RCL, (OPERANDO) {NUM, mem + s->val}); 
 	  		AddInstr(ATR, (OPERANDO) {NUM, $3}); 
   	 		} 
+	| Checa_dir PONTO ATRt { AddInstr(ATR, (OPERANDO) {NUM, $3}); } 
 	| Chamada 
     | Expr ADDt Expr { AddInstr(ADD,  (OPERANDO) {NUM, 0});}
 	| Expr SUBt Expr { AddInstr(SUB,  (OPERANDO) {NUM, 0});}
@@ -324,7 +325,6 @@ Sis: Mov
 	| Jgc
 	| Kmk
 	| Ver
-	| Resposta
 
 // Uso: move(direcao) - Ex: move(NW)
 Mov: MOVt OPEN  Direcao CLOSE { 
@@ -372,6 +372,7 @@ Kmk: KMKt OPEN  CLOSE {
 
 // Empilha um operando do tipo VAR (direcao)
 Direcao: DIRECAOt { AddInstr(PUSH, (OPERANDO) {VAR, $1}); }
+		 | ID
 
 // Empilha um operando do tipo NUM que representa uma direcao:
 // usada em conjunto com o RCM 

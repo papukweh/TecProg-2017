@@ -11,5 +11,4 @@ while (x > 0){
 }
 
 deposita(N);
-joga_cristal(CN);
 move(NW);

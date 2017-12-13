@@ -16,7 +16,7 @@
  * debug do robo. Ela imprime, por
  * exemplo, os estado de ambas as pilhas
  */
-#define DEBUG
+//#define DEBUG
 #ifdef DEBUG
     #define D(X) X
 #else

@@ -1,15 +1,54 @@
 x = 10;
-while (x > 0){
-	x = x-1;
-	move(NW);
-	ver();
-	y = checa(NW);
-	y = y.cristais;
-	if (y > 0){
-		recolhe(NW);
-	}
+while(x > 0){
+	print(x);
+	x--;
 }
+# def melhor_terreno(a, b){
+# 	x = 0;
+# 	y = 0;
 
-deposita(N);
-joga_cristal(CN);
-move(NW);
+# 	if (a.terreno == estrada){
+# 		if (a.ocupado < 0){
+# 			return a;
+# 		}
+# 	}
+
+# 	if (b.terreno == estrada){
+# 		if (b.ocupado < 0){
+# 			return b;
+# 		}
+# 	}
+
+# 	if (a.terreno == grama){
+# 		if (a.ocupado < 0){
+# 			return a;
+# 		}
+# 	}
+
+# 	if (b.terreno == grama){
+# 		if (b.ocupado < 0){
+# 			return b;
+# 		}
+# 	}
+
+# 	if (a.terreno == areia){
+# 		if (a.ocupado < 0){
+# 			return a;
+# 		}
+# 	}
+
+# 	if (b.terreno == areia){
+# 		if (b.ocupado < 0){
+# 			return b;
+# 		}
+# 	}
+
+# 	return a;
+# }
+
+# while(true){
+# 	n = N;
+# 	nw = NW;
+# 	x = melhor_terreno(N, NW);
+# 	move(x);
+# }

@@ -7,12 +7,13 @@ from math import *
 
 pg.init()                                 # inicialização do sistema
 myfont = pg.font.SysFont("monospace", 16, bold=True) # setando a fonte
-logfont = pg.font.SysFont("monospace", 12, bold=True)
-sysfont = pg.font.SysFont("monospace", 54, bold=True)
-sys2font = pg.font.SysFont("monospace", 36, bold=True)
-boom = pg.mixer.Sound('Bomb2.wav')
-clink = pg.mixer.Sound('Bellring.wav')
-clank = pg.mixer.Sound('Bang.wav')
+logfont = pg.font.SysFont("monospace", 12, bold=True) # fonte do log
+sysfont = pg.font.SysFont("monospace", 54, bold=True) # fonte fim de jogo 
+sys2font = pg.font.SysFont("monospace", 36, bold=True) # fonte vencedor
+
+# boom = pg.mixer.Sound('Bomb2.wav')
+# clink = pg.mixer.Sound('Bellring.wav')
+# clank = pg.mixer.Sound('Bang.wav')
 
 # altura e largura da arena, em células
 H, W = 40,24
@@ -20,7 +21,7 @@ H, W = 40,24
 #(1,0) e (18,11) = bases
 #time1 = (0,0); (0,1); (2,0); (3,1); (3,0);
 #time2 = (19, 11); (17,11); (16,11); (19, 10); (17,10)
-#1260 x 770
+#1260 x 770 = resolucao
 # largura da célula
 l = 25
 # altura da célula
@@ -147,6 +148,7 @@ class cell:
         scr.blit(s.image, s.rect)
 
 
+# Variaveis usadas para representar o log
 pos=0
 IDG = [0,1,2,3,4,5]
 
@@ -192,7 +194,6 @@ baseb= pg.image.load("baseb.png")
 erase = pg.image.load("erase.png")
 wrench = pg.image.load("wrench.png")
 label = myfont.render("Base", 2, (0,0,0))
-
 log = logfont.render((LOG_TEXTOS[9]), 2, (255,255,255))
 
 # Define o retângulo cinza sobre o qual os elementos da UI serão desenhados
@@ -205,8 +206,7 @@ log_cor = (0, 0, 0)
 log_pontos = ( (wpx -10, hpx-10) , (wpx-190, hpx-10) , (wpx-190, 10), (wpx-10, 10) )
 pg.draw.polygon(scr, log_cor, log_pontos, 0)
 
-log = logfont.render((LOG_TEXTOS[9]), 2, (255,255,255))
-
+# Cria as posicoes possiveis pras mensagens do log
 for i in range(1, 22):
     if i%2 == 0:
         log_pos.append((log_pos[i-1][0], log_pos[i-1][1] + 40))
@@ -297,22 +297,27 @@ for line in fileinput.input():
         pg.time.wait(30)
         continue
 
+    # escreve as acoes no log de acordo com os códigos recebidos
     if r[0] == 'log':
         if pos >= 22:
             pos = 0
         IDG[0], IDG[1], IDG[2], IDG[3], IDG[4], IDG[5], code1, code2 = list(map(int, r[1:]))
         towrite = LOG_TEXTOS[code1]
 
+        # pertence ao time vermelho
         if IDG[0] > 4:
             cor = (200, 10, 10)
+        # pertence ao time azul
         else:
             cor = (50, 50, 200)
 
+        # troca os números pelos ids dos robôs em questão
         for i in range(5):
             if IDG[i] == -1:
                 break
             towrite = towrite.replace(str(i), str(IDG[i]))
 
+        # apaga a mensagem anterior e escreve
         log = logfont.render(towrite, 2, cor )
         scr.blit(erase, log_pos[pos])
         scr.blit(log, log_pos[pos])
@@ -328,6 +333,8 @@ for line in fileinput.input():
             log = logfont.render(towrite, 2, cor )
             scr.blit(erase, log_pos[pos])
             scr.blit(log, log_pos[pos])
+
+        # avança o ponteiro do log
         pos = pos+1
         continue
 
@@ -391,15 +398,20 @@ for line in fileinput.input():
         lotecris.draw(i, j)
         continue
 
-    # linha começando com 'stop': pausa o jogo por um tempo
+    # fim de jogo: imprime uma tela customizada para a vitória de cada time, assim
+    # como empates
     if r[0] == 'fim':
         i = int(r[1])
+
+        # mensagem genérica de fim de jogo
         fim = pg.image.load("fim.png")
         scr.blit(fim, (0,0))
         atu()
         text = sysfont.render("Fim de jogo!", 1, (255,255,255))
         scr.blit(text, (300, 50))
         atu()
+
+        # cria a tela de vitória do time vermelho
         if i == 1:
             win = sys2font.render("O time vermelho venceu!", 1, (200, 10, 10))
             scr.blit(robs[5].image, (285, 250))
@@ -409,7 +421,9 @@ for line in fileinput.input():
             scr.blit(robs[5].image, (685, 250))
             scr.blit(basea, (475,300))
             scr.blit(lotecris.image, (492.5, 315))
-            scr.blit(win, (250, 200))            
+            scr.blit(win, (250, 200))  
+
+        # cria a tela de vitória do time azul          
         elif i == 2:
             win = sys2font.render("O time azul venceu!", 1, (50, 50, 200))
             scr.blit(robs[0].image, (285, 250))
@@ -420,6 +434,8 @@ for line in fileinput.input():
             scr.blit(baseb, (475,300))
             scr.blit(lotecris.image, (492.5, 315))
             scr.blit(win, (250, 200))
+
+        # cria a tela de empate
         else:
             win = sys2font.render("Empate!", 1, (0, 0, 0))
             scr.blit(basea, (420,300))
@@ -432,6 +448,7 @@ for line in fileinput.input():
         pg.time.wait(5000)
         break
 
+    # Tentativa de usar sons: scrapped pois ficava uma cacofonia
     # if r[0] == 'sfx':
     #     i  =  int(r[1])
     #     if i == 0:
@@ -442,6 +459,7 @@ for line in fileinput.input():
     #         clank.play()
     #     continue
 
+    # Tentativa de usar animações: scrapped pois precisava ficar apagando
     # if r[0] == 'anim':
     #     tipo, ids, i, j, newi, newj = list(map(int, r[1:]))
     #     if tipo == 0:

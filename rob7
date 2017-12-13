@@ -1,15 +1,8 @@
-x = 10;
-while (x > 0){
-	x = x-1;
-	move(NW);
-	ver();
-	y = checa(NW);
-	y = y.cristais;
-	if (y > 0){
-		recolhe(NW);
-	}
-}
+ver();
 
-deposita(N);
-joga_cristal(CN);
-move(NW);
+x = checa(N).ocupado;
+x = 10;
+while(x > 0){
+	x--;
+	print(x);
+}

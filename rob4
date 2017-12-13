@@ -1,1 +1,31 @@
-return;
+counter = 0;
+while (True){
+	ver();
+	s = checa(S);
+	sw = checa(SW);
+	if (s.terreno == estrada){
+		move(S);
+	}
+	if (sw.terreno == estrada){
+		move(SW);
+	}
+	else{
+		move(S);
+	}
+
+	if (sw.ocupado > 4){
+		ataca(SW);
+	}
+
+	if (s.ocupado > 4){
+		ataca(S);
+	}
+
+	if (sw.base == 1){
+		deposita(SW);
+	}
+
+	if (counter < 5){
+		recolhe(S);
+	}
+}

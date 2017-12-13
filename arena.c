@@ -32,9 +32,9 @@
  * "MAX_INSTR" e o numero de instrucoes que podem
  *     ser executadas durante um turno
  */
-#define MAX_ROBOS 1
-#define MAX_TURNOS 20
-#define MAX_TIME 1
+#define MAX_ROBOS 5
+#define MAX_TURNOS 50
+#define MAX_TIME 2
 #define MAX_INSTR 25
 
 /*
@@ -549,7 +549,7 @@ int Sistema(int id){
         switch(instr.valor.ac){
             // Move o robo caso o tile nao esteja ocupado
             case MOV:
-                if(arena.mapa.tiles[posx][posy].ocupado == -1){
+                if(arena.mapa.tiles[posx][posy].ocupado == -1 && arena.mapa.tiles[posx][posy].base == 0){
                     arena.robots[id].position[0] = posx;
                     arena.robots[id].position[1] = posy;
                     arena.mapa.tiles[posx][posy].ocupado = id;

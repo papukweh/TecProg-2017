@@ -10,6 +10,72 @@ while (x > 0){
 	}
 }
 
-deposita(N);
-joga_cristal(CN);
-move(NW);
+def joga_onde_der(a,b,c,d,e,f){
+	
+	if (b.ocupado > 4){
+		joga_cristal(NW);
+	}
+
+	if (c.ocupado > 4){
+		joga_cristal(NE);
+	}
+
+	if (d.ocupado > 4){
+		joga_cristal(S);
+	}
+
+	if (e.ocupado > 4){
+		joga_cristal(SW);
+	}
+
+	if (f.ocupado > 4){
+		joga_cristal(SE);
+	}
+}
+
+def melhor_terreno(a, b){
+	x = 0;
+	y = 0;
+
+	if (a.terreno == estrada){
+		return a;
+	}
+
+	if (b.terreno == estrada){
+		return b;
+	}
+
+	if (a.terreno == grama){
+		return a;
+	}
+
+	if (b.terreno == grama){
+		return b;
+	}
+
+	if (a.terreno == areia){
+		return a;
+	}
+
+	if (b.terreno == areia){
+		return b;
+	}
+
+	return a;
+
+}
+
+while (true){
+	ver();
+	a = checa(N);
+	b = checa(NW);
+	c = checa(NE);
+	d = checa(S);
+	e = checa(SW);
+	f = checa(SE);
+
+	joga_onde_der(a,b,c,d,e,f);
+	g = melhor_terreno(a,f);
+	move(g);
+}
+
