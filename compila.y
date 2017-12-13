@@ -39,6 +39,7 @@ void AddInstr2(OpCode op, OPERANDO valor){
 	int num;
 	double val;
 	Dir direc;
+	Terreno terr;
 	char cod[30];
 }
 
@@ -46,6 +47,7 @@ void AddInstr2(OpCode op, OPERANDO valor){
 %token <val>  NUMt
 %token <cod> ID
 %token <direc> DIRECAOt
+%token <terr> TERRt
 %token ADDt SUBt MULt DIVt ASGN OPEN CLOSE RETt EOL
 %token ADDs SUBs MULs DIVs
 %token EQt NEt LTt LEt GTt GEt INCt DECt ABRE FECHA SEP PONTO NEW TRUEt RESPt
@@ -125,6 +127,7 @@ Expr: NUMt {  AddInstr(PUSH, (OPERANDO) {NUM, $1});}
  		 	}
  	| Resposta	 	
  	| Checa_dir
+ 	| Terreno
 	| ID PONTO ATRt  { 
 	        symrec *s = getsym($1); 
 	  		if (s==0) s = putsym($1);  
@@ -359,7 +362,7 @@ Ver: VERt OPEN CLOSE {
 									}
 
 // Uso: checa(direcao)
-Checa_dir: VERt2 OPEN Direcao CLOSE { AddInstr(RCM, (OPERANDO) {NUM, 0});}
+Checa_dir: VERt2 OPEN Direcao_esp CLOSE { AddInstr(RCM, (OPERANDO) {NUM, 0});}
 
 // Uso: kamikaze()
 Kmk: KMKt OPEN  CLOSE { 
@@ -378,6 +381,9 @@ Resposta: RESPt OPEN CLOSE {AddInstr(RCL, (OPERANDO) {NUM, 8}); }
 
 // Bloco: { comandos }
 Bloco: ABRE Comandos FECHA ;
+
+// Terrenos:
+Terreno: TERRt {AddInstr(PUSH, (OPERANDO) {TERRENO, $1}); }
 
 // Comandos: Sequência de comando(s)
 Comandos: Comando 

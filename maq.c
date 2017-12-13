@@ -347,12 +347,12 @@ void exec_maquina(Maquina *m, int n) {
                 if(pil->topo < 2) break;
                 tmpop = desempilha(pil);
                 tmpop2 = desempilha(pil);
-                if(tmpop.t == NUM && tmpop2.t == NUM){
-                    if (tmpop.valor.n == tmpop2.valor.n)
-                        empilha(pil, cria_operando(NUM, 1));
-                    else
-                        empilha(pil, cria_operando(NUM, 0));
-                }
+                
+                if (tmpop.valor.n == tmpop2.valor.n)
+                    empilha(pil, cria_operando(NUM, 1));
+                else
+                    empilha(pil, cria_operando(NUM, 0));
+                
                 break;
             //Desempilha dois operandos da pilha de dados, caso o primeiro seja
             //menor que o segundo, empilha '1', caso contrario, empilha '0'

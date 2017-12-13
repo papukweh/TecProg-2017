@@ -1,5 +1,6 @@
 DIRECAO [N|S][E|W]?|CN
 ATRIBUTO terreno|cristais|ocupado|base
+TERRENO grama|estrada|montanha|agua|areia
 D [0-9]
 L [a-zA-Z_]
 H [a-zA-Z_0-9]
@@ -38,6 +39,19 @@ int acha_atr(char *s){
 	if (strcmp(s, "base") == 0)
 		return  3;
 }
+
+Terreno acha_terr(char *s){
+	if (strcmp(s, "estrada") == 0)
+		return (Terreno) 1;
+	if (strcmp(s, "grama") == 0)
+		return (Terreno) 0;
+	if (strcmp(s, "agua") == 0)
+		return (Terreno) 3;
+	if (strcmp(s, "montanha") == 0)
+		return  (Terreno) 2;
+	if (strcmp(s, "areia") == 0)
+		return  (Terreno) 4;	
+}
 %}
 
 
@@ -65,6 +79,7 @@ resposta {return RESPt; }
 new {return NEW; }
 {DIRECAO} { yylval.direc = acha_dir(yytext); return DIRECAOt;}
 {ATRIBUTO} {yylval.num = acha_atr(yytext); return ATRt; }
+{TERRENO} {yylval.terr = acha_terr(yytext); return TERRt; }
 
 {L}{H}* { 
   strncpy(yylval.cod, yytext, 30);

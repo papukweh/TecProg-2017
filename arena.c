@@ -32,9 +32,9 @@
  * "MAX_INSTR" e o numero de instrucoes que podem
  *     ser executadas durante um turno
  */
-#define MAX_ROBOS 5
-#define MAX_TURNOS 2
-#define MAX_TIME 2
+#define MAX_ROBOS 1
+#define MAX_TURNOS 20
+#define MAX_TIME 1
 #define MAX_INSTR 25
 
 /*
