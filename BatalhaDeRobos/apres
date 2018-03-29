@@ -11,10 +11,6 @@ logfont = pg.font.SysFont("monospace", 12, bold=True) # fonte do log
 sysfont = pg.font.SysFont("monospace", 54, bold=True) # fonte fim de jogo 
 sys2font = pg.font.SysFont("monospace", 36, bold=True) # fonte vencedor
 
-# boom = pg.mixer.Sound('Bomb2.wav')
-# clink = pg.mixer.Sound('Bellring.wav')
-# clank = pg.mixer.Sound('Bang.wav')
-
 # altura e largura da arena, em células
 H, W = 40,24
 # Posições importantes:
@@ -177,7 +173,7 @@ arena = []
 for i in range(int(H/2)):
     arena.append([])
     for j in range(int(W/2)):
-        arena[i].append(cell(i,j, "hexbase.png"))
+        arena[i].append(cell(i,j, "assets/hexbase.png"))
         arena[i][j].draw(i,j)
 
 # Pega as dimensões da tela
@@ -185,14 +181,13 @@ wpx, hpx = pg.display.get_surface().get_size()
 log_pos = [(wpx -180, 25)]
 
 # Carrega algumas imagens da UI e define algumas labels
-cris = Cristal("cris.png")
-lotecris = Cristal("lotecris.png")
-vida = pg.image.load("vida.png")
-bigcris = pg.image.load("bigcris.png")
-basea = pg.image.load("basea.png")
-baseb= pg.image.load("baseb.png")
-erase = pg.image.load("erase.png")
-wrench = pg.image.load("wrench.png")
+cris = Cristal("assets/cris.png")
+lotecris = Cristal("assets/lotecris.png")
+vida = pg.image.load("assets/vida.png")
+bigcris = pg.image.load("assets/bigcris.png")
+basea = pg.image.load("assets/basea.png")
+baseb= pg.image.load("assets/baseb.png")
+erase = pg.image.load("assets/erase.png")
 label = myfont.render("Base", 2, (0,0,0))
 log = logfont.render((LOG_TEXTOS[9]), 2, (255,255,255))
 
@@ -365,19 +360,19 @@ for line in fileinput.input():
     if r[0] == 'terr':
         i, j, t = list(map(int, r[1:]))
         if t == 0:
-            img = "grama.png"
+            img = "assets/grama.png"
         if t == 1:
-            img = "estrada.png"
+            img = "assets/estrada.png"
         if t == 2:
-            img = "montanha.png"
+            img = "assets/montanha.png"
         if t == 3:
-            img = "agua.png"
+            img = "assets/agua.png"
         if t == 4:
-            img = "areia.png"
+            img = "assets/areia.png"
         if t == 5:
-            img = "basea.png"
+            img = "assets/basea.png"
         if t == 6:
-            img = "baseb.png"
+            img = "assets/baseb.png"
 
         arena[i][j] = cell(i,j,img)
         arena[i][j].draw(i,j)
@@ -404,7 +399,7 @@ for line in fileinput.input():
         i = int(r[1])
 
         # mensagem genérica de fim de jogo
-        fim = pg.image.load("fim.png")
+        fim = pg.image.load("assets/fim.png")
         scr.blit(fim, (0,0))
         atu()
         text = sysfont.render("Fim de jogo!", 1, (255,255,255))

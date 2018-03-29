@@ -43,4 +43,13 @@ __Declaração:__ func f(x, y) { return x+y } ou def g(x) { return; }
 __Chamadas:__ w = f(x, y) ou g(w);  
 __Variáveis locais:__ Como em C, as variáveis declaradas dentro do seu programa possuem um escopo limitado: variáveis declaradas fora de funções são consideradas globais e acessíveis de qualquer lugar. Se você quer declarar uma nova variável, dentro de uma função, com um nome igual ao de uma variável global preexistente, basta usar a keyword *new*: 
   
-```    
+## Instalação
+Depois que você terminou de programar seus robôs, basta rodar os comandos
+
+make compila   
+make 
+./arena
+
+Para ver seus robôs entrarem em ação!
+
+Bom divertimento!

@@ -15,7 +15,7 @@
  * Por exemplo, movimento de robos, retirada
  * de e deposito de cristais
  */
-#define DEBUG
+//#define DEBUG
 #ifdef DEBUG
     #define D(X) X
 #else
@@ -49,8 +49,7 @@ typedef struct{
     Mapa mapa;
 } Arena;
 
-static char *robs[] = {"rob0", "rob1", "rob2", "rob3", "rob4",
-                "rob5", "rob6", "rob7", "rob8", "rob9"};
+static char *robs[] = {"robs/rob0", "robs/rob1", "robs/rob2", "robs/rob3", "robs/rob4","robs/rob5", "robs/rob6", "robs/rob7", "robs/rob8", "robs/rob9"};
 
 /*
  * Definicao das variaveis globais.
@@ -248,8 +247,8 @@ void insereExercito(){
 
         // Para cada robo, associa-o com o sprite de seu time
         // e o desenha em sua posicao inicial
-        if (x == 0) fprintf(display, "rob A.png\n");
-        else fprintf(display, "rob B.png\n");
+        if (x == 0) fprintf(display, "rob assets/A.png\n");
+        else fprintf(display, "rob assets/B.png\n");
         fprintf(display, "%d 99 99 %d %d\n", ids, positions[k], positions[j]);
         printf("Robô %d posicionado\n", ids);
         ids++;
